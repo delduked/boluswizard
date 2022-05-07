@@ -7,7 +7,6 @@ User Input
 -- carb correction to target blood sugar 1.3units)
 - Bolus value = 3.3 units of insulin
 ## Required Values
----
 ### Carb Ratio
 - grams per unit of insulin
 -- increments of 30 minutes
@@ -33,7 +32,6 @@ User Input
 -- `[{"start":12am},{"end":6am},{"high":6.6},{"low":5,4}]`
 
 ## Basal setup
----
 ### required values
 - insulin units per hour ( accuracy of two decimal points)
 - 30min increments
