@@ -1,0 +1,25 @@
+#splash-img(style='background: url(/assets/loginpage/bg.gif); background-size: cover; background-position: center; box-shadow: inset 5px 0px 9px 1px #00000017; min-height: 100vh;').hero.fullscreen.hero-img.parallax-img
+	.hero-body.u-flex.u-justify-space-around.u-flex-wrap
+		.content(style="max-width:320px;").u-text-center
+			h2.text-white Sign Up for the Bolus Wizard!
+		.content(style="max-width:320px; background-color: white; border-radius:15px;").hover-grow.u-shadow-xl.p-4.u-text-center
+			
+			h6.font-alt Please enter your new email and password!
+			.form-section
+				.input-control
+					input(placeholder="Username" type="email")#username.input-contains-icon
+					span.icon
+						i.fa.fa-wrapper.fa-envelope.small
+				.input-control
+					input(placeholder="Password" type="password")#password.input-contains-icon
+					span.icon
+						i.fa.fa-wrapper.fa-lock.small
+			.form-section-u-text-right
+				.m-1.u-inline-block
+					button#signup.btn-primary SignUp
+				.m-1.u-inline-block
+					button#login.btn-light Login?
+			.form-section.u-text-right
+				.m-1.u-inline-block#message
+
+			

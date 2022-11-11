@@ -1,0 +1,30 @@
+stages:
+  - docker
+  - kubernetes
+
+docker-build:
+  stage: docker
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "env/*" && $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME == "feature/*"
+      allow_failure: false
+  script:
+    - docker --version 
+    - echo "Removing any pre-existing containers and their volumes which may already exist..."
+    - docker-compose rm -f -s -v 
+    - echo "Removing any images related to docker compose file..."
+    - docker-compose down --rmi all 
+    - docker-compose up -d --force-recreate 
+
+kubernetes-build:
+  stage: kubernetes
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+      allow_failure: false
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+      allow_failure: false
+  script:
+    - echo "bulding the image"
+    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard:$CI_COMMIT_SHORT_SHA -f image.dockerfile .
+    - docker push registry.nated.io/phosphorusmyesophagus/boluswizard
+    - echo "deploy manifest file"
+    - kubectl apply -f deploy.yaml

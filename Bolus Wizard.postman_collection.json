@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "589fb876-af01-40cc-a6d9-ad640913b7b6",
+		"name": "Bolus Wizard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11828123"
+	},
+	"item": [
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/SignUp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SignUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"nate@nated.ca\",\r\n    \"Password\":\"n4th4n43l\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/SignIn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SignIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveBgTargets",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n\t\t\"Start\": \"00h00m\",\r\n\t\t\"End\":   \"05h59m\",\r\n\t\t\"High\":  6.6,\r\n\t\t\"Low\":   5.4\r\n\t},\r\n\t{\r\n\t\t\"Start\": \"06h00m\",\r\n\t\t\"End\":   \"17h59m\",\r\n\t\t\"High\":  5.7,\r\n\t\t\"Low\":   5.2\r\n\t},\r\n\t{\r\n\t\t\"Start\": \"18h00m\",\r\n\t\t\"End\":   \"23h59m\",\r\n\t\t\"High\":  6.6,\r\n\t\t\"Low\":   5.4\r\n\t}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wizard/SaveBgTargets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"SaveBgTargets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveCarbRatio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n\t\t\"Start\": \"00h00m\",\r\n\t\t\"End\":   \"11h29m\",\r\n\t\t\"Ratio\": 0.125\r\n\t},\r\n\t{\r\n\t\t\"Start\": \"11h30m\",\r\n\t\t\"End\":   \"15h59m\",\r\n\t\t\"Ratio\": 0.15384615384\r\n\t},\r\n\t{\r\n\t\t\"Start\": \"16h00m\",\r\n\t\t\"End\":   \"23h59m\",\r\n\t\t\"Ratio\": 0.125\r\n\t}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wizard/SaveCarbRatios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"SaveCarbRatios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save correction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n\t\t\"Start\": \"00h00m\",\r\n\t\t\"End\":   \"11h29m\",\r\n\t\t\"Ratio\": 0.125\r\n\t},\r\n\t{\r\n\t\t\"Start\": \"11h30m\",\r\n\t\t\"End\":   \"15h59m\",\r\n\t\t\"Ratio\": 0.15384615384\r\n\t},\r\n\t{\r\n\t\t\"Start\": \"16h00m\",\r\n\t\t\"End\":   \"23h59m\",\r\n\t\t\"Ratio\": 0.125\r\n\t}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wizard/SaveCarbRatios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"SaveCarbRatios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save ISF",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t{\r\n\t\t\"Start\":       \"00h00m\",\r\n\t\t\"End\":         \"05h59m\",\r\n\t\t\"Sensitivity\": 0.75757575757\r\n\t},\r\n\t{\r\n\t\t\"Start\":       \"06h00m\",\r\n\t\t\"End\":         \"23h59m\",\r\n\t\t\"Sensitivity\": 0.71428571428\r\n\t}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wizard/SaveISF",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"SaveISF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save duration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t{\r\n\t\t\"Start\":       \"00h00m\",\r\n\t\t\"End\":         \"05h59m\",\r\n\t\t\"Sensitivity\": 0.75757575757\r\n\t},\r\n\t{\r\n\t\t\"Start\":       \"06h00m\",\r\n\t\t\"End\":         \"23h59m\",\r\n\t\t\"Sensitivity\": 0.71428571428\r\n\t}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wizard/Duration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"Duration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save duration Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t{\r\n\t\t\"Start\":       \"00h00m\",\r\n\t\t\"End\":         \"05h59m\",\r\n\t\t\"Sensitivity\": 0.75757575757\r\n\t},\r\n\t{\r\n\t\t\"Start\":       \"06h00m\",\r\n\t\t\"End\":         \"23h59m\",\r\n\t\t\"Sensitivity\": 0.71428571428\r\n\t}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4646/wizard/Duration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4646",
+					"path": [
+						"wizard",
+						"Duration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "correction",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookies",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/wizard/NewCorrection?Bg=10.0&Carbs=10.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"NewCorrection"
+					],
+					"query": [
+						{
+							"key": "Bg",
+							"value": "10.0"
+						},
+						{
+							"key": "Carbs",
+							"value": "10.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get corrections",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookies",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/wizard/NewCorrection?Bg=10.0&Carbs=10.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"NewCorrection"
+					],
+					"query": [
+						{
+							"key": "Bg",
+							"value": "10.0"
+						},
+						{
+							"key": "Carbs",
+							"value": "10.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get correction range",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookies",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/wizard/NewCorrection?Bg=10.0&Carbs=10.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"NewCorrection"
+					],
+					"query": [
+						{
+							"key": "Bg",
+							"value": "10.0"
+						},
+						{
+							"key": "Carbs",
+							"value": "10.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get targets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookies",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/wizard/targets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"targets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get targets Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookies",
+						"value": "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiI5MmNmNjdhOS1lNTU5LTQ3ZjUtODFiMC02MWVmYzgzOGFjNjkiLCJVc2VybmFtZSI6Im5hdGVAbmF0ZWQuY2EiLCJleHAiOjE2NTIyMzA4MTkyNDIyMzUzMDB9.90g4l8jnBilB7HIv3y7Jy_h49KlcoRe9QPNic7A3LaA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/wizard/targets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wizard",
+						"targets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
