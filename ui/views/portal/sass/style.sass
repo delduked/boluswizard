@@ -1,0 +1,181 @@
+@import './components/navbar'
+@import './components/content'
+@import './components/wizard'
+@import './components/hover'
+@import './components/settings'
+*
+      box-sizing: border-box
+      font-family: 'montserrat', sans-serif
+span.ct-label
+      color: black
+      font-weight: 400
+#my-chart
+      padding-right: 15px
+.show
+      display: flex
+.hide
+      display: none
+body
+      display: flex
+      flex-direction: column
+      align-content: center
+      flex-wrap: wrap
+      margin: 0
+      padding: 0
+      min-height: 100vh
+      background: linear-gradient(159deg, rgba(255,255,255,1) 0%, rgba(230,240,255,1) 99%)
+      ovewrflow-y: hidden
+
+main
+      display: flex
+      flex-direction: column
+      flex-wrap: wrap
+      margin-left: 60px
+      padding: 0px
+      width: calc( 100%  - 60px )
+      height: 100vh
+
+
+
+      // nav
+      //       position: fixed
+      //       height: 60px
+      //       margin: 0
+      //       padding: 0 50px
+      //       width: 100%
+      //       border-bottom: 1px solid #e3e3e3
+      //       display: flex
+      //       justify-content: space-between
+      //       align-items: center
+      // .graph
+      //       padding: 1rem
+      //       margin-left: -10px
+      //       width: 100%
+      //       margin-bottom: 20px
+      //       margin-top: -80px
+      //       height: 67vh
+
+      // .container
+      //       //position: fixed
+      //       width: 100%
+      //       height: 33vh
+      //       margin-top: 80px
+            
+      //       padding: 20px 40px
+      //       display: flex
+      //       justify-content: center
+      //       align-content: center
+      //       @media screen and (min-width:1160px)
+      //             justify-content: start
+      //       .ratios, .isf, .targets
+      //             width: 220px
+      //             padding: 20px
+      //             height: 220px
+      //             border-radius: 20px
+      //             //border: 1px solid #e3e3e3
+      //             margin: 0 20px
+      //             display: flex
+      //             flex-direction: column
+      //             flex-wrap: wrap
+      //             justify-content: center
+      //             align-content: center
+      //             background: linear-gradient(145deg, #f6ffff, #cdd5e140)
+      //             //box-shadow:  20px 20px 80px #c4ccd9,-20px -20px 80px #ffffff
+      //             @media screen and (max-width:1160px)
+      //                   display: none
+      //             .title
+      //                   width: 100%
+      //                   height: 20%
+      //                   display: inline-flex
+      //                   justify-content: flex-start
+      //                   align-content: center
+      //                   p
+      //                         margin-top: 0
+                        
+      //             .center
+      //                   width: 100%
+      //                   height: 60%
+      //                   display: flex
+      //                   justify-content: center
+      //                   align-content: center
+      //             .value
+      //                   width: 100%
+      //                   height: 20%
+      //                   display: inline-flex
+      //                   justify-content: space-between
+      //                   align-content: center
+      //                   strong
+      //                         margin: 0
+      //                         padding: 0
+
+      //       .ratios
+      //             margin-left: 40px
+
+      //             // background: rgb(0,219,255)
+      //             // background: linear-gradient(347deg, rgba(0,219,255,1) 25%, rgba(204,173,246,1) 80%)
+                  
+
+      //       .wizard
+      //             height: 220px
+      //             width: 330px
+      //             padding: 20px
+      //             border-radius: 20px
+      //             display: flex
+      //             flex-direction: row
+      //             justify-content: center
+      //             align-content: center
+      //             //border: 1px solid #e3e3e3
+      //             //background-color: white
+      //             background: linear-gradient(145deg, #f6ffff, #cdd5e140)
+      //             //box-shadow:  20px 20px 60px #c4ccd9,-20px -20px 60px #ffffff
+      //             .bolus
+      //                   height: 100%
+      //                   width: 50%
+      //                   text-align: center
+      //                   display: flex
+      //                   flex-direction: column
+      //                   justify-content: center
+      //                   align-content: center
+      //                   .value
+      //                         margin-top: -30px
+      //                         display: block
+      //                         font-size: 2rem
+      //                         font-weight: bold
+      //                         h1
+      //                               color: #942bd6
+      //                               marign: 0
+      //                               padding: 0
+      //                   .details
+      //                         height: 30%
+      //                         margin-top: -30px
+      //                         span
+      //                               display: inline-flex
+      //                               width: 30%
+      //                               font-size: 1rem
+      //                               justify-content: center
+      //                               align-content: center
+      //                               flex-direction: column
+      //                         strong
+      //                               color: #942bd6
+      //             .input
+      //                   height: 100%
+      //                   width: 50%
+      //                   display: flex
+      //                   padding-left: 20px
+      //                   justify-content: center
+      //                   align-content: center
+      //                   flex-wrap: wrap
+      //                   input
+      //                         width: 100%
+      //                         margin: 5px
+      //                         padding: 5px
+      //                         border-radius: 5px
+      //                         outline: none
+      //                         border: none
+      //                   label
+      //                         width: 100%
+      //                         margin-top: 0px 5px 5px 5px
+      //                         padding: 5px
+      //                         font-weight: bold
+            
+      

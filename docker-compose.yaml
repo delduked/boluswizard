@@ -1,0 +1,65 @@
+version: '3'
+services:
+
+  bolusWizardRedis:
+    container_name: ${REDIS_HOSTNAME}
+    hostname: ${REDIS_HOSTNAME}
+    image: redislabs/rejson:latest
+    restart: unless-stopped
+    expose:
+      - ${REDIS_PORT}
+    command: >
+      --requirepass ${REDIS_PASSWORD} 
+      --port ${REDIS_PORT}
+      --save 60 1
+      --loglevel warning
+    volumes:
+      - bolusWizardRedis:/data
+    networks:
+      - bolusWizard
+      
+  api:
+    container_name: ${API_HOSTNAME}
+    hostname: ${API_HOSTNAME}
+    restart: unless-stopped
+    build:
+      context: ./api
+      dockerfile: api.dockerfile
+    ports:
+      - ${API_PORT}:80
+    networks:
+      - bolusWizard
+    environment:
+      - REDIS_HOSTNAME=${REDIS_HOSTNAME}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+
+  ui:
+    container_name: ${UI_HOSTNAME}
+    hostname: ${UI_HOSTNAME}
+    restart: unless-stopped
+    build:
+      context: ./ui
+      dockerfile: ui.dockerfile
+    ports:
+      - ${UI_EXTERNAL_PORT}:80
+    networks:
+      - bolusWizard
+    environment:
+      - API_HOSTNAME=${API_HOSTNAME}
+      - API_PORT=${API_PORT}
+
+volumes:
+  bolusWizardRedis:
+
+
+networks:
+  bolusWizard:
+    driver: bridge
+    external: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.24.0.0/16
+          gateway: 172.24.0.1
+
