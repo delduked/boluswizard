@@ -199,23 +199,6 @@ class ProjectInput {
             throw error;
         }
     }
-    async signin() {
-        try {
-            const token = await fetch("http://localhost:81/Signin", {
-                method: "POST",
-                body: JSON.stringify({ "Username": "nate@nated.ca", "Password": "n4th4n43l" }),
-                headers: { "content-type": "application/json" },
-                credentials: "include"
-            })
-                .then(data => {
-                console.log(data);
-                return data.json();
-            });
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
     async get(info) {
         try {
             const res = await fetch(`http://localhost:81/wizard/${info}`, {

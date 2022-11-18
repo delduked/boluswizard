@@ -6,8 +6,8 @@ services:
     hostname: ${REDIS_HOSTNAME}
     image: redislabs/rejson:latest
     restart: unless-stopped
-    expose:
-      - ${REDIS_PORT}
+    ports:
+      - 6379:${REDIS_PORT}
     command: >
       --requirepass ${REDIS_PASSWORD} 
       --port ${REDIS_PORT}
