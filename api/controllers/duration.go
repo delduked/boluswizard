@@ -26,7 +26,7 @@ func Duration(c *fiber.Ctx) error {
 		Error:  err,
 		Data:   duration,
 	}
-	c.Status(fiber.StatusOK)
+
 	return services.Response(res, c)
 }
 
