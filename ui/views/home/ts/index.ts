@@ -1,9 +1,5 @@
-// import Chartist from "chartist";
 // const Chartist = require('chartist');
 // const moment = require('moment');
-
-// var chart = new Chartist.Line('#my-chart', data, chartType,options);
-// const axios = require('axios').default;
 
 interface iCorrectionResponse {
   Status: number;
@@ -99,6 +95,9 @@ class ProjectInput {
   ToastErrorMessage: HTMLHtmlElement;
   ToastSuccess: HTMLHtmlElement;
 
+  // signout
+  SignOut: HTMLAnchorElement;
+
   // nav
   navBtns: any;
 
@@ -135,6 +134,9 @@ class ProjectInput {
     this.ToastError = document.getElementById('Error')! as HTMLHtmlElement;
     this.ToastSuccess = document.getElementById('Success')! as HTMLHtmlElement;
     this.ToastErrorMessage = document.getElementById('Errormessage')! as HTMLHtmlElement;
+
+    // signout
+    this.SignOut = document.querySelector('[href="/login"]') as HTMLAnchorElement;
 
     // nav
     this.navBtns = document.querySelectorAll('.nav-btn')! as NodeListOf<Element>;
@@ -200,6 +202,10 @@ class ProjectInput {
           ele.classList.toggle('active');
           dropDownMenu.classList.toggle('active');
       });
+    
+    this.SignOut.addEventListener('click', event =>{
+      document.cookie = document.cookie + "max-age=0;"
+    })
   });
 
   }

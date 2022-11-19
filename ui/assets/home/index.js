@@ -1,4 +1,3 @@
-// import Chartist from "chartist";
 // const Chartist = require('chartist');
 // const moment = require('moment');
 class ProjectInput {
@@ -28,6 +27,8 @@ class ProjectInput {
         this.ToastError = document.getElementById('Error');
         this.ToastSuccess = document.getElementById('Success');
         this.ToastErrorMessage = document.getElementById('Errormessage');
+        // signout
+        this.SignOut = document.querySelector('[href="/login"]');
         // nav
         this.navBtns = document.querySelectorAll('.nav-btn');
         this.initSettings();
@@ -81,6 +82,9 @@ class ProjectInput {
                 // Toggle the nav-btn and the dropdown menu
                 ele.classList.toggle('active');
                 dropDownMenu.classList.toggle('active');
+            });
+            this.SignOut.addEventListener('click', event => {
+                document.cookie = document.cookie + "max-age=0;";
             });
         });
     }
