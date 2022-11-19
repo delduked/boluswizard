@@ -101,6 +101,9 @@ class ProjectInput {
   // nav
   navBtns: any;
 
+  // api service
+  apiService: String;
+
   graph: any;
 
   constructor(){
@@ -140,6 +143,9 @@ class ProjectInput {
 
     // nav
     this.navBtns = document.querySelectorAll('.nav-btn')! as NodeListOf<Element>;
+
+    // api service
+    this.apiService = document.querySelector("body").getAttribute('data-api-service')! as string;
 
     this.initSettings()
     this.drawGraph()
@@ -347,7 +353,7 @@ class ProjectInput {
 
   public async get<t>(info: string): Promise<t> {
     try {
-      const res = await fetch(`http://localhost:81/wizard/${info}`,{
+      const res = await fetch(`${this.apiService}wizard/${info}`,{
         method: "GET",
         credentials: "include"
       })
@@ -363,7 +369,7 @@ class ProjectInput {
   }
   public async post<t>(info: string, data: string): Promise<t> {
     try {
-      const res = await fetch(`http://localhost:81/wizard/${info}`,{
+      const res = await fetch(`${this.apiService}wizard/${info}`,{
         method: "POST",
         credentials: "include",
         body: data,

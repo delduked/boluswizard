@@ -14,6 +14,9 @@ class LoginPage {
   message: HTMLInputElement;
   signup : HTMLElement;
 
+  // api service
+  apiService: string;
+
   constructor(){
 
     this.username = document.getElementById('username')! as HTMLInputElement;
@@ -21,6 +24,10 @@ class LoginPage {
     this.message = document.getElementById('message')! as HTMLInputElement;
     this.login = document.getElementById('login')! as HTMLInputElement;
     this.signup = document.getElementById('signup')! as HTMLElement;
+
+    // api service
+    this.apiService = document.querySelector("body").getAttribute('data-api-service')! as string;
+    console.log(this.apiService)
     this.listen();
   }
 
@@ -34,7 +41,7 @@ class LoginPage {
       }
 
       // setup post request for login
-      const res = await fetch("http://localhost:81/SignIn",{
+      const res = await fetch(`${this.apiService}SignIn`,{
         method: "POST",
         body: JSON.stringify(creds),
         headers: {"content-type":"application/json"}

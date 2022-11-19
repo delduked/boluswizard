@@ -31,6 +31,8 @@ class ProjectInput {
         this.SignOut = document.querySelector('[href="/login"]');
         // nav
         this.navBtns = document.querySelectorAll('.nav-btn');
+        // api service
+        this.apiService = document.querySelector("body").getAttribute('data-api-service');
         this.initSettings();
         this.drawGraph();
         this.configure();
@@ -205,7 +207,7 @@ class ProjectInput {
     }
     async get(info) {
         try {
-            const res = await fetch(`http://localhost:81/wizard/${info}`, {
+            const res = await fetch(`${this.apiService}wizard/${info}`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -221,7 +223,7 @@ class ProjectInput {
     }
     async post(info, data) {
         try {
-            const res = await fetch(`http://localhost:81/wizard/${info}`, {
+            const res = await fetch(`${this.apiService}wizard/${info}`, {
                 method: "POST",
                 credentials: "include",
                 body: data,

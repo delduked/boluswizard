@@ -6,6 +6,9 @@ class SignUp {
         this.message = document.getElementById('message');
         this.signup = document.getElementById('signup');
         this.login = document.getElementById('login');
+        // api service
+        this.apiService = document.querySelector("body").getAttribute('data-api-service');
+        console.log(this.apiService);
         this.listen();
     }
     // login
@@ -17,7 +20,7 @@ class SignUp {
                 Password: this.password.value
             };
             // setup post request for login
-            const res = await fetch("http://localhost:81/SignUp", {
+            const res = await fetch(`${this.apiService}SignUp`, {
                 method: "POST",
                 body: JSON.stringify(creds),
                 headers: { "content-type": "application/json" }
