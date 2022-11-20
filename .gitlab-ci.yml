@@ -3,9 +3,7 @@ stages:
   - api
 
 ui-image:
-  stage: build
-  rules:
-    - if: $IS_FEATURE_BRANCH = "true" 
+  stage: ui
   script:
     - echo "building boluswizard/ui image"
     - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/ui:$CI_COMMIT_SHORT_SHA .\ui -f .\ui\ui.dockerfile
@@ -14,8 +12,6 @@ ui-image:
 
 api-image:
   stage: api
-  rules:
-    - if: $IS_FEATURE_BRANCH = "true"
   script:
     - echo "building boluswizard/api image"
     - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/api:$CI_COMMIT_SHORT_SHA .\api -f .\api\api.dockerfile
