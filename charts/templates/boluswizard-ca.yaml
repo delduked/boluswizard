@@ -50,7 +50,8 @@ spec:
       - name: boluswizard-registry
       containers:
         - name: boluswizard
-          image: registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v1.4 # change this to right registry
+          image: registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v1.5 # change this to right registry
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:

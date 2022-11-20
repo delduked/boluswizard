@@ -1,6 +1,6 @@
 {
   "name": "gulp-site",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "My personal Gulp Development enironment",
   "main": "Gulpfile.js",
   "scripts": {

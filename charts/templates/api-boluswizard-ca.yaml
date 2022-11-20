@@ -50,7 +50,8 @@ spec:
       - name: boluswizard-registry
       containers:
         - name: api-boluswizard
-          image: registry.nated.io/phosphorusmyesophagus/boluswizard/api:v1.4 # change this to right registry
+          image: registry.nated.io/phosphorusmyesophagus/boluswizard/api:v1.5 # change this to right registry
+          imagePullPolicy: Always
           env:
           - name: REDIS_HOSTNAME
             value: "redis.bwdev.svc.cluster.local"
