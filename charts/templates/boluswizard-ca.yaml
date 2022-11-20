@@ -4,7 +4,7 @@ metadata:
   name: boluswizard
 spec:
   rules:
-  - host: dev.boluswizard.io
+  - host: boluswizard.io
     http:
       paths:
       - backend:
@@ -16,7 +16,7 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - dev.boluswizard.io
+    - boluswizard.io
     secretName: boluswizard-tls
 ---
 apiVersion: v1
@@ -56,7 +56,7 @@ spec:
             - containerPort: 80
           env:
           - name: API_HOSTNAME
-            value: "https://devapi.boluswizard.io/"
+            value: "https://api.boluswizard.io/"
           - name: API_PORT
             value: "80"
 

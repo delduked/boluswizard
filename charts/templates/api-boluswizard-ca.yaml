@@ -4,7 +4,7 @@ metadata:
   name: api-boluswizard
 spec:
   rules:
-  - host: devapi.boluswizard.io
+  - host: api.boluswizard.io
     http:
       paths:
       - backend:
@@ -16,7 +16,7 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - devapi.boluswizard.io
+    - api.boluswizard.io
     secretName: boluswizard-tls
 ---
 apiVersion: v1
