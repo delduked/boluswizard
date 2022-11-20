@@ -7,11 +7,18 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var apiServiceName = getServiceHostname()
-var apiServicePort = getServicePortNumber()
-var API_SERVICE = apiServiceName[:len(apiServiceName)-1] + ":" + apiServicePort + "/"
+var API_SERVICE = serviceUrl()
 
-func getServiceHostname() string {
+func serviceUrl() string {
+	publicorlocal, ok := getServiceHostname()
+	if !ok {
+		var apiServicePort = getServicePortNumber()
+		return publicorlocal[:len(publicorlocal)-1] + ":" + apiServicePort + "/"
+	}
+	return publicorlocal
+}
+
+func getServiceHostname() (string, bool) {
 	importHostname, ok := os.LookupEnv("API_HOSTNAME")
 	if !ok {
 		var myEnv map[string]string
@@ -19,11 +26,11 @@ func getServiceHostname() string {
 		myEnv, err = godotenv.Read("../.env")
 		if err != nil {
 			fmt.Println("Error reading .env file")
-			return "http://localhost/"
+			return "http://localhost/", false
 		}
-		return myEnv["API_HOSTNAME"]
+		return myEnv["API_HOSTNAME"], false
 	}
-	return importHostname
+	return importHostname, true
 }
 func getServicePortNumber() string {
 	importApiPort, ok := os.LookupEnv("API_PORT")

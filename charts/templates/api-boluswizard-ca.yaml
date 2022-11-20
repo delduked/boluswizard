@@ -3,18 +3,21 @@ kind: Ingress
 metadata:
   name: api-boluswizard
 spec:
-  tls:
-  - hosts:
-      - devapi.boluswizard.io
-    secretName: boluswizard-tls
   rules:
-  - http:
+  - host: devapi.boluswizard.io
+    http:
       paths:
-      - path: /
-        pathType: Prefix
-        backend:
+      - backend:
           service:
             name: api-boluswizard
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - devapi.boluswizard.io
+    secretName: boluswizard-tls
 ---
 apiVersion: v1
 kind: Service
@@ -25,7 +28,7 @@ spec:
   selector:
     app: api-boluswizard
   ports:
-    - protocol: http
+    - protocol: TCP
       port: 80
       targetPort: 81
 ---
