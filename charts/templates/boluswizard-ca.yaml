@@ -11,11 +11,10 @@ spec:
   - http:
       paths:
       - path: /
-        pathtype: Prefix
+        pathType: Prefix
         backend:
           service:
             name: boluswizard
-            servicePort: 80
 
 ---
 apiVersion: v1
@@ -49,12 +48,12 @@ spec:
       - name: boluswizard-registry
       containers:
         - name: boluswizard
-          image: registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v1.2 # change this to right registry
+          image: registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v1.4 # change this to right registry
           ports:
             - containerPort: 80
-        #   env: not needed values are hard coded in the front end
-        #   - name: API_HOSTNAME
-        #     value: api.boluswizard.ca
-        #   - name: API_PORT
-        #     value: 80
+          env:
+          - name: API_HOSTNAME
+            value: "https://devapi.boluswizard.io/"
+          - name: API_PORT
+            value: "81"
 

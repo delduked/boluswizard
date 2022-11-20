@@ -1,0 +1,12 @@
+# public prod setup
+ENVIRONMENT: "prod"
+# api access to redis env
+REDIS_HOSTNAME: "redis.bw.svc.cluster.local"
+REDIS_PASSWORD: "4%GE@pC@?=ZfcvB9x$vq^lM8|4&%ijHUDoYnR5A1wXZ$V0gscLf^aCA@%G8#I]0J"
+REDIS_PORT: "6379"
+# ui env
+API_HOSTNAME: "https://api.boluswizard.io/"
+API_PORT: "81"
+# public access to ui
+UI_EXTERNAL_PORT: "80"
+UI_HOSTNAME: "ui"

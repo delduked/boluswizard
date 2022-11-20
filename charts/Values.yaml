@@ -1,0 +1,14 @@
+# public dev setup
+ENVIRONMENT: "dev"
+# api access to redis env
+REDIS_HOSTNAME: "redis.bwdev.svc.cluster.local"
+REDIS_PASSWORD: "RU2DLZhTIa9z_FS9HW+*L5px$GeR!A6&"
+REDIS_PORT: "6379"
+# ui access to api env
+API_HOSTNAME: "https://devapi.boluswizard.io/"
+API_PORT: "81"
+# public access to ui
+UI_EXTERNAL_PORT: "80"
+UI_HOSTNAME: "ui"
+# helm
+Namespace: "bwdev"
