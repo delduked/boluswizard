@@ -6,7 +6,7 @@ ui-image:
   stage: ui
   script:
     - echo "building boluswizard/ui image"
-    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/ui:$CI_COMMIT_SHORT_SHA .\ui -f .\ui\ui.dockerfile
+    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/ui:$CI_COMMIT_SHORT_SHA ./ui -f ./ui/ui.dockerfile
     - docker push registry.nated.io/phosphorusmyesophagus/boluswizard/ui:$CI_COMMIT_SHORT_SHA
     - echo "image boluswizard/ui was built succesfully."
 
@@ -14,6 +14,6 @@ api-image:
   stage: api
   script:
     - echo "building boluswizard/api image"
-    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/api:$CI_COMMIT_SHORT_SHA .\api -f .\api\api.dockerfile
+    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/api:$CI_COMMIT_SHORT_SHA ./api -f ./api/api.dockerfile
     - docker push registry.nated.io/phosphorusmyesophagus/boluswizard/api:$CI_COMMIT_SHORT_SHA
     - echo "image boluswizard/api was built succesfully."
