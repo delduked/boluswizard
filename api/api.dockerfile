@@ -1,4 +1,4 @@
-FROM golang:alpine3.14 AS stage1
+FROM golang:latest AS stage1
 WORKDIR /app
 COPY . /app
 RUN go install
