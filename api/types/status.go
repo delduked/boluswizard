@@ -1,7 +1,7 @@
 package types
 
 type Response struct {
-	Status int         `json:"Status" redis:"Status"`
-	Error  interface{} `json:"Error" redis:"Error"`
-	Data   interface{} `json:"-"`
+	Status int `json:"Status" redis:"Status"`
+	Error  any `json:"Error" redis:"Error"`
+	Data   any `json:"-"`
 }
