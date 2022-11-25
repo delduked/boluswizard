@@ -1,7 +1,6 @@
 stages:
   - ui
   - api
-  - version
 
 api-image:
   stage: api
@@ -9,8 +8,8 @@ api-image:
     - echo "building boluswizard/api image"
     - export PAT=JscJAxSWqyqCQtPYhq_3
     - echo $PAT | docker login registry.nated.io -u nate --password-stdin
-    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/api:v$CI_PIPELINE_ID ./api -f ./api/api.dockerfile
-    - docker push registry.nated.io/phosphorusmyesophagus/boluswizard/api:v$CI_PIPELINE_ID
+    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/api:v$(cat ./VERSION) ./api -f ./api/api.dockerfile
+    - docker push registry.nated.io/phosphorusmyesophagus/boluswizard/api:v$(cat ./VERSION)
     - echo "image boluswizard/api was built succesfully."
 ui-image:
   stage: ui
@@ -18,13 +17,6 @@ ui-image:
     - echo "building boluswizard/ui image"
     - export PAT=JscJAxSWqyqCQtPYhq_3
     - echo $PAT | docker login registry.nated.io -u nate --password-stdin
-    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v$CI_PIPELINE_ID ./ui -f ./ui/ui.dockerfile
-    - docker push registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v$CI_PIPELINE_ID
+    - docker build -t registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v$(cat ./VERSION) ./ui -f ./ui/ui.dockerfile
+    - docker push registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v$(cat ./VERSION)
     - echo "image boluswizard/ui was built succesfully."
-version:
-  stage: version
-  script:
-    - echo "Increment version"
-    - export version=$CI_PIPELINE_ID | sed -i "1s/.*/$version/" VERSION
-
-
