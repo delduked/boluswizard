@@ -2,11 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis
+  namespace: {{ .Values.NAMESPACE }}
 spec:
   clusterIP: None
   ports:
-  - port: 6379
-    targetPort: 6379
+  - port: {{ .Values.REDIS_PORT }}
+    targetPort: {{ .Values.REDIS_PORT }}
     name: redis
   selector:
     app: redis
@@ -17,9 +18,10 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: bw-pv4
+  namespace: {{ .Values.NAMESPACE }}
   labels:
     app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-namespace: bwdev
+    meta.helm.sh/release-namespace: {{ .Values.NAMESPACE }}
     meta.helm.sh/release-name: charts
 spec:
   storageClassName: boluswizard-storage
@@ -37,16 +39,15 @@ spec:
           operator: In
           values:
           - nated-1
-
 ---
-
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: bw-pv5
+  namespace: {{ .Values.NAMESPACE }}
   labels:
     app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-namespace: bwdev
+    meta.helm.sh/release-namespace: {{ .Values.NAMESPACE }}
     meta.helm.sh/release-name: charts
 spec:
   storageClassName: boluswizard-storage
@@ -66,14 +67,14 @@ spec:
           - nated-2
 
 ---
-
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: bw-pv6
+  namespace: {{ .Values.NAMESPACE }}
   labels:
     app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-namespace: bwdev
+    meta.helm.sh/release-namespace: {{ .Values.NAMESPACE }}
     meta.helm.sh/release-name: charts
 spec:
   storageClassName: boluswizard-storage
@@ -90,14 +91,13 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - nated-3
-          
+          - nated-3  
 ---
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: redis
+  namespace: {{ .Values.NAMESPACE }}
 spec:
   serviceName: redis
   replicas: 3
@@ -126,13 +126,13 @@ spec:
                 echo "this is redis-0, not updating config..."
               else
                 echo "updating redis.conf..."
-                echo "slaveof $MASTER_FDQN 6379" >> /etc/redis/redis.conf
+                echo "slaveof $MASTER_FDQN {{ .Values.REDIS_PORT }}" >> /etc/redis/redis.conf
               fi
             else
               echo "sentinel found, finding master"
               MASTER="$(redis-cli -h sentinel -p 5000 sentinel get-master-addr-by-name mymaster | grep -E '(^redis-\d{1,})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})')"
               echo "master found : $MASTER, updating redis.conf"
-              echo "slaveof $MASTER 6379" >> /etc/redis/redis.conf
+              echo "slaveof $MASTER {{ .Values.REDIS_PORT }}" >> /etc/redis/redis.conf
             fi
         volumeMounts:
         - name: redis-config
@@ -145,7 +145,7 @@ spec:
         command: ["redis-server"]
         args: ["/etc/redis/redis.conf"]
         ports:
-        - containerPort: 6379
+        - containerPort: {{ .Values.REDIS_PORT }}
           name: redis
         volumeMounts:
         - name: data
@@ -173,6 +173,7 @@ spec:
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
+  namespace: {{ .Values.NAMESPACE }}
   name: boluswizard-storage
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer

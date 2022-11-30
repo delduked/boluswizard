@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: redis-config
+  namespace: {{ .Values.NAMESPACE }}
 data:
   redis.conf: |
     # Redis configuration file example.
@@ -11,8 +12,8 @@ data:
     #
     # ./redis-server /path/to/redis.conf
     #slaveof redis-master-0.redis-master.redis.svc.cluster.local 6379
-    masterauth RU2DLZhTIa9z_FS9HW+*L5px$GeR!A6&
-    requirepass RU2DLZhTIa9z_FS9HW+*L5px$GeR!A6&
+    masterauth {{ .Values.REDIS_PASSWORD }}
+    requirepass {{ .Values.REDIS_PASSWORD }}
     # Note on units: when memory size is needed, it is possible to specify
     # it in the usual form of 1k 5GB 4M and so forth:
     #
@@ -97,7 +98,7 @@ data:
 
     # Accept connections on the specified port, default is 6379 (IANA #815344).
     # If port 0 is specified Redis will not listen on a TCP socket.
-    port 6379
+    port {{ .Values.REDIS_PORT }}
 
     # TCP listen() backlog.
     #

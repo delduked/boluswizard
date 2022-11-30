@@ -1,6 +1,6 @@
-apiVersion: v2
-name: charts
-description: A Helm chart for Kubernetes
+apiVersion: v1
+name: BolusWizard
+description: Helm chart for depoying boluswizard web app
 
 # A chart can be either an 'application' or a 'library' chart.
 #
