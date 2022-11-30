@@ -17,7 +17,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.BW_FQDN }}
-    secretName: boluswizard-tls
+    secretName: boluswizard.io
 ---
 apiVersion: v1
 kind: Service
