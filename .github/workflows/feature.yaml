@@ -4,7 +4,7 @@ on:
     branches:
       - feature/*
 
-# jobs:
+jobs:
 #   ui:
 #     runs-on: [self-hosted, nated-7]
 #     steps:
@@ -27,10 +27,9 @@ on:
 #           docker build -t ghcr.io/delduked/boluswizard/api:v$(cat ./VERSION) ./api -f ./api/api.dockerfile
 #           docker push ghcr.io/delduked/boluswizard/api:v$(cat ./VERSION)
 #           echo "image boluswizard/api was built succesfully."
-
   deploy:
     runs-on: [self-hosted, nated-8]
-    needs: [ui,api]
+    #needs: [ui,api]
     steps:
       - uses: actions/checkout@v3
       - id: path
