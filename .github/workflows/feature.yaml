@@ -1,7 +1,8 @@
+name: feature image build
 on:
   push:
     branches:
-      - env/go
+      - feature/*
 
 jobs:
   ui:

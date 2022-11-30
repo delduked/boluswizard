@@ -2,9 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: boluswizard
+  namespace: {{ .Values.NAMESPACE }}
 spec:
   rules:
-  - host: boluswizard.io
+  - host: {{ .Values.BW_FQDN }}
     http:
       paths:
       - backend:
@@ -16,13 +17,14 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - boluswizard.io
+    - {{ .Values.BW_FQDN }}
     secretName: boluswizard-tls
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: boluswizard
+  namespace: {{ .Values.NAMESPACE }}
 spec:
   type: ClusterIP
   selector:
@@ -30,14 +32,15 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: {{ .Values.UI_EXTERNAL_PORT }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: boluswizard
+  namespace: {{ .Values.NAMESPACE }}
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: boluswizard
@@ -50,13 +53,13 @@ spec:
       - name: boluswizard-registry
       containers:
         - name: boluswizard
-          image: registry.nated.io/phosphorusmyesophagus/boluswizard/ui:v1.5 # change this to right registry
+          image: ghcr.io/delduked/boluswizard/ui:v{{ .Values.VERSION }} # change this in pipeline
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.UI_EXTERNAL_PORT }}
           env:
           - name: API_HOSTNAME
-            value: "https://api.boluswizard.io/"
+            value: {{ .Values.API_HOSTNAME }}
           - name: API_PORT
-            value: "80"
+            value: {{ .Values.UI_EXTERNAL_PORT }}
 
