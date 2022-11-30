@@ -15,3 +15,5 @@ NAMESPACE: "bwdev"
 VERSION: "1.5.0"
 BW_FQDN: dev.boluswizard.io
 API_FQDN: devapi.boluswizard.io
+TLS_CRT: <github_secret>
+TLS_KEY: <github_secret>

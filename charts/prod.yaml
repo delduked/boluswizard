@@ -15,3 +15,5 @@ NAMESPACE: "bw"
 VERSION: "1.5.0"
 BW_FQDN: boluswizard.io
 API_FQDN: api.boluswizard.io
+TLS_CRT: <github_secret>
+TLS_KEY: <github_secret>
