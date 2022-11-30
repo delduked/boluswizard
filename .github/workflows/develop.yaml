@@ -40,6 +40,7 @@ jobs:
         with:
           token: ${{ secrets.ALL_ACCESS_PAT }}
           release: ${{ steps.get_version.outputs.VERSION }}
+          namespace: 'bwdev'
           chart: 'charts'
           values-files: "./charts/dev.yaml"
           values: |
