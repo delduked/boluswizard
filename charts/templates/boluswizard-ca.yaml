@@ -47,7 +47,7 @@ spec:
         app: boluswizard
     spec:
       imagePullSecrets:
-      - name: boluswizard-registry
+      - name: boluswizard-ghcr
       containers:
         - name: boluswizard
           image: ghcr.io/delduked/boluswizard/ui:v{{ .Values.VERSION }} # change this in pipeline

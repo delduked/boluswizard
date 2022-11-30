@@ -32,10 +32,6 @@ jobs:
     #needs: [ui,api]
     steps:
       - uses: actions/checkout@v3
-      - id: path
-        run: pwd
-      - id: list
-        run: ls
       - id: get_version
         run: |
           echo "VERSION=$(cat ./VERSION)" >> $GITHUB_OUTPUT
