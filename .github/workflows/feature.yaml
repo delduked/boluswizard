@@ -48,7 +48,7 @@ jobs:
           chart: 'charts'
           value-files: >-
             [
-              "/charts/dev.yaml"
+              "charts/dev.yaml"
             ]
           values: |
             VERSION: ${{ steps.get_version.outputs.VERSION }}
