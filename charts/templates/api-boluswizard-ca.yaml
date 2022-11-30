@@ -54,10 +54,10 @@ spec:
           imagePullPolicy: Always
           env:
           - name: REDIS_HOSTNAME
-            value: {{ .Values.REDIS_HOSTNAME }}
+            value: "{{ .Values.REDIS_HOSTNAME }}"
           - name: REDIS_PORT
-            value: {{ .Values.REDIS_PORT }}
+            value: "{{ .Values.REDIS_PORT }}"
           - name: REDIS_PASSWORD
-            value: {{ .Values.REDIS_PASSWORD }}
+            value: "{{ .Values.REDIS_PASSWORD }}"
           ports:
             - containerPort: {{ .Values.API_PORT }}
