@@ -25,7 +25,5 @@ jobs:
             ]
           values: |
             VERSION: ${{ steps.get_version.outputs.VERSION }}
-            TLS_CRT: ${{ secrets.TLS_CRT }}
-            TLS_KEY: ${{ secrets.TLS_KEY }}
         env: 
           KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
