@@ -40,9 +40,9 @@ jobs:
         uses: vimeda/helm@v1.6.8
         with:
           token: ${{ secrets.ALL_ACCESS_PAT }}
-          release: $(cat ./VERSION)
+          release: ${{ steps.get_version.outputs.VERSION }}
           chart: 'charts'
-          values-files: "./charts/dev.yaml"
+          values-files: "./charts/prod.yaml"
           values: |
             VERSION: ${{ steps.get_version.outputs.VERSION }}
         env: 
