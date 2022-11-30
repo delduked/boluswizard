@@ -2,7 +2,7 @@ name: feature image build
 on:
   push:
     branches:
-      - feature/*
+      - go/feature-*
 
 jobs:
   ui:
