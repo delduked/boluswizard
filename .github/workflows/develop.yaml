@@ -39,6 +39,7 @@ jobs:
         uses: vimeda/helm@v1.6.8
         with:
           token: ${{ secrets.ALL_ACCESS_PAT }}
+          namespace: 'bwdev'
           release: $(cat ./VERSION)
           chart: 'charts'
           values-files: "./charts/dev.yaml"
