@@ -50,7 +50,7 @@ spec:
       - name: boluswizard-ghcr
       containers:
         - name: api-boluswizard
-          image: ghcr.io/delduked/boluswizard/ui:v{{ .Values.VERSION }} # change this in pipeline
+          image: ghcr.io/delduked/boluswizard/api:v{{ .Values.VERSION }} # change this in pipeline
           imagePullPolicy: Always
           env:
           - name: REDIS_HOSTNAME
