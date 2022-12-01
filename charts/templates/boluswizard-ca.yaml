@@ -36,6 +36,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: boluswizard
+  meta.helm.sh/release-name: {{ .Values.VERSION }}
 spec:
   replicas: 5
   selector:
