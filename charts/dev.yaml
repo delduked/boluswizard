@@ -5,7 +5,7 @@ REDIS_HOSTNAME: "redis.bwdev.svc.cluster.local"
 REDIS_PASSWORD: "RU2DLZhTIa9z_FS9HW+*L5px$GeR!A6&"
 REDIS_PORT: "6379"
 # ui access to api env
-API_HOSTNAME: "https://devapi.boluswizard.io/"
+API_HOSTNAME: "https://api.nated.app/"
 API_PORT: "81"
 # public access to ui
 UI_EXTERNAL_PORT: "80"
@@ -13,7 +13,7 @@ UI_HOSTNAME: "ui"
 # helm
 NAMESPACE: "bwdev"
 VERSION: "1.5.0"
-BW_FQDN: dev.boluswizard.io
-API_FQDN: devapi.boluswizard.io
+BW_FQDN: nated.app
+API_FQDN: api.nated.app
 TLS_CRT: <github_secret>
 TLS_KEY: <github_secret>

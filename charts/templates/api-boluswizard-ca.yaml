@@ -17,7 +17,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.BW_FQDN }}
-    secretName: boluswizard.io
+    secretName: nated.app
 ---
 apiVersion: v1
 kind: Service
