@@ -58,5 +58,5 @@ spec:
           - name: API_HOSTNAME
             value: "{{ .Values.API_HOSTNAME }}"
           - name: API_PORT
-            value: "{{ .Values.UI_EXTERNAL_PORT }}"
+            value: "80"
 
