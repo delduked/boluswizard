@@ -3,13 +3,12 @@ kind: Service
 metadata:
   name: redis
 spec:
+  selector:
+    app: redis
   ports:
   - port: {{ .Values.REDIS_PORT }}
     targetPort: {{ .Values.REDIS_PORT }}
-    name: redis
-  selector:
-    app: redis
-
+  type: LoadBalancer
 ---
 
 apiVersion: v1
