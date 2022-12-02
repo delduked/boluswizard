@@ -48,5 +48,5 @@ func main() {
 	wizard.Post("/Duration", controllers.SaveDuration)
 	wizard.Get("/Duration", controllers.Duration)
 
-	app.Listen(":81")
+	app.Listen(":80")
 }

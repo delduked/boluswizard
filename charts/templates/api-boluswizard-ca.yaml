@@ -30,7 +30,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: {{ .Values.API_PORT }}
+      targetPort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -60,4 +60,4 @@ spec:
           - name: REDIS_PASSWORD
             value: "{{ .Values.REDIS_PASSWORD }}"
           ports:
-            - containerPort: {{ .Values.API_PORT }}
+            - containerPort: 80

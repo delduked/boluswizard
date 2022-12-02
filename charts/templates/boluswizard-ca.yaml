@@ -30,7 +30,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: {{ .Values.UI_EXTERNAL_PORT }}
+      targetPort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -53,7 +53,7 @@ spec:
           image: ghcr.io/delduked/boluswizard/ui:v{{ .Values.VERSION }} # change this in pipeline
           imagePullPolicy: Always
           ports:
-            - containerPort: {{ .Values.UI_EXTERNAL_PORT }}
+            - containerPort: 80
           env:
           - name: API_HOSTNAME
             value: "{{ .Values.API_HOSTNAME }}"
