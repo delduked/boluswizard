@@ -29,7 +29,7 @@ jobs:
           docker push ghcr.io/delduked/boluswizard/api:v$(cat ./VERSION)
           echo "image boluswizard/api was built succesfully."
   deploy:
-    runs-on: [self-hosted]
+    runs-on: [self-hosted, nated-7]
     needs: [api,ui]
     steps:
       - uses: actions/checkout@v3
