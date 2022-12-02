@@ -3,10 +3,34 @@ on:
   push:
     branches:
       - develop
+      - go/code
 
 jobs:
-  deploy:
+  ui:
+    runs-on: [self-hosted, nated-7]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Go UI image
+        run : |
+          echo "building boluswizard/ui image"
+          export CR_PAT=${{ secrets.ALL_ACCESS_PAT }} ; echo $CR_PAT | docker login ghcr.io -u delduked --password-stdin
+          docker build -t ghcr.io/delduked/boluswizard/ui:v$(cat ./VERSION) ./ui -f ./ui/ui.dockerfile
+          docker push ghcr.io/delduked/boluswizard/ui:v$(cat ./VERSION)
+          echo "image boluswizard/ui was built succesfully."
+  api:
     runs-on: [self-hosted, nated-8]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Go API image
+        run : |
+          echo "building boluswizard/api image"
+          export CR_PAT=${{ secrets.ALL_ACCESS_PAT }} ; echo $CR_PAT | docker login ghcr.io -u delduked --password-stdin
+          docker build -t ghcr.io/delduked/boluswizard/api:v$(cat ./VERSION) ./api -f ./api/api.dockerfile
+          docker push ghcr.io/delduked/boluswizard/api:v$(cat ./VERSION)
+          echo "image boluswizard/api was built succesfully."
+  deploy:
+    runs-on: [self-hosted]
+    needs: [api,ui]
     steps:
       - uses: actions/checkout@v3
       - id: get_version
