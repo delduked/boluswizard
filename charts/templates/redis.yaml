@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: redis
 spec:
-  clusterIP: None
   ports:
   - port: {{ .Values.REDIS_PORT }}
     targetPort: {{ .Values.REDIS_PORT }}
