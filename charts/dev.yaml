@@ -1,7 +1,7 @@
 # public dev setup
 ENVIRONMENT: "dev"
 # api access to redis env
-REDIS_HOSTNAME: "redis-0.redis.bwdev.svc.cluster.local"
+REDIS_HOSTNAME: "redis.bwdev.svc.cluster.local"
 REDIS_PASSWORD: "RU2DLZhTIa9z_FS9HW+*L5px$GeR!A6&"
 REDIS_PORT: "6379"
 # ui access to api env
