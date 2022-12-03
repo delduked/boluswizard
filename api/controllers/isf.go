@@ -19,7 +19,7 @@ func SaveISFs(c *fiber.Ctx) error {
 	if err := c.BodyParser(body); err != nil {
 		services.ErrorLogger <- err
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
@@ -30,7 +30,7 @@ func SaveISFs(c *fiber.Ctx) error {
 	err := services.SaveISFs(*body, uid)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
@@ -38,7 +38,7 @@ func SaveISFs(c *fiber.Ctx) error {
 	}
 
 	// construct the response
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  nil,
 	}
@@ -53,14 +53,14 @@ func ISFs(c *fiber.Ctx) error {
 	isf, err := services.ISFs(uid)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
 		return services.Response(res, c)
 	}
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  err,
 		Data:   isf,

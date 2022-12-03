@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: redis
 spec:
-  clusterIP: None
   ports:
   - port: {{ .Values.REDIS_PORT }}
     targetPort: {{ .Values.REDIS_PORT }}
@@ -24,7 +23,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/storage/bw-pv4"
+    path: {{ .Values.PV_PATH }}4
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -45,7 +44,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/storage/bw-pv5"
+    path: {{ .Values.PV_PATH }}5
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -67,7 +66,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/storage/bw-pv6"
+    path: {{ .Values.PV_PATH }}6
   nodeAffinity:
     required:
       nodeSelectorTerms:

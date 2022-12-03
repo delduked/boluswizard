@@ -15,5 +15,5 @@ NAMESPACE: "bwdev"
 VERSION: "1.5.0"
 BW_FQDN: nated.app
 API_FQDN: api.nated.app
-TLS_CRT: <github_secret>
-TLS_KEY: <github_secret>
+TLS_SECRET: nated.app
+PV_PATH: "/storage/bw-dev-pv"

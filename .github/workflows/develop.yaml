@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, nated-8]
+    runs-on: [self-hosted, nated-7]
     steps:
       - uses: actions/checkout@v3
       - id: get_version

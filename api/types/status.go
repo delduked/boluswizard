@@ -1,7 +1,7 @@
 package types
 
-type Response struct {
+type Response[T any] struct {
 	Status int `json:"Status" redis:"Status"`
 	Error  any `json:"Error" redis:"Error"`
-	Data   any `json:"-"`
+	Data   T
 }
