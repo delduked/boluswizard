@@ -32,12 +32,18 @@ func SignUp(c *fiber.Ctx) error {
 		return services.Response(res, c)
 	}
 
-	cookie := new(fiber.Cookie)
+	homeCookie := new(fiber.Cookie)
+	homeCookie.Name = "authToken"
+	homeCookie.Value = authToken
+	homeCookie.Path = "/u/" + body.Username + "/home"
 
-	cookie.Name = "authToken"
-	cookie.Value = authToken
+	wizardCookie := new(fiber.Cookie)
+	wizardCookie.Name = "wizardToken"
+	wizardCookie.Value = authToken
+	wizardCookie.Path = "/wizard"
 
-	c.Cookie(cookie)
+	c.Cookie(homeCookie)
+	c.Cookie(wizardCookie)
 
 	data := types.SigninData{
 		Username: body.Username,
@@ -54,7 +60,7 @@ func SignUp(c *fiber.Ctx) error {
 }
 
 func VerifyMiddleWare(c *fiber.Ctx) error {
-	bearer := c.Cookies("authToken")
+	bearer := c.Cookies("wizardToken")
 	uid, err := services.VerifyCredentialsWithToken(bearer, c)
 	if err != nil {
 		c.Status(fiber.StatusForbidden)
@@ -112,13 +118,18 @@ func Signin(c *fiber.Ctx) error {
 		return services.Response(res, c)
 	}
 
-	cookie := new(fiber.Cookie)
+	homeCookie := new(fiber.Cookie)
+	homeCookie.Name = "authToken"
+	homeCookie.Value = authToken
+	homeCookie.Path = "/u/" + body.Username + "/home"
 
-	cookie.Name = "authToken"
-	cookie.Value = authToken
-	cookie.Path = "/"
+	wizardCookie := new(fiber.Cookie)
+	wizardCookie.Name = "wizardToken"
+	wizardCookie.Value = authToken
+	wizardCookie.Path = "/wizard"
 
-	c.Cookie(cookie)
+	c.Cookie(homeCookie)
+	c.Cookie(wizardCookie)
 
 	data := types.SigninData{
 		Username: body.Username,

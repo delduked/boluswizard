@@ -23,13 +23,14 @@ class LoginPage {
             const res = await fetch(`${this.apiService}SignIn`, {
                 method: "POST",
                 body: JSON.stringify(creds),
+                credentials:'include',
                 headers: { "content-type": "application/json" }
             });
             if (res.ok) {
                 // assign token to local storage
                 const responseJson = await res.json();
                 console.log(responseJson.Data);
-                setTimeout(() => { document.cookie = document.cookie + `authToken=${responseJson.Data.Token};path=/`; }, 500);
+                //setTimeout(() => { document.cookie = document.cookie + `authToken=${responseJson.Data.Token};path=/wizard`; }, 500);
                 //setTimeout(() => { document.cookie = document.cookie + `authToken=${responseJson.Data.Token};path=/u/${responseJson.Data.Username}`; }, 1000);
                 this.updateMessage("Login successful!");
                 setTimeout(() => { document.location.href = `/u/${responseJson.Data.Username}/home`; }, 1500);
