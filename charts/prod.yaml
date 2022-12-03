@@ -12,8 +12,10 @@ UI_EXTERNAL_PORT: "80"
 UI_HOSTNAME: "ui"
 # helm
 NAMESPACE: "bw"
-VERSION: "1.5.0"
+VERSION: "1.6.4"
 BW_FQDN: boluswizard.io
 API_FQDN: api.boluswizard.io
 TLS_SECRET: boluswizard.io
 PV_PATH: "/storage/bw-prod-pv"
+STORAGE_CLASS: bw-prod-sc
+PV: bw-prod-pv

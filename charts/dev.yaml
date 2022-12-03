@@ -17,3 +17,5 @@ BW_FQDN: nated.app
 API_FQDN: api.nated.app
 TLS_SECRET: nated.app
 PV_PATH: "/storage/bw-dev-pv"
+STORAGE_CLASS: bw-dev-sc
+PV: bw-dev-pv
