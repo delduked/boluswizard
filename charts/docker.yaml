@@ -1,0 +1,12 @@
+# local docker setup
+ENVIRONMENT: "docker"
+## api access to redis env
+REDIS_HOSTNAME: "boluswizardredis"
+REDIS_PASSWORD: "local-docker-complicate-password"
+REDIS_PORT: "6379"
+## ui access to api env
+API_HOSTNAME: "http://localhost/"
+API_PORT: "81"
+## public access to ui
+UI_EXTERNAL_PORT: "80"
+UI_HOSTNAME: "boluswizard"

@@ -15,7 +15,7 @@ func SignUp(c *fiber.Ctx) error {
 	if err := c.BodyParser(body); err != nil {
 		services.ErrorLogger <- err
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
@@ -25,26 +25,32 @@ func SignUp(c *fiber.Ctx) error {
 	authToken, err := services.SignUp(body)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
 		return services.Response(res, c)
 	}
 
-	cookie := new(fiber.Cookie)
+	homeCookie := new(fiber.Cookie)
+	homeCookie.Name = "authToken"
+	homeCookie.Value = authToken
+	homeCookie.Path = "/u/" + body.Username + "/home"
 
-	cookie.Name = "authToken"
-	cookie.Value = authToken
+	wizardCookie := new(fiber.Cookie)
+	wizardCookie.Name = "wizardToken"
+	wizardCookie.Value = authToken
+	wizardCookie.Path = "/wizard"
 
-	c.Cookie(cookie)
+	c.Cookie(homeCookie)
+	c.Cookie(wizardCookie)
 
 	data := types.SigninData{
 		Username: body.Username,
 		Token:    authToken,
 	}
 
-	res := types.Response{
+	res := types.Response[types.SigninData]{
 		Status: fiber.StatusOK,
 		Error:  nil,
 		Data:   data,
@@ -54,11 +60,11 @@ func SignUp(c *fiber.Ctx) error {
 }
 
 func VerifyMiddleWare(c *fiber.Ctx) error {
-	bearer := c.Cookies("authToken")
+	bearer := c.Cookies("wizardToken")
 	uid, err := services.VerifyCredentialsWithToken(bearer, c)
 	if err != nil {
 		c.Status(fiber.StatusForbidden)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusForbidden,
 			Error:  err,
 		}
@@ -76,7 +82,7 @@ func Signin(c *fiber.Ctx) error {
 	if err := c.BodyParser(body); err != nil {
 		services.ErrorLogger <- err
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
@@ -86,7 +92,7 @@ func Signin(c *fiber.Ctx) error {
 	validate, user, err := services.VerifyUsernameAndPassword(*body)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
@@ -95,7 +101,7 @@ func Signin(c *fiber.Ctx) error {
 
 	if !validate {
 		c.Status(fiber.StatusForbidden)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusForbidden,
 			Error:  err,
 		}
@@ -105,27 +111,32 @@ func Signin(c *fiber.Ctx) error {
 	authToken, err := services.SignIn(user)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
 		return services.Response(res, c)
 	}
 
-	cookie := new(fiber.Cookie)
+	homeCookie := new(fiber.Cookie)
+	homeCookie.Name = "authToken"
+	homeCookie.Value = authToken
+	homeCookie.Path = "/u/" + body.Username + "/home"
 
-	cookie.Name = "authToken"
-	cookie.Value = authToken
-	cookie.Path = "/"
+	wizardCookie := new(fiber.Cookie)
+	wizardCookie.Name = "wizardToken"
+	wizardCookie.Value = authToken
+	wizardCookie.Path = "/wizard"
 
-	c.Cookie(cookie)
+	c.Cookie(homeCookie)
+	c.Cookie(wizardCookie)
 
 	data := types.SigninData{
 		Username: body.Username,
 		Token:    authToken,
 	}
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  err,
 		Data:   data,

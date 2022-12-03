@@ -13,14 +13,14 @@ func Corrections(c *fiber.Ctx) error {
 
 	corrections, err := services.Corrections(uid)
 	if err != nil {
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
 		return services.Response(res, c)
 	}
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  err,
 		Data:   corrections,
@@ -36,14 +36,14 @@ func Correction(c *fiber.Ctx) error {
 
 	correction, err := services.Correction(uid, key)
 	if err != nil {
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
 		return services.Response(res, c)
 	}
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  err,
 		Data:   correction,
@@ -60,7 +60,7 @@ func CorrectionRange(c *fiber.Ctx) error {
 	if err := c.QueryParser(body); err != nil {
 		services.ErrorLogger <- err
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
@@ -70,14 +70,14 @@ func CorrectionRange(c *fiber.Ctx) error {
 	corrections, err := services.CorrectionRange(*body, uid)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
 		return services.Response(res, c)
 	}
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  err,
 		Data:   corrections,
@@ -98,7 +98,7 @@ func SaveCorrections(c *fiber.Ctx) error {
 	if err := c.BodyParser(body); err != nil {
 		services.ErrorLogger <- err
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
@@ -109,7 +109,7 @@ func SaveCorrections(c *fiber.Ctx) error {
 	err := services.SaveCorrections(*body, uid)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
@@ -117,7 +117,7 @@ func SaveCorrections(c *fiber.Ctx) error {
 	}
 
 	// construct the response
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  nil,
 	}

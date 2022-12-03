@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html id="page">
   <head>
-    <title>Resume</title>
+    <title>Hi {{.Username}}!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;">
@@ -17,7 +17,7 @@
     <script src="/assets/portal/editor.main.nls.js"></script>
     <script src="/assets/portal/editor.main.js"></script>
   </head>
-  <body>
+  <body data-api-service="{{.API_SERVICE}}">
     <div class="header header-fixed u-unselectable header-animated">
       <div class="header-brand">
         <div class="nav-item no-hover"><a>

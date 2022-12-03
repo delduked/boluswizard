@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/google/uuid"
 )
 
 // Check if the user exists in the redis database
@@ -102,11 +101,10 @@ func User(uid string) (types.Users, error) {
 // Allow a new user to sign up
 func SaveUser(value *types.Users) error {
 	var err error
-	uid := (uuid.New()).String()
 
 	// Set some fields.
 	_, err = config.Rdb.Pipelined(config.RedisCtx, func(rdb redis.Pipeliner) error {
-		field := uid + "::username"
+		field := value.Uid + "::username"
 		rdb.HSet(config.RedisCtx, field, "Username", value.Username)
 		rdb.HSet(config.RedisCtx, field, "Password", value.Password)
 		return nil

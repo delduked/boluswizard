@@ -1,9 +1,5 @@
-// import Chartist from "chartist";
 // const Chartist = require('chartist');
 // const moment = require('moment');
-
-// var chart = new Chartist.Line('#my-chart', data, chartType,options);
-// const axios = require('axios').default;
 
 interface iCorrectionResponse {
   Status: number;
@@ -99,8 +95,14 @@ class ProjectInput {
   ToastErrorMessage: HTMLHtmlElement;
   ToastSuccess: HTMLHtmlElement;
 
+  // signout
+  SignOut: HTMLAnchorElement;
+
   // nav
   navBtns: any;
+
+  // api service
+  apiService: String;
 
   graph: any;
 
@@ -136,8 +138,14 @@ class ProjectInput {
     this.ToastSuccess = document.getElementById('Success')! as HTMLHtmlElement;
     this.ToastErrorMessage = document.getElementById('Errormessage')! as HTMLHtmlElement;
 
+    // signout
+    this.SignOut = document.querySelector('[href="/login"]') as HTMLAnchorElement;
+
     // nav
     this.navBtns = document.querySelectorAll('.nav-btn')! as NodeListOf<Element>;
+
+    // api service
+    this.apiService = document.querySelector("body").getAttribute('data-api-service')! as string;
 
     this.initSettings()
     this.drawGraph()
@@ -200,6 +208,10 @@ class ProjectInput {
           ele.classList.toggle('active');
           dropDownMenu.classList.toggle('active');
       });
+    
+    this.SignOut.addEventListener('click', event =>{
+      document.cookie = document.cookie + "max-age=0;"
+    })
   });
 
   }
@@ -339,28 +351,9 @@ class ProjectInput {
     }
   }
 
-  public async signin(){
-    try {
-      const token = await fetch("http://localhost:81/Signin",{
-        method: "POST",
-        body: JSON.stringify({"Username":"nate@nated.ca","Password":"n4th4n43l"}),
-        headers: {"content-type":"application/json"},
-        credentials: "include"
-      })
-      .then(data =>{
-          console.log(data);
-          return data.json();
-      })
-
-    } catch (error) {
-
-      console.log(error);
-    }
-  }
-
   public async get<t>(info: string): Promise<t> {
     try {
-      const res = await fetch(`http://localhost:81/wizard/${info}`,{
+      const res = await fetch(`${this.apiService}wizard/${info}`,{
         method: "GET",
         credentials: "include"
       })
@@ -376,7 +369,7 @@ class ProjectInput {
   }
   public async post<t>(info: string, data: string): Promise<t> {
     try {
-      const res = await fetch(`http://localhost:81/wizard/${info}`,{
+      const res = await fetch(`${this.apiService}wizard/${info}`,{
         method: "POST",
         credentials: "include",
         body: data,

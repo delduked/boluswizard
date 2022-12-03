@@ -17,7 +17,11 @@ func main() {
 		Views: engine,
 	})
 
-	app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowCredentials: true,
+		AllowOrigins:     "*",
+		AllowHeaders:     "Origin, Content-Type, Accept, Accept-Language, Content-Length",
+	}))
 	app.Use(middleware.Log)
 
 	app.Get("/error/:error", models.ErrorPage)

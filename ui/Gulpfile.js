@@ -192,6 +192,26 @@ function tsProportal(){
 }
 // Portal
 
+// tasks
+tsProHome.flags = {
+   '--home':'Compiles typescript to user home page for deployment'
+};
+tsProHome.description = 'Compile typescript to user home page';
+gulp.task(tsProHome);
+
+tsPrologin.flags = {
+   '--login':'Compiles typescript to login page for deployment'
+};
+tsPrologin.description = 'Compile typescript to user home page';
+gulp.task(tsPrologin);
+
+tsProSignup.flags = {
+   '--signup':'Compiles typescript to signup page for deployment'
+};
+tsProSignup.description = 'Compile typescript to user home page';
+gulp.task(tsProSignup);
+// tasks
+
 // Watch files
 function watchFiles() {
 

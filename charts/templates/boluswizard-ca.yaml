@@ -1,0 +1,62 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boluswizard
+spec:
+  rules:
+  - host: {{ .Values.BW_FQDN }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: boluswizard
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ .Values.BW_FQDN }}
+    secretName: {{ .Values.TLS_SECRET }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: boluswizard
+spec:
+  type: ClusterIP
+  selector:
+    app: boluswizard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boluswizard
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: boluswizard
+  template:
+    metadata:
+      labels:
+        app: boluswizard
+    spec:
+      imagePullSecrets:
+      - name: boluswizard-ghcr
+      containers:
+        - name: boluswizard
+          image: ghcr.io/delduked/boluswizard/ui:v{{ .Values.VERSION }} # change this in pipeline
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+          - name: API_HOSTNAME
+            value: "{{ .Values.API_HOSTNAME }}"
+          - name: API_PORT
+            value: "80"
+

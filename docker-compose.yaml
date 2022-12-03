@@ -6,8 +6,8 @@ services:
     hostname: ${REDIS_HOSTNAME}
     image: redislabs/rejson:latest
     restart: unless-stopped
-    expose:
-      - ${REDIS_PORT}
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
     command: >
       --requirepass ${REDIS_PASSWORD} 
       --port ${REDIS_PORT}
@@ -26,7 +26,7 @@ services:
       context: ./api
       dockerfile: api.dockerfile
     ports:
-      - ${API_PORT}:80
+      - ${API_PORT}:81
     networks:
       - bolusWizard
     environment:

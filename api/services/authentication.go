@@ -40,6 +40,8 @@ func SignUp(body *types.Users) (string, error) {
 		return authToken, err
 	}
 
+	body.Uid = uid
+
 	// save user account in redis
 	err = SaveUser(body)
 	if err != nil {

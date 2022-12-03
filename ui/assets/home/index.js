@@ -1,4 +1,3 @@
-// import Chartist from "chartist";
 // const Chartist = require('chartist');
 // const moment = require('moment');
 class ProjectInput {
@@ -28,8 +27,12 @@ class ProjectInput {
         this.ToastError = document.getElementById('Error');
         this.ToastSuccess = document.getElementById('Success');
         this.ToastErrorMessage = document.getElementById('Errormessage');
+        // signout
+        this.SignOut = document.querySelector('[href="/login"]');
         // nav
         this.navBtns = document.querySelectorAll('.nav-btn');
+        // api service
+        this.apiService = document.querySelector("body").getAttribute('data-api-service');
         this.initSettings();
         this.drawGraph();
         this.configure();
@@ -81,6 +84,9 @@ class ProjectInput {
                 // Toggle the nav-btn and the dropdown menu
                 ele.classList.toggle('active');
                 dropDownMenu.classList.toggle('active');
+            });
+            this.SignOut.addEventListener('click', event => {
+                document.cookie = document.cookie + "max-age=0;";
             });
         });
     }
@@ -199,26 +205,9 @@ class ProjectInput {
             throw error;
         }
     }
-    async signin() {
-        try {
-            const token = await fetch("http://localhost:81/Signin", {
-                method: "POST",
-                body: JSON.stringify({ "Username": "nate@nated.ca", "Password": "n4th4n43l" }),
-                headers: { "content-type": "application/json" },
-                credentials: "include"
-            })
-                .then(data => {
-                console.log(data);
-                return data.json();
-            });
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
     async get(info) {
         try {
-            const res = await fetch(`http://localhost:81/wizard/${info}`, {
+            const res = await fetch(`${this.apiService}wizard/${info}`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -234,7 +223,7 @@ class ProjectInput {
     }
     async post(info, data) {
         try {
-            const res = await fetch(`http://localhost:81/wizard/${info}`, {
+            const res = await fetch(`${this.apiService}wizard/${info}`, {
                 method: "POST",
                 credentials: "include",
                 body: data,
