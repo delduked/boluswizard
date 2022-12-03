@@ -17,7 +17,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.BW_FQDN }}
-    secretName: nated.app
+    secretName: {{ .Values.TLS_SECRET }}
 ---
 apiVersion: v1
 kind: Service
