@@ -15,7 +15,7 @@ func Bolus(c *fiber.Ctx) error {
 	if err := c.QueryParser(body); err != nil {
 		services.ErrorLogger <- err
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
@@ -25,7 +25,7 @@ func Bolus(c *fiber.Ctx) error {
 	correction, err := services.BolusWizard(body, uid)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
@@ -33,7 +33,7 @@ func Bolus(c *fiber.Ctx) error {
 		return services.Response(res, c)
 	}
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  err,
 		Data:   correction,

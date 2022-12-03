@@ -10,7 +10,7 @@ import (
 // Get status of API
 func Health(c *fiber.Ctx) error {
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  nil,
 	}

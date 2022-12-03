@@ -19,7 +19,7 @@ func SaveTargets(c *fiber.Ctx) error {
 	if err := c.BodyParser(body); err != nil {
 		services.ErrorLogger <- err
 		c.Status(fiber.StatusBadRequest)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusBadRequest,
 			Error:  err,
 		}
@@ -30,7 +30,7 @@ func SaveTargets(c *fiber.Ctx) error {
 	err := services.SaveTargets(*body, uid)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
@@ -38,7 +38,7 @@ func SaveTargets(c *fiber.Ctx) error {
 	}
 
 	// construct the response
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  nil,
 	}
@@ -54,14 +54,14 @@ func Targets(c *fiber.Ctx) error {
 	targets, err := services.Targets(uid)
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
-		res := types.Response{
+		res := types.Response[any]{
 			Status: fiber.StatusInternalServerError,
 			Error:  err,
 		}
 		return services.Response(res, c)
 	}
 
-	res := types.Response{
+	res := types.Response[any]{
 		Status: fiber.StatusOK,
 		Error:  err,
 		Data:   targets,
