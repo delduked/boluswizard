@@ -1,0 +1,494 @@
+swagger: '2.0'
+info:
+  title: BolusWizard
+  version: '1.0'
+
+schemes:
+  - http
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /health-check:
+    get:
+      summary: Health Check
+      operationId: healthCheck
+      responses:
+        200:
+          description: OK
+
+  /ratios:
+    post:
+      summary: Create Carb Ratios
+      operationId: createRatios
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+        - name: carbRatios
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CarbRatio'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+                description: status code
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: object
+                #nullable: true
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+  /Targets:
+    post:
+      summary: Create Target Ratios
+      operationId: createTargets
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+        - name: targetRatios
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Target'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: object
+                #nullable: true
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+  /ISF:
+    post:
+      summary: Create ISF
+      operationId: createISFs
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+        - name: targetRatios
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ISF'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: object
+                #nullable: true
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+
+    get:
+      summary: Get ISFs
+      operationId: getISFs
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: array
+                items: 
+                  $ref: '#/definitions/ISF'
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+  /Duration:
+    post:
+      summary: Create Duration
+      operationId: createDuration
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+        - name: Duration
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              Duration:
+                type: string
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: object
+                #nullable: true
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+
+    get:
+      summary: Get Duration
+      operationId: getDuration
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: string
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+
+  /SignIn:
+    post:
+      summary: Sign In
+      operationId: signIn
+      parameters:
+        - name: signInData
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Sign'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                $ref: '#/definitions/Token'
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+  
+  /NewCorrection:
+    get:
+      summary: New Correction
+      operationId: newCorrection
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+        - name: Bg
+          in: query
+          required: true
+          type: integer
+        - name: Carbs
+          in: query
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                $ref: '#/definitions/CorrectionResponse'
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+  /CorrectionRange:
+    get:
+      summary: get correction range
+      operationId: correctionRange
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+        - name: Bg
+          in: query
+          required: true
+          type: integer
+        - name: Carbs
+          in: query
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                $ref: '#/definitions/CorrectionResponse'
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+
+  /SignUp:
+    post:
+      summary: Sign Up
+      operationId: signUp
+      parameters:
+        - name: signUpData
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Sign'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                $ref: '#/definitions/Token'
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+
+  /corrections:
+    post:
+      summary: Create Corrections
+      operationId: createCorrections
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+        - name: corrections
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Correction'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Response'
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+
+    get:
+      summary: Get Corrections
+      operationId: getCorrections
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: array
+                items: 
+                  $ref: '#/definitions/Correction' #change to corrections
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
+
+definitions:
+  CarbRatio:
+    type: object
+    properties:
+      Key:
+        type: string
+      End:
+        type: string
+      Start:
+        type: string
+      Ratio:
+        type: number
+        format: float64
+  ISF:
+    type: object
+    properties:
+      Key:
+        type: string
+      End:
+        type: string
+      Start:
+        type: string
+      Sensitivity:
+        type: number
+        format: float64
+  Target:
+    type: object
+    properties:
+      Key:
+        type: string
+      End:
+        type: string
+      Start:
+        type: string
+      Ratio:
+        type: number
+        format: float64
+
+  CorrectionResponse:
+    type: object
+    properties:
+      BgCorrection:
+        type: number
+        format: float64
+      CarbCorrection:
+        type: number
+        format: float64
+      ActiveInsulinReduction:
+        type: number
+        format: float64
+      Bolus:
+        type: number
+        format: float64
+
+  Sign:
+    type: object
+    properties:
+      Username:
+        type: string
+      Password:
+        type: string
+  Token:
+    type: object
+    properties:
+      Username:
+        type: string
+      Token:
+        type: string
+
+  Correction:
+    type: object
+    properties:
+      Key:
+        type: string
+      Bg:
+        type: number
+        format: float64
+      Carbs:
+        type: number
+        format: float64
+      Bolus:
+        type: number
+        format: float64
+      TimeStamp:
+        type: integer
+        format: int64
+
+  Response:
+    type: object
+    properties:
+      Status:
+        type: integer
+      Error:
+        type: object
