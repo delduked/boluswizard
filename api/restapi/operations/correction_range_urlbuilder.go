@@ -15,8 +15,8 @@ import (
 
 // CorrectionRangeURL generates an URL for the correction range operation
 type CorrectionRangeURL struct {
-	Bg    int64
-	Carbs int64
+	End   int64
+	Start int64
 
 	_basePath string
 	// avoid unkeyed usage
@@ -49,14 +49,14 @@ func (o *CorrectionRangeURL) Build() (*url.URL, error) {
 
 	qs := make(url.Values)
 
-	bgQ := swag.FormatInt64(o.Bg)
-	if bgQ != "" {
-		qs.Set("Bg", bgQ)
+	endQ := swag.FormatInt64(o.End)
+	if endQ != "" {
+		qs.Set("End", endQ)
 	}
 
-	carbsQ := swag.FormatInt64(o.Carbs)
-	if carbsQ != "" {
-		qs.Set("Carbs", carbsQ)
+	startQ := swag.FormatInt64(o.Start)
+	if startQ != "" {
+		qs.Set("Start", startQ)
 	}
 
 	_result.RawQuery = qs.Encode()

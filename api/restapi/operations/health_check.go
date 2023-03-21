@@ -6,9 +6,15 @@ package operations
 // Editing this file might prove futile when you re-run the generate command
 
 import (
+	"context"
 	"net/http"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
+
+	"boluswizard/models"
 )
 
 // HealthCheckHandlerFunc turns a function with the right signature into a health check handler
@@ -53,4 +59,83 @@ func (o *HealthCheck) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	res := o.Handler.Handle(Params) // actually handle the request
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
+}
+
+// HealthCheckOKBody health check o k body
+//
+// swagger:model HealthCheckOKBody
+type HealthCheckOKBody struct {
+	models.Health
+}
+
+// UnmarshalJSON unmarshals this object from a JSON structure
+func (o *HealthCheckOKBody) UnmarshalJSON(raw []byte) error {
+	// HealthCheckOKBodyAO0
+	var healthCheckOKBodyAO0 models.Health
+	if err := swag.ReadJSON(raw, &healthCheckOKBodyAO0); err != nil {
+		return err
+	}
+	o.Health = healthCheckOKBodyAO0
+
+	return nil
+}
+
+// MarshalJSON marshals this object to a JSON structure
+func (o HealthCheckOKBody) MarshalJSON() ([]byte, error) {
+	_parts := make([][]byte, 0, 1)
+
+	healthCheckOKBodyAO0, err := swag.WriteJSON(o.Health)
+	if err != nil {
+		return nil, err
+	}
+	_parts = append(_parts, healthCheckOKBodyAO0)
+	return swag.ConcatJSON(_parts...), nil
+}
+
+// Validate validates this health check o k body
+func (o *HealthCheckOKBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	// validation for a type composition with models.Health
+	if err := o.Health.Validate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// ContextValidate validate this health check o k body based on the context it is used
+func (o *HealthCheckOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	// validation for a type composition with models.Health
+	if err := o.Health.ContextValidate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *HealthCheckOKBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *HealthCheckOKBody) UnmarshalBinary(b []byte) error {
+	var res HealthCheckOKBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
 }

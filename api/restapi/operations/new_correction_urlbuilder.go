@@ -15,8 +15,8 @@ import (
 
 // NewCorrectionURL generates an URL for the new correction operation
 type NewCorrectionURL struct {
-	Bg    int64
-	Carbs int64
+	Bg    float64
+	Carbs float64
 
 	_basePath string
 	// avoid unkeyed usage
@@ -49,12 +49,12 @@ func (o *NewCorrectionURL) Build() (*url.URL, error) {
 
 	qs := make(url.Values)
 
-	bgQ := swag.FormatInt64(o.Bg)
+	bgQ := swag.FormatFloat64(o.Bg)
 	if bgQ != "" {
 		qs.Set("Bg", bgQ)
 	}
 
-	carbsQ := swag.FormatInt64(o.Carbs)
+	carbsQ := swag.FormatFloat64(o.Carbs)
 	if carbsQ != "" {
 		qs.Set("Carbs", carbsQ)
 	}

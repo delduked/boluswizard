@@ -20,6 +20,9 @@ type Target struct {
 	// end
 	End string `json:"End,omitempty"`
 
+	// high
+	High float64 `json:"High,omitempty"`
+
 	// key
 	Key string `json:"Key,omitempty"`
 
@@ -28,6 +31,9 @@ type Target struct {
 
 	// start
 	Start string `json:"Start,omitempty"`
+
+	// low
+	Low float64 `json:"low,omitempty"`
 }
 
 // Validate validates this target

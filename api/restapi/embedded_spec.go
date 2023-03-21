@@ -46,13 +46,15 @@ func init() {
           },
           {
             "type": "integer",
-            "name": "Bg",
+            "format": "int64",
+            "name": "Start",
             "in": "query",
             "required": true
           },
           {
             "type": "integer",
-            "name": "Carbs",
+            "format": "int64",
+            "name": "End",
             "in": "query",
             "required": true
           }
@@ -64,7 +66,10 @@ func init() {
               "type": "object",
               "properties": {
                 "Data": {
-                  "$ref": "#/definitions/CorrectionResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Correction"
+                  }
                 },
                 "Error": {
                   "type": "object"
@@ -275,13 +280,15 @@ func init() {
             "required": true
           },
           {
-            "type": "integer",
+            "type": "number",
+            "format": "float64",
             "name": "Bg",
             "in": "query",
             "required": true
           },
           {
-            "type": "integer",
+            "type": "number",
+            "format": "float64",
             "name": "Carbs",
             "in": "query",
             "required": true
@@ -531,7 +538,14 @@ func init() {
         "operationId": "healthCheck",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successful operation",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Health"
+                }
+              ]
+            }
           }
         }
       }
@@ -589,6 +603,14 @@ func init() {
     }
   },
   "definitions": {
+    "ActiveInsulinDuration": {
+      "type": "object",
+      "properties": {
+        "Duration": {
+          "type": "string"
+        }
+      }
+    },
     "CarbRatio": {
       "type": "object",
       "properties": {
@@ -631,6 +653,19 @@ func init() {
         }
       }
     },
+    "CorrectionRange": {
+      "type": "object",
+      "properties": {
+        "End": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Start": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "CorrectionResponse": {
       "type": "object",
       "properties": {
@@ -649,6 +684,20 @@ func init() {
         "CarbCorrection": {
           "type": "number",
           "format": "float64"
+        }
+      }
+    },
+    "Health": {
+      "type": "object",
+      "properties": {
+        "Error": {
+          "type": "object"
+        },
+        "Status": {
+          "type": "integer"
+        },
+        "Timestamp": {
+          "type": "object"
         }
       }
     },
@@ -681,6 +730,20 @@ func init() {
         }
       }
     },
+    "ResponseData": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "object"
+        },
+        "Error": {
+          "type": "object"
+        },
+        "Status": {
+          "type": "integer"
+        }
+      }
+    },
     "Sign": {
       "type": "object",
       "properties": {
@@ -698,6 +761,10 @@ func init() {
         "End": {
           "type": "string"
         },
+        "High": {
+          "type": "number",
+          "format": "float64"
+        },
         "Key": {
           "type": "string"
         },
@@ -707,6 +774,10 @@ func init() {
         },
         "Start": {
           "type": "string"
+        },
+        "low": {
+          "type": "number",
+          "format": "float64"
         }
       }
     },
@@ -714,6 +785,20 @@ func init() {
       "type": "object",
       "properties": {
         "Token": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "type": "object",
+      "properties": {
+        "Password": {
+          "type": "string"
+        },
+        "Uid": {
           "type": "string"
         },
         "Username": {
@@ -752,13 +837,15 @@ func init() {
           },
           {
             "type": "integer",
-            "name": "Bg",
+            "format": "int64",
+            "name": "Start",
             "in": "query",
             "required": true
           },
           {
             "type": "integer",
-            "name": "Carbs",
+            "format": "int64",
+            "name": "End",
             "in": "query",
             "required": true
           }
@@ -770,7 +857,10 @@ func init() {
               "type": "object",
               "properties": {
                 "Data": {
-                  "$ref": "#/definitions/CorrectionResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Correction"
+                  }
                 },
                 "Error": {
                   "type": "object"
@@ -981,13 +1071,15 @@ func init() {
             "required": true
           },
           {
-            "type": "integer",
+            "type": "number",
+            "format": "float64",
             "name": "Bg",
             "in": "query",
             "required": true
           },
           {
-            "type": "integer",
+            "type": "number",
+            "format": "float64",
             "name": "Carbs",
             "in": "query",
             "required": true
@@ -1237,7 +1329,14 @@ func init() {
         "operationId": "healthCheck",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successful operation",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Health"
+                }
+              ]
+            }
           }
         }
       }
@@ -1295,6 +1394,14 @@ func init() {
     }
   },
   "definitions": {
+    "ActiveInsulinDuration": {
+      "type": "object",
+      "properties": {
+        "Duration": {
+          "type": "string"
+        }
+      }
+    },
     "CarbRatio": {
       "type": "object",
       "properties": {
@@ -1337,6 +1444,19 @@ func init() {
         }
       }
     },
+    "CorrectionRange": {
+      "type": "object",
+      "properties": {
+        "End": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Start": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "CorrectionResponse": {
       "type": "object",
       "properties": {
@@ -1355,6 +1475,20 @@ func init() {
         "CarbCorrection": {
           "type": "number",
           "format": "float64"
+        }
+      }
+    },
+    "Health": {
+      "type": "object",
+      "properties": {
+        "Error": {
+          "type": "object"
+        },
+        "Status": {
+          "type": "integer"
+        },
+        "Timestamp": {
+          "type": "object"
         }
       }
     },
@@ -1387,6 +1521,20 @@ func init() {
         }
       }
     },
+    "ResponseData": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "object"
+        },
+        "Error": {
+          "type": "object"
+        },
+        "Status": {
+          "type": "integer"
+        }
+      }
+    },
     "Sign": {
       "type": "object",
       "properties": {
@@ -1404,6 +1552,10 @@ func init() {
         "End": {
           "type": "string"
         },
+        "High": {
+          "type": "number",
+          "format": "float64"
+        },
         "Key": {
           "type": "string"
         },
@@ -1413,6 +1565,10 @@ func init() {
         },
         "Start": {
           "type": "string"
+        },
+        "low": {
+          "type": "number",
+          "format": "float64"
         }
       }
     },
@@ -1420,6 +1576,20 @@ func init() {
       "type": "object",
       "properties": {
         "Token": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "type": "object",
+      "properties": {
+        "Password": {
+          "type": "string"
+        },
+        "Uid": {
           "type": "string"
         },
         "Username": {

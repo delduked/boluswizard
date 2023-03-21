@@ -37,12 +37,12 @@ type CorrectionRangeParams struct {
 	  Required: true
 	  In: query
 	*/
-	Bg int64
+	End int64
 	/*
 	  Required: true
 	  In: query
 	*/
-	Carbs int64
+	Start int64
 	/*
 	  Required: true
 	  In: header
@@ -61,13 +61,13 @@ func (o *CorrectionRangeParams) BindRequest(r *http.Request, route *middleware.M
 
 	qs := runtime.Values(r.URL.Query())
 
-	qBg, qhkBg, _ := qs.GetOK("Bg")
-	if err := o.bindBg(qBg, qhkBg, route.Formats); err != nil {
+	qEnd, qhkEnd, _ := qs.GetOK("End")
+	if err := o.bindEnd(qEnd, qhkEnd, route.Formats); err != nil {
 		res = append(res, err)
 	}
 
-	qCarbs, qhkCarbs, _ := qs.GetOK("Carbs")
-	if err := o.bindCarbs(qCarbs, qhkCarbs, route.Formats); err != nil {
+	qStart, qhkStart, _ := qs.GetOK("Start")
+	if err := o.bindStart(qStart, qhkStart, route.Formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -80,10 +80,10 @@ func (o *CorrectionRangeParams) BindRequest(r *http.Request, route *middleware.M
 	return nil
 }
 
-// bindBg binds and validates parameter Bg from query.
-func (o *CorrectionRangeParams) bindBg(rawData []string, hasKey bool, formats strfmt.Registry) error {
+// bindEnd binds and validates parameter End from query.
+func (o *CorrectionRangeParams) bindEnd(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	if !hasKey {
-		return errors.Required("Bg", "query", rawData)
+		return errors.Required("End", "query", rawData)
 	}
 	var raw string
 	if len(rawData) > 0 {
@@ -93,23 +93,23 @@ func (o *CorrectionRangeParams) bindBg(rawData []string, hasKey bool, formats st
 	// Required: true
 	// AllowEmptyValue: false
 
-	if err := validate.RequiredString("Bg", "query", raw); err != nil {
+	if err := validate.RequiredString("End", "query", raw); err != nil {
 		return err
 	}
 
 	value, err := swag.ConvertInt64(raw)
 	if err != nil {
-		return errors.InvalidType("Bg", "query", "int64", raw)
+		return errors.InvalidType("End", "query", "int64", raw)
 	}
-	o.Bg = value
+	o.End = value
 
 	return nil
 }
 
-// bindCarbs binds and validates parameter Carbs from query.
-func (o *CorrectionRangeParams) bindCarbs(rawData []string, hasKey bool, formats strfmt.Registry) error {
+// bindStart binds and validates parameter Start from query.
+func (o *CorrectionRangeParams) bindStart(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	if !hasKey {
-		return errors.Required("Carbs", "query", rawData)
+		return errors.Required("Start", "query", rawData)
 	}
 	var raw string
 	if len(rawData) > 0 {
@@ -119,15 +119,15 @@ func (o *CorrectionRangeParams) bindCarbs(rawData []string, hasKey bool, formats
 	// Required: true
 	// AllowEmptyValue: false
 
-	if err := validate.RequiredString("Carbs", "query", raw); err != nil {
+	if err := validate.RequiredString("Start", "query", raw); err != nil {
 		return err
 	}
 
 	value, err := swag.ConvertInt64(raw)
 	if err != nil {
-		return errors.InvalidType("Carbs", "query", "int64", raw)
+		return errors.InvalidType("Start", "query", "int64", raw)
 	}
-	o.Carbs = value
+	o.Start = value
 
 	return nil
 }

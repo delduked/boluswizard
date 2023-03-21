@@ -8,6 +8,7 @@ package operations
 import (
 	"context"
 	"net/http"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime/middleware"
@@ -67,7 +68,7 @@ func (o *CorrectionRange) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 type CorrectionRangeOKBody struct {
 
 	// data
-	Data *models.CorrectionResponse `json:"Data,omitempty"`
+	Data []*models.Correction `json:"Data"`
 
 	// error
 	Error interface{} `json:"Error,omitempty"`
@@ -95,15 +96,22 @@ func (o *CorrectionRangeOKBody) validateData(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if o.Data != nil {
-		if err := o.Data.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("correctionRangeOK" + "." + "Data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("correctionRangeOK" + "." + "Data")
-			}
-			return err
+	for i := 0; i < len(o.Data); i++ {
+		if swag.IsZero(o.Data[i]) { // not required
+			continue
 		}
+
+		if o.Data[i] != nil {
+			if err := o.Data[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("correctionRangeOK" + "." + "Data" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("correctionRangeOK" + "." + "Data" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -125,15 +133,19 @@ func (o *CorrectionRangeOKBody) ContextValidate(ctx context.Context, formats str
 
 func (o *CorrectionRangeOKBody) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
-	if o.Data != nil {
-		if err := o.Data.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("correctionRangeOK" + "." + "Data")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("correctionRangeOK" + "." + "Data")
+	for i := 0; i < len(o.Data); i++ {
+
+		if o.Data[i] != nil {
+			if err := o.Data[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("correctionRangeOK" + "." + "Data" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("correctionRangeOK" + "." + "Data" + "." + strconv.Itoa(i))
+				}
+				return err
 			}
-			return err
 		}
+
 	}
 
 	return nil

@@ -1,0 +1,25 @@
+Make a goswagger yaml file with multiple endpoints. The first endpoint will be a health check endpoint which will responds with a 200 response from a GET request. 
+
+the second endpoint will be the SignIn endpoint which will be a post request and will receive a json body of type SignIn. Type SignIn includes the field Username of type string and the field Password of type string. 
+On a successfull request the Signin endpoint will respond with three fields which are Uid, Username and Token. All fields Uid, Username and Token from the Signin endpoint will be strings on a successfully response. 
+On an unsuccessfull request the Signin endpoint will respond with two fields called Status of type int and Error of type any.
+
+The third endpoint will be the SignUp endpoint which will be a post request and the json body is of type SignIn. Type SignIn includes the field Username of type string and the field Password of type string. An unssuccessfull post request to the signup endpoint will have a json response with fields called Status of type int and Error of type any.
+
+add an endpoint called NewCorrection which will be a GET request and will accept the query parameters Bg of type int and the query parameter Carbs of type int. The request requires a header in the request where the header is named authToken. On a successfull Get request the NewCorrection endpoint will respond with an object of type CorrectionResponse which includes the fields BgCorrection of type float64, CarbCorrection of type float64, ActiveInsulinReduction  of type float64 and Bolus of type float64. An unssuccessfull Get request will respond with an object of type response.
+
+Add another endpoint called Corrections. A Post request to the Corrections endpoint will receive a json body with an array of objects of type Correction. Type Correction includes the fields Key of type string, Bg of type float64, Carbs of type float64, Bolus of type float64 and TimeStamp of type int64. The request requires a header named authToken. A successfull request will result in a response of an object of type Response. An unsuccessfull POST request to the Corrections endpoint responds with an object of type Response. A successful Get request to the Corrections endpoint will result in a response of an object of type Response. An unssuccessfull get request to the Corrections endpoint will have a json response of type Response.
+
+the sixth endpoint will be the CorrectionRange endpoint which will be a Get request. On a successfull GET request the endpoint CorrectionRange has a json response with a fields called Status of type int, Error of type any, and Data which is an array of type CorrectionRange. the CorrectionRange type has a field called Start of type int64 and a field called End of type int64. The request requires a header in the request where the header is named authToken. On an unsuccessfull Get request to the CorrectionRange endpoint the endpoint will respond with a field called Status of type int and a field called Error of type any.
+
+Make a goswagger yaml file with multiple endpoints. 
+The first endpoint will be a health check endpoint which will respond with a 200 response from a GET request. the Second endpoint will be the Ratios endpoint. 
+A Post request to the Ratios endpoint has json payload consisting of an array of type CarbRatio. Type CarbRatio has the fields Key of type string, End of type string, Start of type string and Ratio of type float64. The request requires a header in the request where the header is named authToken. On a successful POST request the json response will be an object of type Response. Type Response includes the fields Status of type int, Error of type any and Data of a generic type. An unsuccessful Post request to the Ratios endpoint responds with an object of type Response. 
+A Get request to the Ratios endpoint requires a header in the request named authToken. On a successful GET request the json response will be an object of type Response. An unsuccessful Get request to the Ratios endpoint responds with an object of type Response. 
+
+
+
+Make a goswagger yaml file with multiple endpoints. The first endpoint will be a health check endpoint which will responds with a 200 response from a GET request. 
+type Response is an object which includes the fields Status of type int, Error of type any and Data of type any
+
+

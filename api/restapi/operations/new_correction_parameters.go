@@ -37,12 +37,12 @@ type NewCorrectionParams struct {
 	  Required: true
 	  In: query
 	*/
-	Bg int64
+	Bg float64
 	/*
 	  Required: true
 	  In: query
 	*/
-	Carbs int64
+	Carbs float64
 	/*
 	  Required: true
 	  In: header
@@ -97,9 +97,9 @@ func (o *NewCorrectionParams) bindBg(rawData []string, hasKey bool, formats strf
 		return err
 	}
 
-	value, err := swag.ConvertInt64(raw)
+	value, err := swag.ConvertFloat64(raw)
 	if err != nil {
-		return errors.InvalidType("Bg", "query", "int64", raw)
+		return errors.InvalidType("Bg", "query", "float64", raw)
 	}
 	o.Bg = value
 
@@ -123,9 +123,9 @@ func (o *NewCorrectionParams) bindCarbs(rawData []string, hasKey bool, formats s
 		return err
 	}
 
-	value, err := swag.ConvertInt64(raw)
+	value, err := swag.ConvertFloat64(raw)
 	if err != nil {
-		return errors.InvalidType("Carbs", "query", "int64", raw)
+		return errors.InvalidType("Carbs", "query", "float64", raw)
 	}
 	o.Carbs = value
 

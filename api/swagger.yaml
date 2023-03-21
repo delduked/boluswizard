@@ -18,7 +18,10 @@ paths:
       operationId: healthCheck
       responses:
         200:
-          description: OK
+          description: Successful operation
+          schema:
+            allOf:
+              - $ref: '#/definitions/Health'
 
   /ratios:
     post:
@@ -255,11 +258,13 @@ paths:
         - name: Bg
           in: query
           required: true
-          type: integer
+          type: number
+          format: float64
         - name: Carbs
           in: query
           required: true
-          type: integer
+          type: number
+          format: float64
       responses:
         200:
           description: Successful operation
@@ -287,14 +292,16 @@ paths:
           in: header
           required: true
           type: string
-        - name: Bg
+        - name: Start
           in: query
           required: true
           type: integer
-        - name: Carbs
+          format: int64
+        - name: End
           in: query
           required: true
           type: integer
+          format: int64
       responses:
         200:
           description: Successful operation
@@ -307,7 +314,9 @@ paths:
                 type: object
                 #nullable: true
               Data: 
-                $ref: '#/definitions/CorrectionResponse'
+                type: array
+                items:
+                  $ref: '#/definitions/Correction'
                 #nullable: false
         default:
           description: Unsuccessful operation
@@ -432,6 +441,12 @@ definitions:
         type: string
       Start:
         type: string
+      High:
+        type: number
+        format: float64
+      low:
+        type: number
+        format: float64
       Ratio:
         type: number
         format: float64
@@ -459,12 +474,26 @@ definitions:
         type: string
       Password:
         type: string
+  Users:
+    type: object
+    properties:
+      Uid:
+        type: string
+      Username:
+        type: string
+      Password:
+        type: string
   Token:
     type: object
     properties:
       Username:
         type: string
       Token:
+        type: string
+  ActiveInsulinDuration:
+    type: object
+    properties:
+      Duration:
         type: string
 
   Correction:
@@ -484,11 +513,39 @@ definitions:
       TimeStamp:
         type: integer
         format: int64
-
+        
   Response:
     type: object
     properties:
       Status:
         type: integer
       Error:
+        type: object
+  CorrectionRange:
+    type: object
+    properties:
+      Start:
+        type: integer
+        format: int64
+      End:
+        type: integer
+        format: int64
+
+  ResponseData:
+    type: object
+    properties:
+      Status:
+        type: integer
+      Error:
+        type: object
+      Data:
+        type: object
+  Health:
+    type: object
+    properties:
+      Status:
+        type: integer
+      Error:
+        type: object
+      Timestamp:
         type: object

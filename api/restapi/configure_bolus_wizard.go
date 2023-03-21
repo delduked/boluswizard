@@ -10,6 +10,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
+	"boluswizard/restapi/controllers"
 	"boluswizard/restapi/operations"
 )
 
@@ -37,21 +38,6 @@ func configureAPI(api *operations.BolusWizardAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.CorrectionRangeHandler == nil {
-		api.CorrectionRangeHandler = operations.CorrectionRangeHandlerFunc(func(params operations.CorrectionRangeParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.CorrectionRange has not yet been implemented")
-		})
-	}
-	if api.CreateCorrectionsHandler == nil {
-		api.CreateCorrectionsHandler = operations.CreateCorrectionsHandlerFunc(func(params operations.CreateCorrectionsParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.CreateCorrections has not yet been implemented")
-		})
-	}
-	if api.CreateDurationHandler == nil {
-		api.CreateDurationHandler = operations.CreateDurationHandlerFunc(func(params operations.CreateDurationParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.CreateDuration has not yet been implemented")
-		})
-	}
 	if api.CreateISFsHandler == nil {
 		api.CreateISFsHandler = operations.CreateISFsHandlerFunc(func(params operations.CreateISFsParams) middleware.Responder {
 			return middleware.NotImplemented("operation operations.CreateISFs has not yet been implemented")
@@ -67,31 +53,12 @@ func configureAPI(api *operations.BolusWizardAPI) http.Handler {
 			return middleware.NotImplemented("operation operations.CreateTargets has not yet been implemented")
 		})
 	}
-	if api.GetCorrectionsHandler == nil {
-		api.GetCorrectionsHandler = operations.GetCorrectionsHandlerFunc(func(params operations.GetCorrectionsParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.GetCorrections has not yet been implemented")
-		})
-	}
-	if api.GetDurationHandler == nil {
-		api.GetDurationHandler = operations.GetDurationHandlerFunc(func(params operations.GetDurationParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.GetDuration has not yet been implemented")
-		})
-	}
 	if api.GetISFsHandler == nil {
 		api.GetISFsHandler = operations.GetISFsHandlerFunc(func(params operations.GetISFsParams) middleware.Responder {
 			return middleware.NotImplemented("operation operations.GetISFs has not yet been implemented")
 		})
 	}
-	if api.HealthCheckHandler == nil {
-		api.HealthCheckHandler = operations.HealthCheckHandlerFunc(func(params operations.HealthCheckParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.HealthCheck has not yet been implemented")
-		})
-	}
-	if api.NewCorrectionHandler == nil {
-		api.NewCorrectionHandler = operations.NewCorrectionHandlerFunc(func(params operations.NewCorrectionParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.NewCorrection has not yet been implemented")
-		})
-	}
+
 	if api.SignInHandler == nil {
 		api.SignInHandler = operations.SignInHandlerFunc(func(params operations.SignInParams) middleware.Responder {
 			return middleware.NotImplemented("operation operations.SignIn has not yet been implemented")
@@ -102,6 +69,14 @@ func configureAPI(api *operations.BolusWizardAPI) http.Handler {
 			return middleware.NotImplemented("operation operations.SignUp has not yet been implemented")
 		})
 	}
+
+	api.GetDurationHandler = operations.GetDurationHandlerFunc(controllers.Duration)
+	api.CreateDurationHandler = operations.CreateDurationHandlerFunc(controllers.SaveDuration)
+	api.CreateCorrectionsHandler = operations.CreateCorrectionsHandlerFunc(controllers.SaveCorrections)
+	api.CorrectionRangeHandler = operations.CorrectionRangeHandlerFunc(controllers.CorrectionRange)
+	api.HealthCheckHandler = operations.HealthCheckHandlerFunc(controllers.Healthcheck)
+	api.GetCorrectionsHandler = operations.GetCorrectionsHandlerFunc(controllers.Corrections)
+	api.NewCorrectionHandler = operations.NewCorrectionHandlerFunc(controllers.Newcorrection)
 
 	api.PreServerShutdown = func() {}
 
