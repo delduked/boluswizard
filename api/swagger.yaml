@@ -58,6 +58,34 @@ paths:
           description: Unsuccessful operation
           schema:
             $ref: '#/definitions/Response'
+    get:
+      summary: Get Ratios
+      operationId: getRatios
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: array
+                items: 
+                  $ref: '#/definitions/CarbRatio'
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
   /Targets:
     post:
       summary: Create Target Ratios
@@ -92,6 +120,34 @@ paths:
           description: Unsuccessful operation
           schema:
             $ref: '#/definitions/Response'
+    get:
+      summary: Get Targets
+      operationId: getTargets
+      parameters:
+        - name: authToken
+          in: header
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              Status:
+                type: integer
+              Error:
+                type: object
+                #nullable: true
+              Data: 
+                type: array
+                items: 
+                  $ref: '#/definitions/Target'
+                #nullable: false
+        default:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/Response'
   /ISF:
     post:
       summary: Create ISF
@@ -101,7 +157,7 @@ paths:
           in: header
           required: true
           type: string
-        - name: targetRatios
+        - name: ISFs
           in: body
           required: true
           schema:

@@ -6,40 +6,31 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"io"
 	"net/http"
 
 	"github.com/go-openapi/errors"
-	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
-
-	"boluswizard/models"
 )
 
-// NewCreateISFsParams creates a new CreateISFsParams object
+// NewGetRatiosParams creates a new GetRatiosParams object
 //
 // There are no default values defined in the spec.
-func NewCreateISFsParams() CreateISFsParams {
+func NewGetRatiosParams() GetRatiosParams {
 
-	return CreateISFsParams{}
+	return GetRatiosParams{}
 }
 
-// CreateISFsParams contains all the bound params for the create i s fs operation
+// GetRatiosParams contains all the bound params for the get ratios operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters createISFs
-type CreateISFsParams struct {
+// swagger:parameters getRatios
+type GetRatiosParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	/*
-	  Required: true
-	  In: body
-	*/
-	ISFs []*models.ISF
 	/*
 	  Required: true
 	  In: header
@@ -50,41 +41,11 @@ type CreateISFsParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewCreateISFsParams() beforehand.
-func (o *CreateISFsParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewGetRatiosParams() beforehand.
+func (o *GetRatiosParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
-
-	if runtime.HasBody(r) {
-		defer r.Body.Close()
-		var body []*models.ISF
-		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			if err == io.EOF {
-				res = append(res, errors.Required("iSFs", "body", ""))
-			} else {
-				res = append(res, errors.NewParseError("iSFs", "body", "", err))
-			}
-		} else {
-
-			// validate array of body objects
-			for i := range body {
-				if body[i] == nil {
-					continue
-				}
-				if err := body[i].Validate(route.Formats); err != nil {
-					res = append(res, err)
-					break
-				}
-			}
-
-			if len(res) == 0 {
-				o.ISFs = body
-			}
-		}
-	} else {
-		res = append(res, errors.Required("iSFs", "body", ""))
-	}
 
 	if err := o.bindAuthToken(r.Header[http.CanonicalHeaderKey("authToken")], true, route.Formats); err != nil {
 		res = append(res, err)
@@ -96,7 +57,7 @@ func (o *CreateISFsParams) BindRequest(r *http.Request, route *middleware.Matche
 }
 
 // bindAuthToken binds and validates parameter AuthToken from header.
-func (o *CreateISFsParams) bindAuthToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *GetRatiosParams) bindAuthToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	if !hasKey {
 		return errors.Required("authToken", "header", rawData)
 	}

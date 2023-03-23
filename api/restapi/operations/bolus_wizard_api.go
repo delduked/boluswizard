@@ -69,6 +69,12 @@ func NewBolusWizardAPI(spec *loads.Document) *BolusWizardAPI {
 		GetISFsHandler: GetISFsHandlerFunc(func(params GetISFsParams) middleware.Responder {
 			return middleware.NotImplemented("operation GetISFs has not yet been implemented")
 		}),
+		GetRatiosHandler: GetRatiosHandlerFunc(func(params GetRatiosParams) middleware.Responder {
+			return middleware.NotImplemented("operation GetRatios has not yet been implemented")
+		}),
+		GetTargetsHandler: GetTargetsHandlerFunc(func(params GetTargetsParams) middleware.Responder {
+			return middleware.NotImplemented("operation GetTargets has not yet been implemented")
+		}),
 		HealthCheckHandler: HealthCheckHandlerFunc(func(params HealthCheckParams) middleware.Responder {
 			return middleware.NotImplemented("operation HealthCheck has not yet been implemented")
 		}),
@@ -135,6 +141,10 @@ type BolusWizardAPI struct {
 	GetDurationHandler GetDurationHandler
 	// GetISFsHandler sets the operation handler for the get i s fs operation
 	GetISFsHandler GetISFsHandler
+	// GetRatiosHandler sets the operation handler for the get ratios operation
+	GetRatiosHandler GetRatiosHandler
+	// GetTargetsHandler sets the operation handler for the get targets operation
+	GetTargetsHandler GetTargetsHandler
 	// HealthCheckHandler sets the operation handler for the health check operation
 	HealthCheckHandler HealthCheckHandler
 	// NewCorrectionHandler sets the operation handler for the new correction operation
@@ -246,6 +256,12 @@ func (o *BolusWizardAPI) Validate() error {
 	}
 	if o.GetISFsHandler == nil {
 		unregistered = append(unregistered, "GetISFsHandler")
+	}
+	if o.GetRatiosHandler == nil {
+		unregistered = append(unregistered, "GetRatiosHandler")
+	}
+	if o.GetTargetsHandler == nil {
+		unregistered = append(unregistered, "GetTargetsHandler")
 	}
 	if o.HealthCheckHandler == nil {
 		unregistered = append(unregistered, "HealthCheckHandler")
@@ -383,6 +399,14 @@ func (o *BolusWizardAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/ISF"] = NewGetISFs(o.context, o.GetISFsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/ratios"] = NewGetRatios(o.context, o.GetRatiosHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/Targets"] = NewGetTargets(o.context, o.GetTargetsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

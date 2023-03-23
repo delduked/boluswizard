@@ -230,7 +230,7 @@ func init() {
             "required": true
           },
           {
-            "name": "targetRatios",
+            "name": "ISFs",
             "in": "body",
             "required": true,
             "schema": {
@@ -404,6 +404,46 @@ func init() {
       }
     },
     "/Targets": {
+      "get": {
+        "summary": "Get Targets",
+        "operationId": "getTargets",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Target"
+                  }
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Create Target Ratios",
         "operationId": "createTargets",
@@ -551,6 +591,46 @@ func init() {
       }
     },
     "/ratios": {
+      "get": {
+        "summary": "Get Ratios",
+        "operationId": "getRatios",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CarbRatio"
+                  }
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Create Carb Ratios",
         "operationId": "createRatios",
@@ -1021,7 +1101,7 @@ func init() {
             "required": true
           },
           {
-            "name": "targetRatios",
+            "name": "ISFs",
             "in": "body",
             "required": true,
             "schema": {
@@ -1195,6 +1275,46 @@ func init() {
       }
     },
     "/Targets": {
+      "get": {
+        "summary": "Get Targets",
+        "operationId": "getTargets",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Target"
+                  }
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Create Target Ratios",
         "operationId": "createTargets",
@@ -1342,6 +1462,46 @@ func init() {
       }
     },
     "/ratios": {
+      "get": {
+        "summary": "Get Ratios",
+        "operationId": "getRatios",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CarbRatio"
+                  }
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Create Carb Ratios",
         "operationId": "createRatios",

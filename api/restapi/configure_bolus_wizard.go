@@ -8,7 +8,6 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
-	"github.com/go-openapi/runtime/middleware"
 
 	"boluswizard/restapi/controllers"
 	"boluswizard/restapi/operations"
@@ -38,43 +37,25 @@ func configureAPI(api *operations.BolusWizardAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.CreateISFsHandler == nil {
-		api.CreateISFsHandler = operations.CreateISFsHandlerFunc(func(params operations.CreateISFsParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.CreateISFs has not yet been implemented")
-		})
-	}
-	if api.CreateRatiosHandler == nil {
-		api.CreateRatiosHandler = operations.CreateRatiosHandlerFunc(func(params operations.CreateRatiosParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.CreateRatios has not yet been implemented")
-		})
-	}
-	if api.CreateTargetsHandler == nil {
-		api.CreateTargetsHandler = operations.CreateTargetsHandlerFunc(func(params operations.CreateTargetsParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.CreateTargets has not yet been implemented")
-		})
-	}
-	if api.GetISFsHandler == nil {
-		api.GetISFsHandler = operations.GetISFsHandlerFunc(func(params operations.GetISFsParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.GetISFs has not yet been implemented")
-		})
-	}
+	api.HealthCheckHandler = operations.HealthCheckHandlerFunc(controllers.Healthcheck)
 
-	if api.SignInHandler == nil {
-		api.SignInHandler = operations.SignInHandlerFunc(func(params operations.SignInParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.SignIn has not yet been implemented")
-		})
-	}
-	if api.SignUpHandler == nil {
-		api.SignUpHandler = operations.SignUpHandlerFunc(func(params operations.SignUpParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.SignUp has not yet been implemented")
-		})
-	}
+	api.SignInHandler = operations.SignInHandlerFunc(controllers.Signin)
+	api.SignUpHandler = operations.SignUpHandlerFunc(controllers.SignUp)
+
+	api.CreateRatiosHandler = operations.CreateRatiosHandlerFunc(controllers.SaveRatios)
+	api.GetRatiosHandler = operations.GetRatiosHandlerFunc(controllers.Ratios)
+
+	api.GetTargetsHandler = operations.GetTargetsHandlerFunc(controllers.Targets)
+	api.CreateTargetsHandler = operations.CreateTargetsHandlerFunc(controllers.SaveTargets)
+
+	api.GetISFsHandler = operations.GetISFsHandlerFunc(controllers.ISFs)
+	api.CreateISFsHandler = operations.CreateISFsHandlerFunc(controllers.SaveISFs)
 
 	api.GetDurationHandler = operations.GetDurationHandlerFunc(controllers.Duration)
 	api.CreateDurationHandler = operations.CreateDurationHandlerFunc(controllers.SaveDuration)
+
 	api.CreateCorrectionsHandler = operations.CreateCorrectionsHandlerFunc(controllers.SaveCorrections)
 	api.CorrectionRangeHandler = operations.CorrectionRangeHandlerFunc(controllers.CorrectionRange)
-	api.HealthCheckHandler = operations.HealthCheckHandlerFunc(controllers.Healthcheck)
 	api.GetCorrectionsHandler = operations.GetCorrectionsHandlerFunc(controllers.Corrections)
 	api.NewCorrectionHandler = operations.NewCorrectionHandlerFunc(controllers.Newcorrection)
 

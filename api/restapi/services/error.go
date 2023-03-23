@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/runtime/middleware"
 )
 
 func Error(rw http.ResponseWriter, pr runtime.Producer) {
@@ -15,4 +16,18 @@ func Error(rw http.ResponseWriter, pr runtime.Producer) {
 		Error:  "Internal Server Error",
 	}
 	pr.Produce(rw, response)
+}
+func NewError(status int, err error) middleware.ResponderFunc {
+
+	test := func(rw http.ResponseWriter, pr runtime.Producer) {
+		rw.WriteHeader(status)
+		response := &models.Response{
+			Status: int64(status),
+			Error:  err,
+		}
+		pr.Produce(rw, response)
+	}
+
+	return test
+
 }
