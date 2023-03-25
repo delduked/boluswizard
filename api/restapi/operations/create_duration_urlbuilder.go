@@ -35,7 +35,7 @@ func (o *CreateDurationURL) SetBasePath(bp string) {
 func (o *CreateDurationURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/Duration"
+	var _path = "/wizard/Duration"
 
 	_basePath := o._basePath
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)

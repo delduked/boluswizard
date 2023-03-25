@@ -33,7 +33,107 @@ func init() {
     "version": "1.0"
   },
   "paths": {
-    "/CorrectionRange": {
+    "/SignIn": {
+      "post": {
+        "summary": "Sign In",
+        "operationId": "signIn",
+        "parameters": [
+          {
+            "name": "signInData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "$ref": "#/definitions/Token"
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/SignUp": {
+      "post": {
+        "summary": "Sign Up",
+        "operationId": "signUp",
+        "parameters": [
+          {
+            "name": "signUpData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "$ref": "#/definitions/Token"
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Health"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/wizard/CorrectionRange": {
       "get": {
         "summary": "get correction range",
         "operationId": "correctionRange",
@@ -89,7 +189,7 @@ func init() {
         }
       }
     },
-    "/Duration": {
+    "/wizard/Duration": {
       "get": {
         "summary": "Get Duration",
         "operationId": "getDuration",
@@ -178,7 +278,7 @@ func init() {
         }
       }
     },
-    "/ISF": {
+    "/wizard/ISF": {
       "get": {
         "summary": "Get ISFs",
         "operationId": "getISFs",
@@ -268,7 +368,7 @@ func init() {
         }
       }
     },
-    "/NewCorrection": {
+    "/wizard/NewCorrection": {
       "get": {
         "summary": "New Correction",
         "operationId": "newCorrection",
@@ -321,89 +421,7 @@ func init() {
         }
       }
     },
-    "/SignIn": {
-      "post": {
-        "summary": "Sign In",
-        "operationId": "signIn",
-        "parameters": [
-          {
-            "name": "signInData",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Sign"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "$ref": "#/definitions/Token"
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      }
-    },
-    "/SignUp": {
-      "post": {
-        "summary": "Sign Up",
-        "operationId": "signUp",
-        "parameters": [
-          {
-            "name": "signUpData",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Sign"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "$ref": "#/definitions/Token"
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      }
-    },
-    "/Targets": {
+    "/wizard/Targets": {
       "get": {
         "summary": "Get Targets",
         "operationId": "getTargets",
@@ -493,7 +511,7 @@ func init() {
         }
       }
     },
-    "/corrections": {
+    "/wizard/corrections": {
       "get": {
         "summary": "Get Corrections",
         "operationId": "getCorrections",
@@ -572,25 +590,7 @@ func init() {
         }
       }
     },
-    "/health-check": {
-      "get": {
-        "summary": "Health Check",
-        "operationId": "healthCheck",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Health"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/ratios": {
+    "/wizard/ratios": {
       "get": {
         "summary": "Get Ratios",
         "operationId": "getRatios",
@@ -687,7 +687,8 @@ func init() {
       "type": "object",
       "properties": {
         "Duration": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Duration\""
         }
       }
     },
@@ -695,17 +696,21 @@ func init() {
       "type": "object",
       "properties": {
         "End": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -714,22 +719,26 @@ func init() {
       "properties": {
         "Bg": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Bg\""
         },
         "Bolus": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "Carbs": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Carbs\""
         },
         "Key": {
           "type": "string"
         },
         "TimeStamp": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-go-custom-tag": "redis:\"TimeStamp\""
         }
       }
     },
@@ -738,11 +747,13 @@ func init() {
       "properties": {
         "End": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Start": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -751,19 +762,23 @@ func init() {
       "properties": {
         "ActiveInsulinReduction": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"ActiveInsulinReduction\""
         },
         "BgCorrection": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"BgCorrection\""
         },
         "Bolus": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "CarbCorrection": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"CarbCorrection\""
         }
       }
     },
@@ -785,17 +800,21 @@ func init() {
       "type": "object",
       "properties": {
         "End": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Sensitivity": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Sensitivity\""
         },
         "Start": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -828,10 +847,12 @@ func init() {
       "type": "object",
       "properties": {
         "Password": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Password\""
         },
         "Username": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Username\""
         }
       }
     },
@@ -839,25 +860,31 @@ func init() {
       "type": "object",
       "properties": {
         "End": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "High": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"High\""
         },
         "Key": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Start\""
         },
         "low": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"low\""
         }
       }
     },
@@ -865,10 +892,12 @@ func init() {
       "type": "object",
       "properties": {
         "Token": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Token\""
         },
         "Username": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Username\""
         }
       }
     },
@@ -876,13 +905,16 @@ func init() {
       "type": "object",
       "properties": {
         "Password": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Password\""
         },
         "Uid": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Uid\""
         },
         "Username": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Username\""
         }
       }
     }
@@ -904,7 +936,107 @@ func init() {
     "version": "1.0"
   },
   "paths": {
-    "/CorrectionRange": {
+    "/SignIn": {
+      "post": {
+        "summary": "Sign In",
+        "operationId": "signIn",
+        "parameters": [
+          {
+            "name": "signInData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "$ref": "#/definitions/Token"
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/SignUp": {
+      "post": {
+        "summary": "Sign Up",
+        "operationId": "signUp",
+        "parameters": [
+          {
+            "name": "signUpData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "$ref": "#/definitions/Token"
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Health"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/wizard/CorrectionRange": {
       "get": {
         "summary": "get correction range",
         "operationId": "correctionRange",
@@ -960,7 +1092,7 @@ func init() {
         }
       }
     },
-    "/Duration": {
+    "/wizard/Duration": {
       "get": {
         "summary": "Get Duration",
         "operationId": "getDuration",
@@ -1049,7 +1181,7 @@ func init() {
         }
       }
     },
-    "/ISF": {
+    "/wizard/ISF": {
       "get": {
         "summary": "Get ISFs",
         "operationId": "getISFs",
@@ -1139,7 +1271,7 @@ func init() {
         }
       }
     },
-    "/NewCorrection": {
+    "/wizard/NewCorrection": {
       "get": {
         "summary": "New Correction",
         "operationId": "newCorrection",
@@ -1192,89 +1324,7 @@ func init() {
         }
       }
     },
-    "/SignIn": {
-      "post": {
-        "summary": "Sign In",
-        "operationId": "signIn",
-        "parameters": [
-          {
-            "name": "signInData",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Sign"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "$ref": "#/definitions/Token"
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      }
-    },
-    "/SignUp": {
-      "post": {
-        "summary": "Sign Up",
-        "operationId": "signUp",
-        "parameters": [
-          {
-            "name": "signUpData",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Sign"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "$ref": "#/definitions/Token"
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      }
-    },
-    "/Targets": {
+    "/wizard/Targets": {
       "get": {
         "summary": "Get Targets",
         "operationId": "getTargets",
@@ -1364,7 +1414,7 @@ func init() {
         }
       }
     },
-    "/corrections": {
+    "/wizard/corrections": {
       "get": {
         "summary": "Get Corrections",
         "operationId": "getCorrections",
@@ -1443,25 +1493,7 @@ func init() {
         }
       }
     },
-    "/health-check": {
-      "get": {
-        "summary": "Health Check",
-        "operationId": "healthCheck",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Health"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/ratios": {
+    "/wizard/ratios": {
       "get": {
         "summary": "Get Ratios",
         "operationId": "getRatios",
@@ -1558,7 +1590,8 @@ func init() {
       "type": "object",
       "properties": {
         "Duration": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Duration\""
         }
       }
     },
@@ -1566,17 +1599,21 @@ func init() {
       "type": "object",
       "properties": {
         "End": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -1585,22 +1622,26 @@ func init() {
       "properties": {
         "Bg": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Bg\""
         },
         "Bolus": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "Carbs": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Carbs\""
         },
         "Key": {
           "type": "string"
         },
         "TimeStamp": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-go-custom-tag": "redis:\"TimeStamp\""
         }
       }
     },
@@ -1609,11 +1650,13 @@ func init() {
       "properties": {
         "End": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Start": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -1622,19 +1665,23 @@ func init() {
       "properties": {
         "ActiveInsulinReduction": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"ActiveInsulinReduction\""
         },
         "BgCorrection": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"BgCorrection\""
         },
         "Bolus": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "CarbCorrection": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"CarbCorrection\""
         }
       }
     },
@@ -1656,17 +1703,21 @@ func init() {
       "type": "object",
       "properties": {
         "End": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Sensitivity": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Sensitivity\""
         },
         "Start": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -1699,10 +1750,12 @@ func init() {
       "type": "object",
       "properties": {
         "Password": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Password\""
         },
         "Username": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Username\""
         }
       }
     },
@@ -1710,25 +1763,31 @@ func init() {
       "type": "object",
       "properties": {
         "End": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"End\""
         },
         "High": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"High\""
         },
         "Key": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Start\""
         },
         "low": {
           "type": "number",
-          "format": "float64"
+          "format": "float64",
+          "x-go-custom-tag": "redis:\"low\""
         }
       }
     },
@@ -1736,10 +1795,12 @@ func init() {
       "type": "object",
       "properties": {
         "Token": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Token\""
         },
         "Username": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Username\""
         }
       }
     },
@@ -1747,13 +1808,16 @@ func init() {
       "type": "object",
       "properties": {
         "Password": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Password\""
         },
         "Uid": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Uid\""
         },
         "Username": {
-          "type": "string"
+          "type": "string",
+          "x-go-custom-tag": "redis:\"Username\""
         }
       }
     }

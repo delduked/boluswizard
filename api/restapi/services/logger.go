@@ -3,6 +3,9 @@ package services
 import (
 	"fmt"
 	"log"
+	"time"
+
+	"github.com/go-openapi/strfmt"
 )
 
 var ErrorLogger = make(chan any)
@@ -16,6 +19,6 @@ func ErrorLog() {
 
 	for {
 		err := <-ErrorLogger
-		log.Println("Error:", fmt.Sprintf("%v", err))
+		log.Println("Log :", fmt.Sprintf("%v", err), strfmt.DateTime(time.Now().UTC()))
 	}
 }

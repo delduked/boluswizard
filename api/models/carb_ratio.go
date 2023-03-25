@@ -18,16 +18,16 @@ import (
 type CarbRatio struct {
 
 	// end
-	End string `json:"End,omitempty"`
+	End string `json:"End,omitempty" redis:"End"`
 
 	// key
-	Key string `json:"Key,omitempty"`
+	Key string `json:"Key,omitempty" redis:"Key"`
 
 	// ratio
-	Ratio float64 `json:"Ratio,omitempty"`
+	Ratio float64 `json:"Ratio,omitempty" redis:"Ratio"`
 
 	// start
-	Start string `json:"Start,omitempty"`
+	Start string `json:"Start,omitempty" redis:"Start"`
 }
 
 // Validate validates this carb ratio

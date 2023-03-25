@@ -18,19 +18,19 @@ import (
 type Correction struct {
 
 	// bg
-	Bg float64 `json:"Bg,omitempty"`
+	Bg float64 `json:"Bg,omitempty" redis:"Bg"`
 
 	// bolus
-	Bolus float64 `json:"Bolus,omitempty"`
+	Bolus float64 `json:"Bolus,omitempty" redis:"Bolus"`
 
 	// carbs
-	Carbs float64 `json:"Carbs,omitempty"`
+	Carbs float64 `json:"Carbs,omitempty" redis:"Carbs"`
 
 	// key
 	Key string `json:"Key,omitempty"`
 
 	// time stamp
-	TimeStamp int64 `json:"TimeStamp,omitempty"`
+	TimeStamp int64 `json:"TimeStamp,omitempty" redis:"TimeStamp"`
 }
 
 // Validate validates this correction

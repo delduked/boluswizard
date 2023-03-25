@@ -30,7 +30,7 @@ func NewCreateCorrections(ctx *middleware.Context, handler CreateCorrectionsHand
 }
 
 /*
-	CreateCorrections swagger:route POST /corrections createCorrections
+	CreateCorrections swagger:route POST /wizard/corrections createCorrections
 
 Create Corrections
 */

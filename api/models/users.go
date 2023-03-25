@@ -18,13 +18,13 @@ import (
 type Users struct {
 
 	// password
-	Password string `json:"Password,omitempty"`
+	Password string `json:"Password,omitempty" redis:"Password"`
 
 	// Uid
-	UID string `json:"Uid,omitempty"`
+	UID string `json:"Uid,omitempty" redis:"Uid"`
 
 	// username
-	Username string `json:"Username,omitempty"`
+	Username string `json:"Username,omitempty" redis:"Username"`
 }
 
 // Validate validates this users

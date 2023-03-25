@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Portal</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;">
+    <link rel="stylesheet" type="text/css" href="/assets/portal/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/portal/chartist.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="/assets/portal/editor.main.css">
+  </head>
+  <body>
+    <nav>
+      <p>ND</p>
+      <div class="selector">
+        <div class="fa-solid fa-pizza-slice" id="ratios" data-hover="Carb Ratios"></div>
+        <div class="fa-solid fa-divide" id="isfs" data-hover="Insulin Sensitivity Factor"></div>
+        <div class="fa-solid fa-crosshairs" id="targets" data-hover="BG Targets"></div>
+      </div>
+      <div class="selector">
+        <div class="fa-solid fa-gear" data-hover="Settings"></div>
+      </div>
+    </nav>
+    <main>
+      <section class="short">
+        <div class="wizard" id="wizard">
+          <div class="result">
+            <h1 id="Result">0.0</h1>
+            <button id="save">Save</button>
+          </div>
+          <div class="details">
+            <input id="bg" type="number" placeholder="BG">
+            <input id="carbs" type="number" placeholder="Carbs"><span><i>Carb Correction</i><strong id="CarbCorrection">0.0</strong></span><span><i>BG Correction</i><strong id="BGCorrection">0.0</strong></span><span><i>ISF Correction</i><strong id="InsulinReduction">0.0</strong></span>
+          </div>
+        </div>
+      </section>
+      <sectionl class="tall" id="my-chart"></sectionl>
+    </main>
+    <div class="modal hide" id="modal">
+      <div class="window"> 
+        <div class="fa-solid fa-xmark" id="close"></div>
+        <div class="window-header"> 
+          <h3>Carb Ratios</h3>
+        </div>
+        <div class="window-body"> 
+          <textarea id="editor"> </textarea>
+        </div>
+        <div class="window-footer">
+          <p id="success"></p>
+          <button id="update" data-update="">Update</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="/assets/portal/moment.js"></script>
+<script src="/assets/portal/loader.js"></script>
+<script src="/assets/portal/editor.main.nls.js"></script>
+<script src="/assets/portal/editor.main.js"></script>
+<script src="/assets/portal/chartist.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/assets/portal/index.js"></script>

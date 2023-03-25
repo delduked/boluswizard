@@ -33,7 +33,7 @@ func NewCreateTargets(ctx *middleware.Context, handler CreateTargetsHandler) *Cr
 }
 
 /*
-	CreateTargets swagger:route POST /Targets createTargets
+	CreateTargets swagger:route POST /wizard/Targets createTargets
 
 Create Target Ratios
 */

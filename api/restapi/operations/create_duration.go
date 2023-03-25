@@ -33,7 +33,7 @@ func NewCreateDuration(ctx *middleware.Context, handler CreateDurationHandler) *
 }
 
 /*
-	CreateDuration swagger:route POST /Duration createDuration
+	CreateDuration swagger:route POST /wizard/Duration createDuration
 
 Create Duration
 */

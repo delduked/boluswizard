@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html id="page">
+  <head>
+    <title>Hi {{.Username}}!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;">
+    <link rel="stylesheet" type="text/css" href="/assets/portal/chartist.css">
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="/assets/portal/editor.main.css">
+    <link href="https://unpkg.com/cirrus-ui" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="/assets/portal/moment.js"></script>
+    <script src="/assets/portal/loader.js"></script>
+    <script src="/assets/portal/editor.main.nls.js"></script>
+    <script src="/assets/portal/editor.main.js"></script>
+  </head>
+  <body data-api-service="{{.API_SERVICE}}">
+    <div class="header header-fixed u-unselectable header-animated">
+      <div class="header-brand">
+        <div class="nav-item no-hover"><a>
+            <h6 class="title">BolusWizard</h6></a></div>
+        <div class="nav-item nav-btn" id="header-btn"><span></span><span></span><span></span></div>
+      </div>
+      <div class="header-nav" id="header-menu">
+        <div class="nav-left">
+          <div class="nav-item text-center"><a href="#">
+              <p class="m-0">{{.Username}}</p></a></div>
+        </div>
+        <div class="nav-right">
+          <div class="nav-item has-sub toggle-hover" id="dropdown"><a class="nav-dropdown-link">Settings</a>
+            <ul class="dropdown-menu dropdown-animated" role="menu">
+              <li role="menu-item"><a href="#Ratio">Carb Ratios</a></li>
+              <li role="menu-item"><a href="#Isf">Insulin Sensitivity Factor</a></li>
+              <li role="menu-item"><a href="#Duration">Active Isnulin Duration</a></li>
+              <li role="menu-item"><a href="#Target">BG Targets</a></li>
+            </ul>
+          </div>
+          <div class="nav-item"><a href="/login">SignOut</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="Ratio">
+      <div class="modal-content">
+        <div class="modal-header"><a class="u-pull-right" href="#"><span class="icon">X</span></a>
+          <div class="modal-title">Carb Ratios</div>
+        </div>
+        <div class="modal-body m-0">
+          <p>To Adjust your Carb Ratios throughout the day edit the below text. Time is in 24-hour format. </p>
+          <p>Use the below example as a reference </p>
+          <textarea id="EditRatio" style="min-height: 350px;"></textarea>
+          <pre><code class="mb-1"> [
+       {
+             "Start":       "00h00m",
+             "End":         "05h59m",
+             "Ratio": 0.125
+       },
+       {
+             "Start":       "06h00m",
+             "End":         "23h59m",
+             "Ratio": 0.25
+       }
+ ]</code></pre>
+        </div>
+        <div class="modal-footer u-text-right"><a class="u-inline-block" href="#">
+            <input class="btn-primary pull-right" id="SaveRatio" type="submit"></a></div>
+      </div>
+    </div>
+    <div class="modal" id="Target">
+      <div class="modal-content">
+        <div class="modal-header"><a class="u-pull-right" href="#"><span class="icon">X</span></a>
+          <div class="modal-title">BG Targets</div>
+        </div>
+        <div class="modal-body m-0">
+          <p>To Adjust your carb ratios throughout the day edit the below text. Time is in 24-hour format. </p>
+          <p>Use the below example as a reference </p>
+          <textarea id="EditTarget" style="min-height: 350px;"> [
+       {
+             "Start":   "00h00m",
+             "End":     "05h59m",
+             "High":    6.6,
+             "low":     5.4
+       },
+       {
+             "Start":   "06h00m",
+             "End":     "23h59m",
+             "High":    6.7,
+             "low":     5.2
+       }
+ ]</textarea>
+          <pre><code class="mb-1"> [
+       {
+             "Start":   "00h00m",
+             "End":     "05h59m",
+             "High":    6.6,
+             "low":     5.4
+       },
+       {
+             "Start":   "06h00m",
+             "End":     "23h59m",
+             "High":    6.7,
+             "low":     5.2
+       }
+ ]</code></pre>
+        </div>
+        <div class="modal-footer u-text-right"><a class="u-inline-block" href="#">
+            <input class="btn-primary pull-right" id="SaveTarget" type="submit"></a></div>
+      </div>
+    </div>
+    <div class="modal" id="Isf">
+      <div class="modal-content">
+        <div class="modal-header"><a class="u-pull-right" href="#"><span class="icon">X</span></a>
+          <div class="modal-title">Insulin Sensitivity Factor</div>
+        </div>
+        <div class="modal-body m-0">
+          <p>To Adjust your Insulin Sensitivity Factor throughout the day edit the below text. Time is in 24-hour format. </p>
+          <p>Use the below example as a reference </p>
+          <textarea id="EditIsf" style="min-height: 350px;"></textarea>
+          <pre><code class="mb-1">[
+	{
+		"Start":       "00h00m",
+		"End":         "05h59m",
+		"Sensitivity": 0.75
+	},
+	{
+		"Start":       "06h00m",
+		"End":         "23h59m",
+		"Sensitivity": 0.71
+	}
+]    </code></pre>
+        </div>
+        <div class="modal-footer u-text-right"><a class="u-inline-block" href="#">
+            <input class="btn-primary pull-right" id="SaveIsf" type="submit"></a></div>
+      </div>
+    </div>
+    <div class="modal" id="Duration">
+      <div class="modal-content">
+        <div class="modal-header"><a class="u-pull-right" href="#"><span class="icon">X</span></a>
+          <div class="modal-title">Active Insulin Duration</div>
+        </div>
+        <div class="modal-body m-0">
+          <p>To Adjust your Active Insulin Duration time throughout the day edit the below text. Time is in 24-hour format. </p>
+          <p>Use the below example as a reference </p>
+          <textarea id="EditDuration" style="min-height: 150px;"></textarea>
+          <pre><code class="mb-1">{
+     "Duration": "02h00m"
+}</code></pre>
+        </div>
+        <div class="modal-footer u-text-right"><a class="u-inline-block" href="#">
+            <input class="btn-primary pull-right" id="SaveDuration" type="submit"></a></div>
+      </div>
+    </div>
+    <section class="section">
+      <div class="grid m-2 h-screen">
+        <div class="grid-c-12 grid-r-3 level u-flex u-justify-space-around">
+          <div class="card p-2 hover-grow u-round-lg">
+            <div class="tile u-items-center u-flex-wrap u-justify-center">
+              <div class="tile__container u-overflow-hidden u-text-center u-flex-row mr-0">
+                <h1 id="Bolus">0.0</h1>
+              </div>
+              <div class="tile__container u-overflow-hidden pl-0">
+                <div class="form-group">
+                  <label class="form-group-label label--xs">BG</label>
+                  <input class="input--xs form-group-input" id="bg" type="number" placeholder="What's your BG?">
+                  <button class="form-group-btn btn-primary btn--xs" id="GetCorrection" style="font-weight: bold;" data-tooltip="Calculate a Correction Bolus">CALC</button>
+                </div>
+                <div class="form-group">
+                  <label class="form-group-label label--xs">CB</label>
+                  <input class="form-group-input input--xs" id="carbs" type="number" placeholder="How many Carbs?">
+                  <button class="form-group-btn btn-primary btn--xs" id="SaveCorrection" style="font-weight: bold;" data-tooltip="Save a Correctino Bolus to history">SAVE</button>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="tag-container group-tags u-inline-flex mb-0">
+                <div class="tag tag--xs tag--dark">Active Insulin</div>
+                <div class="tag tag--xs tag--info" id="ActiveInsulinReduction">0.0</div>
+              </div>
+              <div class="tag-container group-tags u-inline-flex mb-0">
+                <div class="tag tag--xs tag--dark">BG Correction</div>
+                <div class="tag tag--xs tag--info" id="BGCorrection">0.0</div>
+              </div>
+              <div class="tag-container group-tags u-inline-flex mb-0">
+                <div class="tag tag--xs tag--dark">CB Correction</div>
+                <div class="tag tag--xs tag--info" id="CarbCorrection">0.0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-c-12 grid-r-9" id="my-chart"></div>
+      </div>
+      <footer class="footer">
+        <h6 class="footer__title text-white uppercase">logo</h6>
+        <div class="content">
+          <div class="divider"></div>
+          <div class="row">
+            <div class="col-4"></div>
+          </div>
+          <p class="subtitle">bolus wizard</p>
+        </div>
+      </footer>
+    </section>
+    <div class="toast toast--danger u-z-30 u-fixed" id="Error" style="bottom: -200px; right: 0;width: 100%;transition: any 400ms ease-in;margin: 0;">
+      <h4 class="toast__title" id="Errormessage"></h4>
+      <p>Looks like there has been an error!</p>
+    </div>
+    <div class="toast toast--success u-z-30 u-fixed" id="Success" style="bottom: -200px; right: 0;width: 100%;transition: any 400ms ease-in;margin: 0;">
+      <h4 class="toast__title">Success</h4>
+      <p>Yay it worked!</p>
+    </div>
+  </body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/assets/portal/chartist.js"></script>
+<script src="/assets/home/index.js"></script>

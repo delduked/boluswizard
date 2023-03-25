@@ -46,7 +46,7 @@ func getRedisPassword() string {
 		myEnv, err = godotenv.Read("../.env")
 		if err != nil {
 			fmt.Println("Error reading .env file")
-			return "n4th4n43l"
+			return "default-redis-password"
 		}
 		fmt.Println("redis pass: ", myEnv["REDIS_PASSWORD"])
 		return myEnv["REDIS_PASSWORD"]

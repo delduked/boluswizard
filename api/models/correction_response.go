@@ -18,16 +18,16 @@ import (
 type CorrectionResponse struct {
 
 	// active insulin reduction
-	ActiveInsulinReduction float64 `json:"ActiveInsulinReduction,omitempty"`
+	ActiveInsulinReduction float64 `json:"ActiveInsulinReduction,omitempty" redis:"ActiveInsulinReduction"`
 
 	// bg correction
-	BgCorrection float64 `json:"BgCorrection,omitempty"`
+	BgCorrection float64 `json:"BgCorrection,omitempty" redis:"BgCorrection"`
 
 	// bolus
-	Bolus float64 `json:"Bolus,omitempty"`
+	Bolus float64 `json:"Bolus,omitempty" redis:"Bolus"`
 
 	// carb correction
-	CarbCorrection float64 `json:"CarbCorrection,omitempty"`
+	CarbCorrection float64 `json:"CarbCorrection,omitempty" redis:"CarbCorrection"`
 }
 
 // Validate validates this correction response

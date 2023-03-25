@@ -17,5 +17,6 @@ func Healthcheck(rw http.ResponseWriter, pr runtime.Producer) {
 		Error:     nil,
 		Timestamp: strfmt.DateTime(time.Now().UTC()),
 	}
+
 	pr.Produce(rw, response)
 }

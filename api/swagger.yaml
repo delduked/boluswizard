@@ -12,7 +12,7 @@ produces:
   - application/json
 
 paths:
-  /health-check:
+  /health:
     get:
       summary: Health Check
       operationId: healthCheck
@@ -23,7 +23,7 @@ paths:
             allOf:
               - $ref: '#/definitions/Health'
 
-  /ratios:
+  /wizard/ratios:
     post:
       summary: Create Carb Ratios
       operationId: createRatios
@@ -86,7 +86,7 @@ paths:
           description: Unsuccessful operation
           schema:
             $ref: '#/definitions/Response'
-  /Targets:
+  /wizard/Targets:
     post:
       summary: Create Target Ratios
       operationId: createTargets
@@ -148,7 +148,7 @@ paths:
           description: Unsuccessful operation
           schema:
             $ref: '#/definitions/Response'
-  /ISF:
+  /wizard/ISF:
     post:
       summary: Create ISF
       operationId: createISFs
@@ -211,7 +211,7 @@ paths:
           description: Unsuccessful operation
           schema:
             $ref: '#/definitions/Response'
-  /Duration:
+  /wizard/Duration:
     post:
       summary: Create Duration
       operationId: createDuration
@@ -302,7 +302,7 @@ paths:
           schema:
             $ref: '#/definitions/Response'
   
-  /NewCorrection:
+  /wizard/NewCorrection:
     get:
       summary: New Correction
       operationId: newCorrection
@@ -339,7 +339,7 @@ paths:
           description: Unsuccessful operation
           schema:
             $ref: '#/definitions/Response'
-  /CorrectionRange:
+  /wizard/CorrectionRange:
     get:
       summary: get correction range
       operationId: correctionRange
@@ -408,7 +408,7 @@ paths:
           schema:
             $ref: '#/definitions/Response'
 
-  /corrections:
+  /wizard/corrections:
     post:
       summary: Create Corrections
       operationId: createCorrections
@@ -469,43 +469,57 @@ definitions:
     properties:
       Key:
         type: string
+        x-go-custom-tag: redis:"Key"
       End:
         type: string
+        x-go-custom-tag: redis:"End"
       Start:
         type: string
+        x-go-custom-tag: redis:"Start"
       Ratio:
         type: number
         format: float64
+        x-go-custom-tag: redis:"Ratio"
   ISF:
     type: object
     properties:
       Key:
         type: string
+        x-go-custom-tag: redis:"Key"
       End:
         type: string
+        x-go-custom-tag: redis:"End"
       Start:
         type: string
+        x-go-custom-tag: redis:"Start"
       Sensitivity:
         type: number
         format: float64
+        x-go-custom-tag: redis:"Sensitivity"
   Target:
     type: object
     properties:
       Key:
         type: string
+        x-go-custom-tag: redis:"Key"
       End:
         type: string
+        x-go-custom-tag: redis:"End"
       Start:
         type: string
+        x-go-custom-tag: redis:"Start"
       High:
         type: number
         format: float64
+        x-go-custom-tag: redis:"High"
       low:
         type: number
         format: float64
+        x-go-custom-tag: redis:"low"
       Ratio:
         type: number
         format: float64
+        x-go-custom-tag: redis:"Ratio"
 
   CorrectionResponse:
     type: object
@@ -513,44 +527,56 @@ definitions:
       BgCorrection:
         type: number
         format: float64
+        x-go-custom-tag: redis:"BgCorrection"
       CarbCorrection:
         type: number
         format: float64
+        x-go-custom-tag: redis:"CarbCorrection"
       ActiveInsulinReduction:
         type: number
         format: float64
+        x-go-custom-tag: redis:"ActiveInsulinReduction"
       Bolus:
         type: number
         format: float64
+        x-go-custom-tag: redis:"Bolus"
 
   Sign:
     type: object
     properties:
       Username:
         type: string
+        x-go-custom-tag: redis:"Username"
       Password:
         type: string
+        x-go-custom-tag: redis:"Password"
   Users:
     type: object
     properties:
       Uid:
         type: string
+        x-go-custom-tag: redis:"Uid"
       Username:
         type: string
+        x-go-custom-tag: redis:"Username"
       Password:
         type: string
+        x-go-custom-tag: redis:"Password"
   Token:
     type: object
     properties:
       Username:
         type: string
+        x-go-custom-tag: redis:"Username"
       Token:
         type: string
+        x-go-custom-tag: redis:"Token"
   ActiveInsulinDuration:
     type: object
     properties:
       Duration:
         type: string
+        x-go-custom-tag: redis:"Duration"
 
   Correction:
     type: object
@@ -560,15 +586,19 @@ definitions:
       Bg:
         type: number
         format: float64
+        x-go-custom-tag: redis:"Bg"
       Carbs:
         type: number
         format: float64
+        x-go-custom-tag: redis:"Carbs"
       Bolus:
         type: number
         format: float64
+        x-go-custom-tag: redis:"Bolus"
       TimeStamp:
         type: integer
         format: int64
+        x-go-custom-tag: redis:"TimeStamp"
         
   Response:
     type: object
@@ -583,9 +613,11 @@ definitions:
       Start:
         type: integer
         format: int64
+        x-go-custom-tag: redis:"Start"
       End:
         type: integer
         format: int64
+        x-go-custom-tag: redis:"End"
 
   ResponseData:
     type: object

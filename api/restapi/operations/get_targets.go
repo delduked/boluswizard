@@ -37,7 +37,7 @@ func NewGetTargets(ctx *middleware.Context, handler GetTargetsHandler) *GetTarge
 }
 
 /*
-	GetTargets swagger:route GET /Targets getTargets
+	GetTargets swagger:route GET /wizard/Targets getTargets
 
 Get Targets
 */

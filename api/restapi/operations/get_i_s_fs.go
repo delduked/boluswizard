@@ -37,7 +37,7 @@ func NewGetISFs(ctx *middleware.Context, handler GetISFsHandler) *GetISFs {
 }
 
 /*
-	GetISFs swagger:route GET /ISF getISFs
+	GetISFs swagger:route GET /wizard/ISF getISFs
 
 Get ISFs
 */

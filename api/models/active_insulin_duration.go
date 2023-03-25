@@ -18,7 +18,7 @@ import (
 type ActiveInsulinDuration struct {
 
 	// duration
-	Duration string `json:"Duration,omitempty"`
+	Duration string `json:"Duration,omitempty" redis:"Duration"`
 }
 
 // Validate validates this active insulin duration

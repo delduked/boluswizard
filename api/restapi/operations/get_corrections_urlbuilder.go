@@ -35,7 +35,7 @@ func (o *GetCorrectionsURL) SetBasePath(bp string) {
 func (o *GetCorrectionsURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/corrections"
+	var _path = "/wizard/corrections"
 
 	_basePath := o._basePath
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)

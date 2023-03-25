@@ -33,7 +33,7 @@ func NewCreateISFs(ctx *middleware.Context, handler CreateISFsHandler) *CreateIS
 }
 
 /*
-	CreateISFs swagger:route POST /ISF createISFs
+	CreateISFs swagger:route POST /wizard/ISF createISFs
 
 Create ISF
 */

@@ -18,10 +18,10 @@ import (
 type Sign struct {
 
 	// password
-	Password string `json:"Password,omitempty"`
+	Password string `json:"Password,omitempty" redis:"Password"`
 
 	// username
-	Username string `json:"Username,omitempty"`
+	Username string `json:"Username,omitempty" redis:"Username"`
 }
 
 // Validate validates this sign

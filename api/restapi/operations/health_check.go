@@ -36,7 +36,7 @@ func NewHealthCheck(ctx *middleware.Context, handler HealthCheckHandler) *Health
 }
 
 /*
-	HealthCheck swagger:route GET /health-check healthCheck
+	HealthCheck swagger:route GET /health healthCheck
 
 Health Check
 */

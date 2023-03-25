@@ -1,8 +1,8 @@
 version: '3'
 services:
 
-  bolusWizardRedis:
-    container_name: ${REDIS_HOSTNAME}
+  redis:
+    #container_name: ${REDIS_HOSTNAME}
     hostname: ${REDIS_HOSTNAME}
     image: redislabs/rejson:latest
     restart: unless-stopped
@@ -19,7 +19,7 @@ services:
       - bolusWizard
       
   api:
-    container_name: ${API_HOSTNAME}
+    #container_name: ${API_HOSTNAME}
     hostname: ${API_HOSTNAME}
     restart: unless-stopped
     build:
@@ -35,7 +35,7 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
 
   ui:
-    container_name: ${UI_HOSTNAME}
+    #container_name: ${UI_HOSTNAME}
     hostname: ${UI_HOSTNAME}
     restart: unless-stopped
     build:

@@ -37,7 +37,7 @@ func NewCorrectionRange(ctx *middleware.Context, handler CorrectionRangeHandler)
 }
 
 /*
-	CorrectionRange swagger:route GET /CorrectionRange correctionRange
+	CorrectionRange swagger:route GET /wizard/CorrectionRange correctionRange
 
 get correction range
 */

@@ -33,7 +33,7 @@ func NewGetDuration(ctx *middleware.Context, handler GetDurationHandler) *GetDur
 }
 
 /*
-	GetDuration swagger:route GET /Duration getDuration
+	GetDuration swagger:route GET /wizard/Duration getDuration
 
 Get Duration
 */

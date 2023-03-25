@@ -18,10 +18,10 @@ import (
 type Token struct {
 
 	// token
-	Token string `json:"Token,omitempty"`
+	Token string `json:"Token,omitempty" redis:"Token"`
 
 	// username
-	Username string `json:"Username,omitempty"`
+	Username string `json:"Username,omitempty" redis:"Username"`
 }
 
 // Validate validates this token

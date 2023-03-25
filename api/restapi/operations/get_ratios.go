@@ -37,7 +37,7 @@ func NewGetRatios(ctx *middleware.Context, handler GetRatiosHandler) *GetRatios 
 }
 
 /*
-	GetRatios swagger:route GET /ratios getRatios
+	GetRatios swagger:route GET /wizard/ratios getRatios
 
 Get Ratios
 */

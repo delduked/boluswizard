@@ -33,7 +33,7 @@ func NewCreateRatios(ctx *middleware.Context, handler CreateRatiosHandler) *Crea
 }
 
 /*
-	CreateRatios swagger:route POST /ratios createRatios
+	CreateRatios swagger:route POST /wizard/ratios createRatios
 
 Create Carb Ratios
 */

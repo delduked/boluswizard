@@ -37,7 +37,7 @@ func NewGetCorrections(ctx *middleware.Context, handler GetCorrectionsHandler) *
 }
 
 /*
-	GetCorrections swagger:route GET /corrections getCorrections
+	GetCorrections swagger:route GET /wizard/corrections getCorrections
 
 Get Corrections
 */

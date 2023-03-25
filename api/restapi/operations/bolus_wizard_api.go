@@ -366,55 +366,55 @@ func (o *BolusWizardAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/CorrectionRange"] = NewCorrectionRange(o.context, o.CorrectionRangeHandler)
+	o.handlers["GET"]["/wizard/CorrectionRange"] = NewCorrectionRange(o.context, o.CorrectionRangeHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/corrections"] = NewCreateCorrections(o.context, o.CreateCorrectionsHandler)
+	o.handlers["POST"]["/wizard/corrections"] = NewCreateCorrections(o.context, o.CreateCorrectionsHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/Duration"] = NewCreateDuration(o.context, o.CreateDurationHandler)
+	o.handlers["POST"]["/wizard/Duration"] = NewCreateDuration(o.context, o.CreateDurationHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/ISF"] = NewCreateISFs(o.context, o.CreateISFsHandler)
+	o.handlers["POST"]["/wizard/ISF"] = NewCreateISFs(o.context, o.CreateISFsHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/ratios"] = NewCreateRatios(o.context, o.CreateRatiosHandler)
+	o.handlers["POST"]["/wizard/ratios"] = NewCreateRatios(o.context, o.CreateRatiosHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/Targets"] = NewCreateTargets(o.context, o.CreateTargetsHandler)
+	o.handlers["POST"]["/wizard/Targets"] = NewCreateTargets(o.context, o.CreateTargetsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/corrections"] = NewGetCorrections(o.context, o.GetCorrectionsHandler)
+	o.handlers["GET"]["/wizard/corrections"] = NewGetCorrections(o.context, o.GetCorrectionsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/Duration"] = NewGetDuration(o.context, o.GetDurationHandler)
+	o.handlers["GET"]["/wizard/Duration"] = NewGetDuration(o.context, o.GetDurationHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/ISF"] = NewGetISFs(o.context, o.GetISFsHandler)
+	o.handlers["GET"]["/wizard/ISF"] = NewGetISFs(o.context, o.GetISFsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/ratios"] = NewGetRatios(o.context, o.GetRatiosHandler)
+	o.handlers["GET"]["/wizard/ratios"] = NewGetRatios(o.context, o.GetRatiosHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/Targets"] = NewGetTargets(o.context, o.GetTargetsHandler)
+	o.handlers["GET"]["/wizard/Targets"] = NewGetTargets(o.context, o.GetTargetsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/health-check"] = NewHealthCheck(o.context, o.HealthCheckHandler)
+	o.handlers["GET"]["/health"] = NewHealthCheck(o.context, o.HealthCheckHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/NewCorrection"] = NewNewCorrection(o.context, o.NewCorrectionHandler)
+	o.handlers["GET"]["/wizard/NewCorrection"] = NewNewCorrection(o.context, o.NewCorrectionHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
