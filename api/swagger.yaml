@@ -438,7 +438,7 @@ paths:
       summary: Get Corrections
       operationId: getCorrections
       parameters:
-        - name: authToken
+        - name: wizardToken
           in: header
           required: true
           type: string

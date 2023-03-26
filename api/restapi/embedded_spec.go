@@ -609,7 +609,7 @@ func init() {
         "parameters": [
           {
             "type": "string",
-            "name": "authToken",
+            "name": "wizardToken",
             "in": "header",
             "required": true
           }
@@ -1512,7 +1512,7 @@ func init() {
         "parameters": [
           {
             "type": "string",
-            "name": "authToken",
+            "name": "wizardToken",
             "in": "header",
             "required": true
           }
