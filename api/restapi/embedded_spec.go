@@ -278,7 +278,7 @@ func init() {
         }
       }
     },
-    "/wizard/ISF": {
+    "/wizard/ISFs": {
       "get": {
         "summary": "Get ISFs",
         "operationId": "getISFs",
@@ -1181,7 +1181,7 @@ func init() {
         }
       }
     },
-    "/wizard/ISF": {
+    "/wizard/ISFs": {
       "get": {
         "summary": "Get ISFs",
         "operationId": "getISFs",

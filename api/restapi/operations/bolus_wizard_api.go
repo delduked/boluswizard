@@ -378,7 +378,7 @@ func (o *BolusWizardAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/wizard/ISF"] = NewCreateISFs(o.context, o.CreateISFsHandler)
+	o.handlers["POST"]["/wizard/ISFs"] = NewCreateISFs(o.context, o.CreateISFsHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -398,7 +398,7 @@ func (o *BolusWizardAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/wizard/ISF"] = NewGetISFs(o.context, o.GetISFsHandler)
+	o.handlers["GET"]["/wizard/ISFs"] = NewGetISFs(o.context, o.GetISFsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
