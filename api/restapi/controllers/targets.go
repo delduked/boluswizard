@@ -11,7 +11,7 @@ import (
 // Save a single or multiple BG targets with an array of values
 func SaveTargets(params operations.CreateTargetsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
@@ -38,7 +38,7 @@ func SaveTargets(params operations.CreateTargetsParams) middleware.Responder {
 // Get a single or multiple BG Targets with an array of Target values
 func Targets(params operations.GetTargetsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}

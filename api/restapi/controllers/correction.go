@@ -16,7 +16,7 @@ func Newcorrection(params operations.NewCorrectionParams) middleware.Responder {
 	// if the service that determines the token to be invalid by throwing an error
 	// return the middleware.ResponderFunc(services.Error) or whatever function you make
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
@@ -38,7 +38,7 @@ func Newcorrection(params operations.NewCorrectionParams) middleware.Responder {
 // Get All Corrections
 func Corrections(params operations.GetCorrectionsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
@@ -60,7 +60,7 @@ func Corrections(params operations.GetCorrectionsParams) middleware.Responder {
 // Get a range of corrections specified by the user
 func CorrectionRange(params operations.CorrectionRangeParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
@@ -93,7 +93,7 @@ func CorrectionRange(params operations.CorrectionRangeParams) middleware.Respond
 // Save a single or multiple corrections
 func SaveCorrections(params operations.CreateCorrectionsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}

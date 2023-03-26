@@ -11,7 +11,7 @@ import (
 // Save a single or multiple ISFs with an array of ISF values
 func SaveISFs(params operations.CreateISFsParams) middleware.Responder {
 	// only accept POST requests
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
@@ -39,7 +39,7 @@ func SaveISFs(params operations.CreateISFsParams) middleware.Responder {
 // Get all ISFs saved for the specific logged in user
 func ISFs(params operations.GetISFsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}

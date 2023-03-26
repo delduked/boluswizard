@@ -10,7 +10,7 @@ import (
 // Get a Single duration value for a specific user
 func Duration(params operations.GetDurationParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
@@ -32,7 +32,7 @@ func Duration(params operations.GetDurationParams) middleware.Responder {
 // Save a single insulin duration value for a specific user
 func SaveDuration(params operations.CreateDurationParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}

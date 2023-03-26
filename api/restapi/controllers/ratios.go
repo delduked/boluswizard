@@ -11,7 +11,7 @@ import (
 // Save a single or multiple carb ratios with an array of values
 func SaveRatios(params operations.CreateRatiosParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
@@ -37,7 +37,7 @@ func SaveRatios(params operations.CreateRatiosParams) middleware.Responder {
 
 // Get all carb ratios for the specific user logged in
 func Ratios(params operations.GetRatiosParams) middleware.Responder {
-	uid, err := services.VerifyCredentialsWithToken(params.AuthToken)
+	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
 	if err != nil {
 		return middleware.ResponderFunc(services.Error)
 	}
