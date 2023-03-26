@@ -47,7 +47,7 @@ type NewCorrectionParams struct {
 	  Required: true
 	  In: header
 	*/
-	AuthToken string
+	WizardToken string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -71,7 +71,7 @@ func (o *NewCorrectionParams) BindRequest(r *http.Request, route *middleware.Mat
 		res = append(res, err)
 	}
 
-	if err := o.bindAuthToken(r.Header[http.CanonicalHeaderKey("authToken")], true, route.Formats); err != nil {
+	if err := o.bindWizardToken(r.Header[http.CanonicalHeaderKey("wizardToken")], true, route.Formats); err != nil {
 		res = append(res, err)
 	}
 	if len(res) > 0 {
@@ -132,10 +132,10 @@ func (o *NewCorrectionParams) bindCarbs(rawData []string, hasKey bool, formats s
 	return nil
 }
 
-// bindAuthToken binds and validates parameter AuthToken from header.
-func (o *NewCorrectionParams) bindAuthToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
+// bindWizardToken binds and validates parameter WizardToken from header.
+func (o *NewCorrectionParams) bindWizardToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	if !hasKey {
-		return errors.Required("authToken", "header", rawData)
+		return errors.Required("wizardToken", "header", rawData)
 	}
 	var raw string
 	if len(rawData) > 0 {
@@ -144,10 +144,10 @@ func (o *NewCorrectionParams) bindAuthToken(rawData []string, hasKey bool, forma
 
 	// Required: true
 
-	if err := validate.RequiredString("authToken", "header", raw); err != nil {
+	if err := validate.RequiredString("wizardToken", "header", raw); err != nil {
 		return err
 	}
-	o.AuthToken = raw
+	o.WizardToken = raw
 
 	return nil
 }
