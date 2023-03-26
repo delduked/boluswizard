@@ -35,7 +35,7 @@ func (o *GetRatiosURL) SetBasePath(bp string) {
 func (o *GetRatiosURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/wizard/ratios"
+	var _path = "/wizard/Ratios"
 
 	_basePath := o._basePath
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)

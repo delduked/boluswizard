@@ -382,7 +382,7 @@ func (o *BolusWizardAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/wizard/ratios"] = NewCreateRatios(o.context, o.CreateRatiosHandler)
+	o.handlers["POST"]["/wizard/Ratios"] = NewCreateRatios(o.context, o.CreateRatiosHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -402,7 +402,7 @@ func (o *BolusWizardAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/wizard/ratios"] = NewGetRatios(o.context, o.GetRatiosHandler)
+	o.handlers["GET"]["/wizard/Ratios"] = NewGetRatios(o.context, o.GetRatiosHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

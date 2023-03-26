@@ -23,7 +23,7 @@ paths:
             allOf:
               - $ref: '#/definitions/Health'
 
-  /wizard/ratios:
+  /wizard/Ratios:
     post:
       summary: Create Carb Ratios
       operationId: createRatios

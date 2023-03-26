@@ -421,6 +421,97 @@ func init() {
         }
       }
     },
+    "/wizard/Ratios": {
+      "get": {
+        "summary": "Get Ratios",
+        "operationId": "getRatios",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CarbRatio"
+                  }
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Carb Ratios",
+        "operationId": "createRatios",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          },
+          {
+            "name": "carbRatios",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CarbRatio"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "object"
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "description": "status code",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
     "/wizard/Targets": {
       "get": {
         "summary": "Get Targets",
@@ -579,97 +670,6 @@ func init() {
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/Response"
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      }
-    },
-    "/wizard/ratios": {
-      "get": {
-        "summary": "Get Ratios",
-        "operationId": "getRatios",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "authToken",
-            "in": "header",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/CarbRatio"
-                  }
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create Carb Ratios",
-        "operationId": "createRatios",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "authToken",
-            "in": "header",
-            "required": true
-          },
-          {
-            "name": "carbRatios",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CarbRatio"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "type": "object"
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "description": "status code",
-                  "type": "integer"
-                }
-              }
             }
           },
           "default": {
@@ -1324,6 +1324,97 @@ func init() {
         }
       }
     },
+    "/wizard/Ratios": {
+      "get": {
+        "summary": "Get Ratios",
+        "operationId": "getRatios",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CarbRatio"
+                  }
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Carb Ratios",
+        "operationId": "createRatios",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authToken",
+            "in": "header",
+            "required": true
+          },
+          {
+            "name": "carbRatios",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CarbRatio"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Data": {
+                  "type": "object"
+                },
+                "Error": {
+                  "type": "object"
+                },
+                "Status": {
+                  "description": "status code",
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unsuccessful operation",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
     "/wizard/Targets": {
       "get": {
         "summary": "Get Targets",
@@ -1482,97 +1573,6 @@ func init() {
             "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/Response"
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      }
-    },
-    "/wizard/ratios": {
-      "get": {
-        "summary": "Get Ratios",
-        "operationId": "getRatios",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "authToken",
-            "in": "header",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/CarbRatio"
-                  }
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Unsuccessful operation",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create Carb Ratios",
-        "operationId": "createRatios",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "authToken",
-            "in": "header",
-            "required": true
-          },
-          {
-            "name": "carbRatios",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CarbRatio"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Data": {
-                  "type": "object"
-                },
-                "Error": {
-                  "type": "object"
-                },
-                "Status": {
-                  "description": "status code",
-                  "type": "integer"
-                }
-              }
             }
           },
           "default": {
