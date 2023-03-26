@@ -148,7 +148,7 @@ paths:
           description: Unsuccessful operation
           schema:
             $ref: '#/definitions/Response'
-  /wizard/ISF:
+  /wizard/ISFs:
     post:
       summary: Create ISF
       operationId: createISFs

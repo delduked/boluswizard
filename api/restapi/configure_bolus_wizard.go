@@ -6,11 +6,12 @@ import (
 	"crypto/tls"
 	"net/http"
 
-	"github.com/go-openapi/errors"
-	"github.com/go-openapi/runtime"
-
 	"boluswizard/restapi/controllers"
 	"boluswizard/restapi/operations"
+
+	"github.com/go-openapi/errors"
+	"github.com/go-openapi/runtime"
+	"github.com/rs/cors"
 )
 
 //go:generate swagger generate server --target ../../api --name BolusWizard --spec ../swagger.yaml --principal interface{}
@@ -28,6 +29,14 @@ func configureAPI(api *operations.BolusWizardAPI) http.Handler {
 	//
 	// Example:
 	// api.Logger = log.Printf
+
+	// Set up the CORS middleware
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
+		AllowedHeaders:   []string{"*"},
+		AllowCredentials: true,
+	})
 
 	api.UseSwaggerUI()
 	// To continue using redoc as your UI, uncomment the following line
@@ -63,7 +72,10 @@ func configureAPI(api *operations.BolusWizardAPI) http.Handler {
 
 	api.ServerShutdown = func() {}
 
-	return setupGlobalMiddleware(api.Serve(setupMiddlewares))
+	boluswizard := api.Serve(setupMiddlewares)
+	cors := c.Handler(boluswizard)
+
+	return setupGlobalMiddleware(cors)
 }
 
 // The TLS configuration before HTTPS server starts.
