@@ -4,6 +4,8 @@ import (
 	"boluswizard/models"
 	"boluswizard/restapi/operations"
 	"boluswizard/restapi/services"
+	"boluswizard/restapi/tools"
+	"net/http"
 
 	"github.com/go-openapi/runtime/middleware"
 )
@@ -11,9 +13,14 @@ import (
 // Save a single or multiple BG targets with an array of values
 func SaveTargets(params operations.CreateTargetsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	var body []models.Target
@@ -38,9 +45,14 @@ func SaveTargets(params operations.CreateTargetsParams) middleware.Responder {
 // Get a single or multiple BG Targets with an array of Target values
 func Targets(params operations.GetTargetsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	targets, err := services.Targets(uid)

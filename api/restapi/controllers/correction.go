@@ -4,6 +4,8 @@ import (
 	"boluswizard/models"
 	"boluswizard/restapi/operations"
 	"boluswizard/restapi/services"
+	"boluswizard/restapi/tools"
+	"net/http"
 
 	"github.com/go-openapi/runtime/middleware"
 )
@@ -16,9 +18,14 @@ func Newcorrection(params operations.NewCorrectionParams) middleware.Responder {
 	// if the service that determines the token to be invalid by throwing an error
 	// return the middleware.ResponderFunc(services.Error) or whatever function you make
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	correction, err := services.BolusWizard(params.Bg, params.Carbs, uid)
@@ -38,9 +45,14 @@ func Newcorrection(params operations.NewCorrectionParams) middleware.Responder {
 // Get All Corrections
 func Corrections(params operations.GetCorrectionsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	corrections, err := services.Corrections(uid)
@@ -60,9 +72,14 @@ func Corrections(params operations.GetCorrectionsParams) middleware.Responder {
 // Get a range of corrections specified by the user
 func CorrectionRange(params operations.CorrectionRangeParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	body := models.CorrectionRange{
@@ -93,9 +110,14 @@ func CorrectionRange(params operations.CorrectionRangeParams) middleware.Respond
 // Save a single or multiple corrections
 func SaveCorrections(params operations.CreateCorrectionsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	var data []models.Correction

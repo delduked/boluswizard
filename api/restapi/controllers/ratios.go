@@ -4,6 +4,8 @@ import (
 	"boluswizard/models"
 	"boluswizard/restapi/operations"
 	"boluswizard/restapi/services"
+	"boluswizard/restapi/tools"
+	"net/http"
 
 	"github.com/go-openapi/runtime/middleware"
 )
@@ -11,9 +13,14 @@ import (
 // Save a single or multiple carb ratios with an array of values
 func SaveRatios(params operations.CreateRatiosParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	var body []models.CarbRatio
@@ -37,9 +44,14 @@ func SaveRatios(params operations.CreateRatiosParams) middleware.Responder {
 
 // Get all carb ratios for the specific user logged in
 func Ratios(params operations.GetRatiosParams) middleware.Responder {
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	ratios, err := services.Ratios(uid)

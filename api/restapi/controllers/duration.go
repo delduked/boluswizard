@@ -3,6 +3,8 @@ package controllers
 import (
 	"boluswizard/restapi/operations"
 	"boluswizard/restapi/services"
+	"boluswizard/restapi/tools"
+	"net/http"
 
 	"github.com/go-openapi/runtime/middleware"
 )
@@ -10,9 +12,14 @@ import (
 // Get a Single duration value for a specific user
 func Duration(params operations.GetDurationParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	data, err := services.GetDuration(uid)
@@ -32,9 +39,14 @@ func Duration(params operations.GetDurationParams) middleware.Responder {
 // Save a single insulin duration value for a specific user
 func SaveDuration(params operations.CreateDurationParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	// check if the duration string is in the required format ex: 02h00m or 13h15m

@@ -4,6 +4,8 @@ import (
 	"boluswizard/models"
 	"boluswizard/restapi/operations"
 	"boluswizard/restapi/services"
+	"boluswizard/restapi/tools"
+	"net/http"
 
 	"github.com/go-openapi/runtime/middleware"
 )
@@ -11,9 +13,14 @@ import (
 // Save a single or multiple ISFs with an array of ISF values
 func SaveISFs(params operations.CreateISFsParams) middleware.Responder {
 	// only accept POST requests
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	var data []models.ISF
@@ -39,9 +46,14 @@ func SaveISFs(params operations.CreateISFsParams) middleware.Responder {
 // Get all ISFs saved for the specific logged in user
 func ISFs(params operations.GetISFsParams) middleware.Responder {
 
-	uid, err := services.VerifyCredentialsWithToken(params.WizardToken)
+	cookies, err := tools.GetCookies(params.HTTPRequest, "wizardToken")
 	if err != nil {
-		return middleware.ResponderFunc(services.Error)
+		return services.NewError(http.StatusUnauthorized, err)
+	}
+
+	uid, err := services.VerifyCredentialsWithToken(cookies["wizardToken"])
+	if err != nil {
+		return tools.DeleteCookie("wizardToken", err)
 	}
 
 	isf, err := services.ISFs(uid)
