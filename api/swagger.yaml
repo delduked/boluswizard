@@ -28,10 +28,10 @@ paths:
       summary: Create Carb Ratios
       operationId: createRatios
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
         - name: carbRatios
           in: body
           required: true
@@ -62,10 +62,10 @@ paths:
       summary: Get Ratios
       operationId: getRatios
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
       responses:
         200:
           description: Successful operation
@@ -91,10 +91,10 @@ paths:
       summary: Create Target Ratios
       operationId: createTargets
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
         - name: targetRatios
           in: body
           required: true
@@ -124,10 +124,10 @@ paths:
       summary: Get Targets
       operationId: getTargets
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
       responses:
         200:
           description: Successful operation
@@ -153,10 +153,10 @@ paths:
       summary: Create ISF
       operationId: createISFs
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
         - name: ISFs
           in: body
           required: true
@@ -187,10 +187,10 @@ paths:
       summary: Get ISFs
       operationId: getISFs
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
       responses:
         200:
           description: Successful operation
@@ -216,10 +216,10 @@ paths:
       summary: Create Duration
       operationId: createDuration
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
         - name: Duration
           in: body
           required: true
@@ -251,10 +251,10 @@ paths:
       summary: Get Duration
       operationId: getDuration
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
       responses:
         200:
           description: Successful operation
@@ -307,10 +307,10 @@ paths:
       summary: New Correction
       operationId: newCorrection
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
         - name: Bg
           in: query
           required: true
@@ -344,10 +344,10 @@ paths:
       summary: get correction range
       operationId: correctionRange
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
         - name: Start
           in: query
           required: true
@@ -413,10 +413,10 @@ paths:
       summary: Create Corrections
       operationId: createCorrections
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
         - name: corrections
           in: body
           required: true
@@ -438,10 +438,10 @@ paths:
       summary: Get Corrections
       operationId: getCorrections
       parameters:
-        - name: wizardToken
-          in: header
-          required: true
-          type: string
+        # - name: wizardToken
+        #   in: header
+        #   required: true
+        #   type: string
       responses:
         200:
           description: Successful operation
