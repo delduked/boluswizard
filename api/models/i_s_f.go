@@ -18,16 +18,16 @@ import (
 type ISF struct {
 
 	// end
-	End *string `json:"End,omitempty" redis:"End"`
+	End string `json:"End,omitempty" redis:"End"`
 
 	// key
-	Key *string `json:"Key,omitempty" redis:"Key"`
+	Key string `json:"Key,omitempty" redis:"Key"`
 
 	// sensitivity
-	Sensitivity *float64 `json:"Sensitivity,omitempty" redis:"Sensitivity"`
+	Sensitivity float64 `json:"Sensitivity,omitempty" redis:"Sensitivity"`
 
 	// start
-	Start *string `json:"Start,omitempty" redis:"Start"`
+	Start string `json:"Start,omitempty" redis:"Start"`
 }
 
 // Validate validates this i s f

@@ -21,7 +21,7 @@ type Response struct {
 	Error interface{} `json:"Error,omitempty"`
 
 	// status
-	Status *int64 `json:"Status,omitempty"`
+	Status int64 `json:"Status,omitempty"`
 }
 
 // Validate validates this response

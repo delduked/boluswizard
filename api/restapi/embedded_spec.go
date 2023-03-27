@@ -615,24 +615,20 @@ func init() {
       "properties": {
         "End": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Key\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Ratio\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -642,20 +638,17 @@ func init() {
         "Bg": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Bg\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Bg\""
         },
         "Bolus": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Bolus\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "Carbs": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Carbs\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Carbs\""
         },
         "Key": {
           "type": "string"
@@ -663,8 +656,7 @@ func init() {
         "TimeStamp": {
           "type": "integer",
           "format": "int64",
-          "x-go-custom-tag": "redis:\"TimeStamp\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"TimeStamp\""
         }
       }
     },
@@ -674,14 +666,12 @@ func init() {
         "End": {
           "type": "integer",
           "format": "int64",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Start": {
           "type": "integer",
           "format": "int64",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -691,26 +681,22 @@ func init() {
         "ActiveInsulinReduction": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"ActiveInsulinReduction\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"ActiveInsulinReduction\""
         },
         "BgCorrection": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"BgCorrection\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"BgCorrection\""
         },
         "Bolus": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Bolus\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "CarbCorrection": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"CarbCorrection\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"CarbCorrection\""
         }
       }
     },
@@ -718,8 +704,7 @@ func init() {
       "type": "object",
       "properties": {
         "Error": {
-          "type": "object",
-          "x-nullable": true
+          "type": "object"
         },
         "Status": {
           "type": "integer"
@@ -734,24 +719,20 @@ func init() {
       "properties": {
         "End": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Key\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Sensitivity": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Sensitivity\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Sensitivity\""
         },
         "Start": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -759,12 +740,10 @@ func init() {
       "type": "object",
       "properties": {
         "Error": {
-          "type": "object",
-          "x-nullable": true
+          "type": "object"
         },
         "Status": {
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         }
       }
     },
@@ -800,36 +779,30 @@ func init() {
       "properties": {
         "End": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "High": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"High\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"High\""
         },
         "Key": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Key\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Ratio\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         },
         "low": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"low\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"low\""
         }
       }
     },
@@ -1463,24 +1436,20 @@ func init() {
       "properties": {
         "End": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Key\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Ratio\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -1490,20 +1459,17 @@ func init() {
         "Bg": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Bg\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Bg\""
         },
         "Bolus": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Bolus\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "Carbs": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Carbs\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Carbs\""
         },
         "Key": {
           "type": "string"
@@ -1511,8 +1477,7 @@ func init() {
         "TimeStamp": {
           "type": "integer",
           "format": "int64",
-          "x-go-custom-tag": "redis:\"TimeStamp\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"TimeStamp\""
         }
       }
     },
@@ -1522,14 +1487,12 @@ func init() {
         "End": {
           "type": "integer",
           "format": "int64",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Start": {
           "type": "integer",
           "format": "int64",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -1539,26 +1502,22 @@ func init() {
         "ActiveInsulinReduction": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"ActiveInsulinReduction\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"ActiveInsulinReduction\""
         },
         "BgCorrection": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"BgCorrection\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"BgCorrection\""
         },
         "Bolus": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Bolus\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Bolus\""
         },
         "CarbCorrection": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"CarbCorrection\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"CarbCorrection\""
         }
       }
     },
@@ -1566,8 +1525,7 @@ func init() {
       "type": "object",
       "properties": {
         "Error": {
-          "type": "object",
-          "x-nullable": true
+          "type": "object"
         },
         "Status": {
           "type": "integer"
@@ -1582,24 +1540,20 @@ func init() {
       "properties": {
         "End": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "Key": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Key\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Sensitivity": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Sensitivity\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Sensitivity\""
         },
         "Start": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         }
       }
     },
@@ -1607,12 +1561,10 @@ func init() {
       "type": "object",
       "properties": {
         "Error": {
-          "type": "object",
-          "x-nullable": true
+          "type": "object"
         },
         "Status": {
-          "type": "integer",
-          "x-nullable": true
+          "type": "integer"
         }
       }
     },
@@ -1648,36 +1600,30 @@ func init() {
       "properties": {
         "End": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"End\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"End\""
         },
         "High": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"High\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"High\""
         },
         "Key": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Key\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Key\""
         },
         "Ratio": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"Ratio\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Ratio\""
         },
         "Start": {
           "type": "string",
-          "x-go-custom-tag": "redis:\"Start\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"Start\""
         },
         "low": {
           "type": "number",
           "format": "float64",
-          "x-go-custom-tag": "redis:\"low\"",
-          "x-nullable": true
+          "x-go-custom-tag": "redis:\"low\""
         }
       }
     },

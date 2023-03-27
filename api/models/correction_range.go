@@ -18,10 +18,10 @@ import (
 type CorrectionRange struct {
 
 	// end
-	End *int64 `json:"End,omitempty" redis:"End"`
+	End int64 `json:"End,omitempty" redis:"End"`
 
 	// start
-	Start *int64 `json:"Start,omitempty" redis:"Start"`
+	Start int64 `json:"Start,omitempty" redis:"Start"`
 }
 
 // Validate validates this correction range
