@@ -23,7 +23,7 @@ func SaveRatios(params operations.CreateRatiosParams) middleware.Responder {
 		return tools.DeleteCookie("wizardToken", err)
 	}
 
-	var body []models.CarbRatio
+	body := make([]models.CarbRatio, len(params.CarbRatios))
 	for i, j := range params.CarbRatios {
 		body[i] = *j
 	}
@@ -59,7 +59,7 @@ func Ratios(params operations.GetRatiosParams) middleware.Responder {
 		return middleware.ResponderFunc(services.Error)
 	}
 
-	var data []*models.CarbRatio
+	data := make([]*models.CarbRatio, len(ratios))
 	for i, j := range ratios {
 		data[i] = &j
 	}

@@ -23,7 +23,7 @@ func SaveTargets(params operations.CreateTargetsParams) middleware.Responder {
 		return tools.DeleteCookie("wizardToken", err)
 	}
 
-	var body []models.Target
+	body := make([]models.Target, len(params.TargetRatios))
 	for i, j := range params.TargetRatios {
 		body[i] = *j
 	}
@@ -60,7 +60,7 @@ func Targets(params operations.GetTargetsParams) middleware.Responder {
 		return middleware.ResponderFunc(services.Error)
 	}
 
-	var data []*models.Target
+	data := make([]*models.Target, len(targets))
 	for i, j := range targets {
 		data[i] = &j
 	}

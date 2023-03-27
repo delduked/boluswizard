@@ -23,7 +23,8 @@ func SaveISFs(params operations.CreateISFsParams) middleware.Responder {
 		return tools.DeleteCookie("wizardToken", err)
 	}
 
-	var data []models.ISF
+	//var data []models.ISF
+	data := make([]models.ISF, len(params.ISFs))
 	for i, j := range params.ISFs {
 		data[i] = *j
 	}
@@ -61,7 +62,7 @@ func ISFs(params operations.GetISFsParams) middleware.Responder {
 		return middleware.ResponderFunc(services.Error)
 	}
 
-	var data []*models.ISF
+	data := make([]*models.ISF, len(isf))
 	for i, j := range isf {
 		data[i] = &j
 	}

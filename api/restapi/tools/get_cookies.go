@@ -7,7 +7,7 @@ import (
 
 func GetCookies(req *http.Request, findCookie string) (map[string]string, error) {
 
-	var cookies map[string]string
+	cookies := make(map[string]string)
 	for _, cookie := range req.Cookies() {
 		cookies[cookie.Name] = cookie.Value
 	}
