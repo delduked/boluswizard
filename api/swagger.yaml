@@ -61,7 +61,7 @@ paths:
     get:
       summary: Get Ratios
       operationId: getRatios
-      parameters:
+      #parameters:
         # - name: wizardToken
         #   in: header
         #   required: true
@@ -123,7 +123,7 @@ paths:
     get:
       summary: Get Targets
       operationId: getTargets
-      parameters:
+      #parameters:
         # - name: wizardToken
         #   in: header
         #   required: true
@@ -186,7 +186,7 @@ paths:
     get:
       summary: Get ISFs
       operationId: getISFs
-      parameters:
+      #parameters:
         # - name: wizardToken
         #   in: header
         #   required: true
@@ -250,7 +250,7 @@ paths:
     get:
       summary: Get Duration
       operationId: getDuration
-      parameters:
+      #parameters:
         # - name: wizardToken
         #   in: header
         #   required: true
@@ -437,7 +437,7 @@ paths:
     get:
       summary: Get Corrections
       operationId: getCorrections
-      parameters:
+      #parameters:
         # - name: wizardToken
         #   in: header
         #   required: true
