@@ -139,12 +139,6 @@ func init() {
         "operationId": "correctionRange",
         "parameters": [
           {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
-          {
             "type": "integer",
             "format": "int64",
             "name": "Start",
@@ -193,14 +187,6 @@ func init() {
       "get": {
         "summary": "Get Duration",
         "operationId": "getDuration",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -231,12 +217,6 @@ func init() {
         "summary": "Create Duration",
         "operationId": "createDuration",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "Duration",
             "in": "body",
@@ -282,14 +262,6 @@ func init() {
       "get": {
         "summary": "Get ISFs",
         "operationId": "getISFs",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -323,12 +295,6 @@ func init() {
         "summary": "Create ISF",
         "operationId": "createISFs",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "ISFs",
             "in": "body",
@@ -373,12 +339,6 @@ func init() {
         "summary": "New Correction",
         "operationId": "newCorrection",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "type": "number",
             "format": "float64",
@@ -425,14 +385,6 @@ func init() {
       "get": {
         "summary": "Get Ratios",
         "operationId": "getRatios",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -466,12 +418,6 @@ func init() {
         "summary": "Create Carb Ratios",
         "operationId": "createRatios",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "carbRatios",
             "in": "body",
@@ -516,14 +462,6 @@ func init() {
       "get": {
         "summary": "Get Targets",
         "operationId": "getTargets",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -557,12 +495,6 @@ func init() {
         "summary": "Create Target Ratios",
         "operationId": "createTargets",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "targetRatios",
             "in": "body",
@@ -606,14 +538,6 @@ func init() {
       "get": {
         "summary": "Get Corrections",
         "operationId": "getCorrections",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -647,12 +571,6 @@ func init() {
         "summary": "Create Corrections",
         "operationId": "createCorrections",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "corrections",
             "in": "body",
@@ -1042,12 +960,6 @@ func init() {
         "operationId": "correctionRange",
         "parameters": [
           {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
-          {
             "type": "integer",
             "format": "int64",
             "name": "Start",
@@ -1096,14 +1008,6 @@ func init() {
       "get": {
         "summary": "Get Duration",
         "operationId": "getDuration",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -1134,12 +1038,6 @@ func init() {
         "summary": "Create Duration",
         "operationId": "createDuration",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "Duration",
             "in": "body",
@@ -1185,14 +1083,6 @@ func init() {
       "get": {
         "summary": "Get ISFs",
         "operationId": "getISFs",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -1226,12 +1116,6 @@ func init() {
         "summary": "Create ISF",
         "operationId": "createISFs",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "ISFs",
             "in": "body",
@@ -1276,12 +1160,6 @@ func init() {
         "summary": "New Correction",
         "operationId": "newCorrection",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "type": "number",
             "format": "float64",
@@ -1328,14 +1206,6 @@ func init() {
       "get": {
         "summary": "Get Ratios",
         "operationId": "getRatios",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -1369,12 +1239,6 @@ func init() {
         "summary": "Create Carb Ratios",
         "operationId": "createRatios",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "carbRatios",
             "in": "body",
@@ -1419,14 +1283,6 @@ func init() {
       "get": {
         "summary": "Get Targets",
         "operationId": "getTargets",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -1460,12 +1316,6 @@ func init() {
         "summary": "Create Target Ratios",
         "operationId": "createTargets",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "targetRatios",
             "in": "body",
@@ -1509,14 +1359,6 @@ func init() {
       "get": {
         "summary": "Get Corrections",
         "operationId": "getCorrections",
-        "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -1550,12 +1392,6 @@ func init() {
         "summary": "Create Corrections",
         "operationId": "createCorrections",
         "parameters": [
-          {
-            "type": "string",
-            "name": "wizardToken",
-            "in": "header",
-            "required": true
-          },
           {
             "name": "corrections",
             "in": "body",

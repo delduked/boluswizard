@@ -43,11 +43,6 @@ type CorrectionRangeParams struct {
 	  In: query
 	*/
 	Start int64
-	/*
-	  Required: true
-	  In: header
-	*/
-	WizardToken string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -68,10 +63,6 @@ func (o *CorrectionRangeParams) BindRequest(r *http.Request, route *middleware.M
 
 	qStart, qhkStart, _ := qs.GetOK("Start")
 	if err := o.bindStart(qStart, qhkStart, route.Formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.bindWizardToken(r.Header[http.CanonicalHeaderKey("wizardToken")], true, route.Formats); err != nil {
 		res = append(res, err)
 	}
 	if len(res) > 0 {
@@ -128,26 +119,6 @@ func (o *CorrectionRangeParams) bindStart(rawData []string, hasKey bool, formats
 		return errors.InvalidType("Start", "query", "int64", raw)
 	}
 	o.Start = value
-
-	return nil
-}
-
-// bindWizardToken binds and validates parameter WizardToken from header.
-func (o *CorrectionRangeParams) bindWizardToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	if !hasKey {
-		return errors.Required("wizardToken", "header", rawData)
-	}
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: true
-
-	if err := validate.RequiredString("wizardToken", "header", raw); err != nil {
-		return err
-	}
-	o.WizardToken = raw
 
 	return nil
 }

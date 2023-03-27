@@ -12,7 +12,6 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 )
 
@@ -38,11 +37,6 @@ type CreateDurationParams struct {
 	  In: body
 	*/
 	Duration CreateDurationBody
-	/*
-	  Required: true
-	  In: header
-	*/
-	WizardToken string
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -81,32 +75,8 @@ func (o *CreateDurationParams) BindRequest(r *http.Request, route *middleware.Ma
 	} else {
 		res = append(res, errors.Required("duration", "body", ""))
 	}
-
-	if err := o.bindWizardToken(r.Header[http.CanonicalHeaderKey("wizardToken")], true, route.Formats); err != nil {
-		res = append(res, err)
-	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-// bindWizardToken binds and validates parameter WizardToken from header.
-func (o *CreateDurationParams) bindWizardToken(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	if !hasKey {
-		return errors.Required("wizardToken", "header", rawData)
-	}
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: true
-
-	if err := validate.RequiredString("wizardToken", "header", raw); err != nil {
-		return err
-	}
-	o.WizardToken = raw
-
 	return nil
 }
