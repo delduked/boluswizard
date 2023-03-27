@@ -87,8 +87,8 @@ func BolusWizard(bg, carbs float64, uid string) (models.CorrectionResponse, erro
 
 	// round the value to two decimal places
 	totalCorrection := roundFloat(carbCorrection+bgCorrection-activeInsulin, 2)
-	if *totalCorrection < 0 {
-		*totalCorrection = 0
+	if totalCorrection < 0 {
+		totalCorrection = 0
 	}
 
 	// construct the response
@@ -96,7 +96,7 @@ func BolusWizard(bg, carbs float64, uid string) (models.CorrectionResponse, erro
 		BgCorrection:           roundFloat(bgCorrection, 2),
 		CarbCorrection:         roundFloat(carbCorrection, 2),
 		ActiveInsulinReduction: roundFloat(activeInsulin, 2),
-		Bolus:                  roundFloat(*totalCorrection, 2),
+		Bolus:                  roundFloat(totalCorrection, 2),
 	}
 
 	fmt.Printf(`Bolus Wizard correction: %v`, res)
@@ -244,10 +244,10 @@ func getCarbCorrection(carbs float64, carbRatio float64) float64 {
 	result := carbs * carbRatio
 	return result
 }
-func roundFloat(val float64, precision uint) *float64 {
+func roundFloat(val float64, precision uint) float64 {
 	ratio := math.Pow(10, float64(precision))
 	res := math.Round(val*ratio) / ratio
-	return &res
+	return res
 }
 
 func getActiveInsulin(t time.Time, now time.Time, uid string, duration string) (float64, error) {
