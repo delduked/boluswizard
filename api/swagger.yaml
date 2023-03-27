@@ -470,70 +470,56 @@ definitions:
       Key:
         type: string
         x-go-custom-tag: redis:"Key"
-        x-nullable: true
       End:
         type: string
         x-go-custom-tag: redis:"End"
-        x-nullable: true
       Start:
         type: string
         x-go-custom-tag: redis:"Start"
-        x-nullable: true
       Ratio:
         type: number
         format: float64
         x-go-custom-tag: redis:"Ratio"
-        x-nullable: true
   ISF:
     type: object
     properties:
       Key:
         type: string
         x-go-custom-tag: redis:"Key"
-        x-nullable: true
       End:
         type: string
         x-go-custom-tag: redis:"End"
-        x-nullable: true
       Start:
         type: string
         x-go-custom-tag: redis:"Start"
-        x-nullable: true
       Sensitivity:
         type: number
         format: float64
         x-go-custom-tag: redis:"Sensitivity"
-        x-nullable: true
   Target:
     type: object
     properties:
       Key:
         type: string
         x-go-custom-tag: redis:"Key"
-        x-nullable: true
       End:
         type: string
         x-go-custom-tag: redis:"End"
-        x-nullable: true
       Start:
         type: string
         x-go-custom-tag: redis:"Start"
-        x-nullable: true
       High:
         type: number
         format: float64
         x-go-custom-tag: redis:"High"
-        x-nullable: true
       low:
         type: number
         format: float64
         x-go-custom-tag: redis:"low"
-        x-nullable: true
       Ratio:
         type: number
         format: float64
         x-go-custom-tag: redis:"Ratio"
-        x-nullable: true
 
   CorrectionResponse:
     type: object
@@ -542,22 +528,22 @@ definitions:
         type: number
         format: float64
         x-go-custom-tag: redis:"BgCorrection"
-        x-nullable: true
+        
       CarbCorrection:
         type: number
         format: float64
         x-go-custom-tag: redis:"CarbCorrection"
-        x-nullable: true
+        
       ActiveInsulinReduction:
         type: number
         format: float64
         x-go-custom-tag: redis:"ActiveInsulinReduction"
-        x-nullable: true
+        
       Bolus:
         type: number
         format: float64
         x-go-custom-tag: redis:"Bolus"
-        x-nullable: true
+        
 
   Sign:
     type: object
@@ -586,15 +572,18 @@ definitions:
       Username:
         type: string
         x-go-custom-tag: redis:"Username"
+        
       Token:
         type: string
         x-go-custom-tag: redis:"Token"
+        
   ActiveInsulinDuration:
     type: object
     properties:
       Duration:
         type: string
         x-go-custom-tag: redis:"Duration"
+        
 
   Correction:
     type: object
@@ -605,32 +594,32 @@ definitions:
         type: number
         format: float64
         x-go-custom-tag: redis:"Bg"
-        x-nullable: true
+        
       Carbs:
         type: number
         format: float64
         x-go-custom-tag: redis:"Carbs"
-        x-nullable: true
+        
       Bolus:
         type: number
         format: float64
         x-go-custom-tag: redis:"Bolus"
-        x-nullable: true
+        
       TimeStamp:
         type: integer
         format: int64
         x-go-custom-tag: redis:"TimeStamp"
-        x-nullable: true
-
+        
+        
   Response:
     type: object
     properties:
       Status:
         type: integer
-        x-nullable: true
+        
       Error:
         type: object
-        x-nullable: true
+        
   CorrectionRange:
     type: object
     properties:
@@ -638,12 +627,12 @@ definitions:
         type: integer
         format: int64
         x-go-custom-tag: redis:"Start"
-        x-nullable: true
+        
       End:
         type: integer
         format: int64
         x-go-custom-tag: redis:"End"
-        x-nullable: true
+        
 
   ResponseData:
     type: object
@@ -660,7 +649,7 @@ definitions:
       Status:
         type: integer
       Error:
-        x-nullable: true
+      
         type: object
       Timestamp:
         type: object

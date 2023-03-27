@@ -83,8 +83,8 @@ func CorrectionRange(params operations.CorrectionRangeParams) middleware.Respond
 	}
 
 	body := models.CorrectionRange{
-		Start: params.Start,
-		End:   params.End,
+		Start: &params.Start,
+		End:   &params.End,
 	}
 
 	CorrectionRange, err := services.CorrectionRange(body, uid)
