@@ -621,7 +621,7 @@ definitions:
         format: int64
         x-go-custom-tag: redis:"TimeStamp"
         x-nullable: true
-        
+
   Response:
     type: object
     properties:
@@ -660,7 +660,7 @@ definitions:
       Status:
         type: integer
       Error:
-      x-nullable: true
+        x-nullable: true
         type: object
       Timestamp:
         type: object

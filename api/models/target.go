@@ -18,22 +18,22 @@ import (
 type Target struct {
 
 	// end
-	End string `json:"End,omitempty" redis:"End"`
+	End *string `json:"End,omitempty" redis:"End"`
 
 	// high
-	High float64 `json:"High,omitempty" redis:"High"`
+	High *float64 `json:"High,omitempty" redis:"High"`
 
 	// key
-	Key string `json:"Key,omitempty" redis:"Key"`
+	Key *string `json:"Key,omitempty" redis:"Key"`
 
 	// ratio
-	Ratio float64 `json:"Ratio,omitempty" redis:"Ratio"`
+	Ratio *float64 `json:"Ratio,omitempty" redis:"Ratio"`
 
 	// start
-	Start string `json:"Start,omitempty" redis:"Start"`
+	Start *string `json:"Start,omitempty" redis:"Start"`
 
 	// low
-	Low float64 `json:"low,omitempty" redis:"low"`
+	Low *float64 `json:"low,omitempty" redis:"low"`
 }
 
 // Validate validates this target
