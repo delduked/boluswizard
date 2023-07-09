@@ -10,10 +10,8 @@
 	let Labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 	let ctx;
 	let chartCanvas;
-	let isf;
-	let duration;
-	let target;
-	let bolus;
+
+	
 	onMount(async (promise) => {
 		const { Chart } = await import('chart.js');
 		ctx = await chartCanvas.getContext('2d');

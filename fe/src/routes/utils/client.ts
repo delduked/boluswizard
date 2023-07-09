@@ -1,10 +1,13 @@
 import type { iRangeData, iResponse, iCorrectionData, iCredentials } from './types';
 
-const get = async <t>(info: string): Promise<t> => {
+export const get = async <t>(info: string): Promise<t> => {
 	try {
-		const res = await fetch(`${process.env.apiServiceUrl}wizard/${info}`, {
+		const res = await fetch(`${process.env.ApiServiceUrl}wizard/${info}`, {
 			method: 'GET',
-			credentials: 'include'
+			credentials: 'include',
+			headers: { 
+				'content-type': 'application/json', 
+			}
 		})
 			.then((data) => data.json())
 			.catch((err) => err);
@@ -16,13 +19,16 @@ const get = async <t>(info: string): Promise<t> => {
 		throw error;
 	}
 };
-const post = async <t>(info: string, data: string): Promise<t> => {
+export const post = async <t>(info: string, data: string): Promise<t> => {
 	try {
-		const res = await fetch(`${process.env.apiServiceUrl}wizard/${info}`, {
+		//https://api.boluswizard.io/
+		const res = await fetch(`${process.env.ApiServiceUrl}wizard/${info}`, {
 			method: 'POST',
 			credentials: 'include',
 			body: data,
-			headers: { 'content-type': 'application/json' }
+			headers: { 
+				'content-type': 'application/json', 
+			}
 		})
 			.then((data) => data.json())
 			.catch((err) => err);
@@ -88,7 +94,7 @@ export const Signup = async (creds: iCredentials): Promise<boolean> => {
 		//   }
 
 		// setup post request for login
-		const res = await fetch(`${process.env.apiServiceUrl}SignUp`, {
+		const res = await fetch(`${process.env.ApiServiceUrl}SignUp`, {
 			method: 'POST',
 			body: JSON.stringify(creds),
 			headers: { 'content-type': 'application/json' }
@@ -125,7 +131,7 @@ export const Signup = async (creds: iCredentials): Promise<boolean> => {
 export const Signin = async (creds: iCredentials): Promise<boolean> => {
 	try {
 		// setup post request for login
-		const res = await fetch(`${process.env.apiServiceUrl}SignIn`, {
+		const res = await fetch(`${process.env.ApiServiceUrl}SignIn`, {
 			method: 'POST',
 			body: JSON.stringify(creds),
 			headers: { 'content-type': 'application/json' }
@@ -146,7 +152,7 @@ export const Signin = async (creds: iCredentials): Promise<boolean> => {
 			// this.updateMessage('Login successful!');
 
 			setTimeout(() => {
-				document.location.href = `/u/${responseJson.Data.Username}/home`;
+				document.location.href = `/user/${responseJson.Data.Username}`;
 			}, 1000);
             return true
 		}

@@ -1,3 +1,24 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { post, get } from '../utils/client';
+	import type { duration, iTarget, iRatio, iIsf } from '../utils/types';
+
+	let Isf;
+	let Duration;
+	let Target;
+	let Ratio;
+
+	onMount(() => {
+		try {
+
+			// Duration = get<any>('Duration').then((data) => data);
+
+		} catch (error) {
+			console.log(error);
+		}
+	});
+</script>
+
 <div class="stats shadow flex-col justify-center">
 	<div class="stat place-items-center">
 		<div class="stat-title">Bolus</div>
@@ -18,7 +39,11 @@
 
 	<div class="stat place-items-center">
 		<div class="stat-title">Duration</div>
-		<div class="stat-value">2</div>
+		{#if Duration}
+			<div class="stat-value">{Duration}</div>
+		{:else}
+			<div class="stat-value">n/a</div>
+		{/if}
 		<div class="stat-desc">hours</div>
 	</div>
 </div>
