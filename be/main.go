@@ -13,7 +13,7 @@ func main() {
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
 		AllowOrigins:     "*",
-		AllowHeaders:     "Origin, Content-Type, Accept, Accept-Language, Content-Length",
+		AllowHeaders:     "*",
 	}))
 
 	app.Use(controllers.Logger)
@@ -35,14 +35,17 @@ func main() {
 	// saves an array of blood sugar targets with time stamps through out the day, used to calculates carb corrections
 	wizard.Post("/Targets", controllers.SaveTargets)
 	wizard.Get("/Targets", controllers.Targets)
+	wizard.Get("/CurrentTarget", controllers.CurrentTarget)
 
 	// saves an array of carb ratios with time stamps through out the day, used to calculate carb corrections
 	wizard.Post("/Ratios", controllers.SaveRatios)
 	wizard.Get("/Ratios", controllers.Ratios)
+	wizard.Get("/CurrentRatio", controllers.CurrentRatio)
 
 	// saves an array of insuling sensitivity factors, used to calculate blood sugar and carb corrections
 	wizard.Post("/ISFs", controllers.SaveISFs)
 	wizard.Get("/ISFs", controllers.ISFs)
+	wizard.Get("/CurrentISF", controllers.CurrentIsf)
 
 	// saves an array of insuling sensitivity factors, used to calculate blood sugar and carb corrections
 	wizard.Post("/Duration", controllers.SaveDuration)

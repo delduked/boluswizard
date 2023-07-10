@@ -68,3 +68,25 @@ func ISFs(c *fiber.Ctx) error {
 	c.Status(fiber.StatusOK)
 	return services.Response(res, c)
 }
+
+func CurrentIsf(c *fiber.Ctx) error {
+	uid := c.Locals("Uid").(string)
+
+	isf, err := services.CurrentIsf(uid)
+	if err != nil {
+		c.Status(fiber.StatusInternalServerError)
+		res := types.Response[any]{
+			Status: fiber.StatusInternalServerError,
+			Error:  err,
+		}
+		return services.Response(res, c)
+	}
+
+	res := types.Response[any]{
+		Status: fiber.StatusOK,
+		Error:  err,
+		Data:   isf,
+	}
+	c.Status(fiber.StatusOK)
+	return services.Response(res, c)
+}

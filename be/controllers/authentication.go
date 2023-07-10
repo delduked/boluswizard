@@ -3,6 +3,7 @@ package controllers
 import (
 	"api/services"
 	"api/types"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -60,7 +61,8 @@ func SignUp(c *fiber.Ctx) error {
 }
 
 func VerifyMiddleWare(c *fiber.Ctx) error {
-	bearer := c.Cookies("wizardToken")
+	bearer := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyNjQxMzcxMC1lMDRmLTQ0YTYtYWMwOS05OWQxYjEzZGY3MzciLCJVc2VybmFtZSI6Im5hdGUiLCJleHAiOjE2ODg5NjE1MjUsImlhdCI6MTY4ODk1NDMyNX0.kcGt617usRV3zkNRXLOzXM4F37naLJcHiQvP76I2Lrs"
+	fmt.Println(bearer)
 	uid, err := services.VerifyCredentialsWithToken(bearer, c)
 	if err != nil {
 		c.Status(fiber.StatusForbidden)

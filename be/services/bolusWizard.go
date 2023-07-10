@@ -23,7 +23,7 @@ func BolusWizard(value *types.CorrectionRequest, uid string) (types.CorrectionRe
 	// get the list of BG Targets for the specific user
 	go func() {
 		var err error
-		bgTarget, err = getBGTarget(t, now, uid)
+		bgTarget, err = GetBGTarget(t, now, uid)
 		errors <- err
 		done <- true
 	}()
@@ -31,7 +31,7 @@ func BolusWizard(value *types.CorrectionRequest, uid string) (types.CorrectionRe
 	// get all the insulin sensitivity factor value for the specific user through out the day
 	go func() {
 		var err error
-		isf, err = getInsulinSensitivityFactor(t, now, uid)
+		isf, err = GetInsulinSensitivityFactor(t, now, uid)
 		errors <- err
 		done <- true
 	}()
@@ -39,7 +39,7 @@ func BolusWizard(value *types.CorrectionRequest, uid string) (types.CorrectionRe
 	// get the list of all carb ratios through out the day for the specific user
 	go func() {
 		var err error
-		carbRatio, err = getCarbRatio(t, now, uid)
+		carbRatio, err = GetCarbRatio(t, now, uid)
 		errors <- err
 		done <- true
 	}()
@@ -82,17 +82,17 @@ func BolusWizard(value *types.CorrectionRequest, uid string) (types.CorrectionRe
 	}
 
 	// round the value to two decimal places
-	totalCorrection := roundFloat(carbCorrection+bgCorrection-activeInsulin, 2)
+	totalCorrection := RoundFloat(carbCorrection+bgCorrection-activeInsulin, 2)
 	if totalCorrection < 0 {
 		totalCorrection = 0
 	}
 
 	// construct the response
 	res := types.CorrectionResponse{
-		BgCorrection:           roundFloat(bgCorrection, 2),
-		CarbCorrection:         roundFloat(carbCorrection, 2),
-		ActiveInsulinReduction: roundFloat(activeInsulin, 2),
-		Bolus:                  roundFloat(totalCorrection, 2),
+		BgCorrection:           RoundFloat(bgCorrection, 2),
+		CarbCorrection:         RoundFloat(carbCorrection, 2),
+		ActiveInsulinReduction: RoundFloat(activeInsulin, 2),
+		Bolus:                  RoundFloat(totalCorrection, 2),
 	}
 
 	fmt.Printf(`Bolus Wizard correction: %v`, res)
@@ -107,7 +107,7 @@ func unixTime(t time.Time) {
 	fmt.Println("unixTime: ", unixTime)
 
 }
-func getBGTarget(t time.Time, now time.Time, uid string) (types.Target, error) {
+func GetBGTarget(t time.Time, now time.Time, uid string) (types.Target, error) {
 	var result types.Target
 	var err error
 
@@ -141,7 +141,7 @@ func getBGTarget(t time.Time, now time.Time, uid string) (types.Target, error) {
 	err = fmt.Errorf("No BG Target found")
 	return result, err
 }
-func getCarbRatio(t time.Time, now time.Time, uid string) (float64, error) {
+func GetCarbRatio(t time.Time, now time.Time, uid string) (float64, error) {
 	var result float64
 	var err error
 
@@ -177,7 +177,7 @@ func getCarbRatio(t time.Time, now time.Time, uid string) (float64, error) {
 	return result, err
 }
 
-func getInsulinSensitivityFactor(t time.Time, now time.Time, uid string) (float64, error) {
+func GetInsulinSensitivityFactor(t time.Time, now time.Time, uid string) (float64, error) {
 	var result float64
 	var err error
 
@@ -240,7 +240,7 @@ func getCarbCorrection(carbs float64, carbRatio float64) float64 {
 	result := carbs * carbRatio
 	return result
 }
-func roundFloat(val float64, precision uint) float64 {
+func RoundFloat(val float64, precision uint) float64 {
 	ratio := math.Pow(10, float64(precision))
 	return math.Round(val*ratio) / ratio
 }

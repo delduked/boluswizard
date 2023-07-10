@@ -3,6 +3,7 @@ package services
 import (
 	"api/config"
 	"api/types"
+	"time"
 
 	"strings"
 
@@ -129,4 +130,15 @@ func deleteTargets(value []types.Target, uid string) error {
 	}
 
 	return nil
+}
+
+func CurrentTarget(uid string) (types.Target, error) {
+	var bgTarget types.Target
+	now := time.Now()
+	t := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local)
+	bgTarget, err := GetBGTarget(t, now, uid)
+	if err != nil {
+		return bgTarget, err
+	}
+	return bgTarget, err
 }

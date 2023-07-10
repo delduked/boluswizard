@@ -10,9 +10,9 @@
 
 	onMount(() => {
 		try {
-
-			// Duration = get<any>('Duration').then((data) => data);
-
+			get<duration>('Duration').then((data) => (Duration = data.Duration));
+			get<iIsf>('CurrentISF').then((data) => (Isf = data));
+			get<iTarget>('CurrentTarget').then((data) => (Target = data.Low + '-' + data.High));
 		} catch (error) {
 			console.log(error);
 		}
@@ -27,14 +27,24 @@
 	</div>
 	<div class="stat place-items-center">
 		<div class="stat-title">Target</div>
-		<div class="stat-value">6.0</div>
+		{#if Target}
+			<div class="stat-value">{Target}</div>
+		{:else}
+			<div class="stat-value">n/a</div>
+		{/if}
+
 		<div class="stat-desc">mmols</div>
 	</div>
 
 	<div class="stat place-items-center">
 		<div class="stat-title">ISF</div>
-		<div class="stat-value text-info">1.2</div>
-		<div class="stat-desc text-info">mmol/unit</div>
+		{#if Isf}
+			<div class="stat-value text-info">{Isf}</div>
+		{:else}
+			<div class="stat-value text-info">n/a</div>
+		{/if}
+
+		<div class="stat-desc text-info">unit/mmol</div>
 	</div>
 
 	<div class="stat place-items-center">

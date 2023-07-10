@@ -69,3 +69,25 @@ func Targets(c *fiber.Ctx) error {
 	c.Status(fiber.StatusOK)
 	return services.Response(res, c)
 }
+
+func CurrentTarget(c *fiber.Ctx) error {
+	uid := c.Locals("Uid").(string)
+
+	target, err := services.CurrentTarget(uid)
+	if err != nil {
+		c.Status(fiber.StatusInternalServerError)
+		res := types.Response[any]{
+			Status: fiber.StatusInternalServerError,
+			Error:  err,
+		}
+		return services.Response(res, c)
+	}
+
+	res := types.Response[any]{
+		Status: fiber.StatusOK,
+		Error:  err,
+		Data:   target,
+	}
+	c.Status(fiber.StatusOK)
+	return services.Response(res, c)
+}

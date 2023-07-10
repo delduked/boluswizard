@@ -1,19 +1,28 @@
+import { error } from '@sveltejs/kit';
 import type { iRangeData, iResponse, iCorrectionData, iCredentials } from './types';
-
+import axios from 'axios';
 export const get = async <t>(info: string): Promise<t> => {
 	try {
-		const res = await fetch(`${process.env.ApiServiceUrl}wizard/${info}`, {
-			method: 'GET',
-			credentials: 'include',
-			headers: { 
-				'content-type': 'application/json', 
-			}
-		})
-			.then((data) => data.json())
-			.catch((err) => err);
+		let config = {
+			method: 'get',
+			maxBodyLength: Infinity,
+			withCredentials: true,
+			url: `http://localhost/wizard/${info}`,
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		};
 
-		console.log(res.Data);
-		return res.Data;
+		const res = await axios
+			.request(config)
+			.then((response) => {
+				return response.data.Data;
+			})
+			.catch((error) => {
+				throw error;
+			});
+
+		return res
 	} catch (error) {
 		console.log(error);
 		throw error;
@@ -26,8 +35,8 @@ export const post = async <t>(info: string, data: string): Promise<t> => {
 			method: 'POST',
 			credentials: 'include',
 			body: data,
-			headers: { 
-				'content-type': 'application/json', 
+			headers: {
+				'content-type': 'application/json'
 			}
 		})
 			.then((data) => data.json())
@@ -64,7 +73,7 @@ export const saveCorrection = async (): Promise<iResponse> => {
 		]);
 
 		const res = await post<iResponse>('Corrections', raw);
-        return res
+		return res;
 	} catch (error) {
 		console.error(error);
 	}
@@ -78,7 +87,7 @@ export const calculateCorrection = async (bg: number, carbs: number): Promise<iC
 		//   this.BgCorrection.innerHTML = response.BgCorrection.toString();
 		//   this.ActiveInsulinReduction.innerHTML = response.ActiveInsulinReduction.toString();
 		//   this.Bolus.innerHTML = response.Bolus.toString();
-        return response
+		return response;
 	} catch (error) {
 		console.error(error);
 	}
@@ -117,11 +126,11 @@ export const Signup = async (creds: iCredentials): Promise<boolean> => {
 			setTimeout(() => {
 				document.location.href = `/u/${responseJson.Data.Username}/home`;
 			}, 1000);
-            return true
+			return true;
 		}
 	} catch (error) {
-        console.error(error)
-        return false
+		console.error(error);
+		return false;
 		// update message
 		// this.updateMessage("Oops! Something went wrong.", error);
 	}
@@ -154,12 +163,59 @@ export const Signin = async (creds: iCredentials): Promise<boolean> => {
 			setTimeout(() => {
 				document.location.href = `/user/${responseJson.Data.Username}`;
 			}, 1000);
-            return true
+			return true;
 		}
 	} catch (error) {
-        console.error(error)
-        return false
+		console.error(error);
+		return false;
 		// update message
 		// this.updateMessage('Oops! Something went wrong.', error);
+	}
+};
+export const test = async <t>(info: string): Promise<t> => {
+	try {
+		const res = await fetch(`http://127.0.0.1/wizard/Duration`, {
+			method: 'GET',
+			credentials: 'include',
+			headers: {
+				'content-type': 'application/json'
+			}
+		})
+			.then((data) => data.json())
+			.catch((err) => err);
+
+		console.log(res.Data.duration);
+		return res.Data;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+export const axTest = async (): Promise<any> => {
+	try {
+
+		let config = {
+			method: 'get',
+			maxBodyLength: Infinity,
+			withCredentials: true,
+			url: 'http://localhost/wizard/Duration',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		};
+
+		const res = await axios
+			.request(config)
+			.then((response) => {
+				response.data.Data.duration;
+			})
+			.catch((error) => {
+				throw error;
+			});
+
+		return res
+	} catch (error) {
+		console.log(error);
+		return error;
 	}
 };

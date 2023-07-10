@@ -3,6 +3,7 @@ package services
 import (
 	"api/config"
 	"api/types"
+	"time"
 
 	"strings"
 
@@ -113,4 +114,16 @@ func deleteISFs(value []types.InsulinSensitivity, uid string) error {
 	}
 
 	return nil
+}
+
+// Get the current Insulin sensitivity factor for the current user
+func CurrentIsf(uid string) (float64, error) {
+	var isf float64
+	now := time.Now()
+	t := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local)
+	isf, err := GetInsulinSensitivityFactor(t, now, uid)
+	if err != nil {
+		return isf, err
+	}
+	return RoundFloat(isf,2), err
 }
