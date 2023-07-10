@@ -13,6 +13,7 @@
 			get<duration>('Duration').then((data) => (Duration = data.Duration));
 			get<iIsf>('CurrentISF').then((data) => (Isf = data));
 			get<iTarget>('CurrentTarget').then((data) => (Target = data.Low + '-' + data.High));
+			get<number>('CurrentRatio').then((data) => Ratio = data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -20,11 +21,6 @@
 </script>
 
 <div class="stats shadow flex-col justify-center">
-	<div class="stat place-items-center">
-		<div class="stat-title">Bolus</div>
-		<div class="stat-value text-secondary">N/A</div>
-		<div class="stat-desc text-secondary">units</div>
-	</div>
 	<div class="stat place-items-center">
 		<div class="stat-title">Target</div>
 		{#if Target}
@@ -39,12 +35,12 @@
 	<div class="stat place-items-center">
 		<div class="stat-title">ISF</div>
 		{#if Isf}
-			<div class="stat-value text-info">{Isf}</div>
+			<div class="stat-value text-secondary">{Isf}</div>
 		{:else}
-			<div class="stat-value text-info">n/a</div>
+			<div class="stat-value text-secondary">n/a</div>
 		{/if}
 
-		<div class="stat-desc text-info">unit/mmol</div>
+		<div class="stat-desc text-secondary">unit/mmol</div>
 	</div>
 
 	<div class="stat place-items-center">
@@ -55,5 +51,14 @@
 			<div class="stat-value">n/a</div>
 		{/if}
 		<div class="stat-desc">hours</div>
+	</div>
+	<div class="stat place-items-center">
+		<div class="stat-title">Ratio</div>
+		{#if Ratio}
+			<div class="stat-value text-info">{Ratio}</div>
+		{:else}
+			<div class="stat-value text-info">n/a</div>
+		{/if}
+		<div class="stat-desc">units/carbs</div>
 	</div>
 </div>

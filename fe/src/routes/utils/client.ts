@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { iRangeData, iResponse, iCorrectionData, iCredentials } from './types';
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 export const get = async <t>(info: string): Promise<t> => {
 	try {
 		let config = {
@@ -28,22 +28,30 @@ export const get = async <t>(info: string): Promise<t> => {
 		throw error;
 	}
 };
-export const post = async <t>(info: string, data: string): Promise<t> => {
+export const post = async <t>(info: string, data: t): Promise<t> => {
 	try {
 		//https://api.boluswizard.io/
-		const res = await fetch(`${process.env.ApiServiceUrl}wizard/${info}`, {
-			method: 'POST',
-			credentials: 'include',
-			body: data,
+		let config: AxiosRequestConfig = {
+			method: 'post',
+			maxBodyLength: Infinity,
+			withCredentials: true,
+			url: `http://localhost/wizard/${info}`,
 			headers: {
-				'content-type': 'application/json'
-			}
-		})
-			.then((data) => data.json())
-			.catch((err) => err);
+				'Content-Type': 'application/json'
+			},
+			data: data
+		};
 
-		console.log(res.Data);
-		return res.Data;
+		const res = await axios
+			.request(config)
+			.then((response) => {
+				return response.data;
+			})
+			.catch((error) => {
+				throw error;
+			});
+
+		return res
 	} catch (error) {
 		console.log(error);
 		throw error;
@@ -62,7 +70,7 @@ export const getRange = async (): Promise<iRangeData[]> => {
 		throw error;
 	}
 };
-export const saveCorrection = async (): Promise<iResponse> => {
+export const saveCorrection = async (): Promise<iResponse<any>> => {
 	try {
 		var raw = await JSON.stringify([
 			{
@@ -72,7 +80,7 @@ export const saveCorrection = async (): Promise<iResponse> => {
 			}
 		]);
 
-		const res = await post<iResponse>('Corrections', raw);
+		const res = await post<iResponse<any>>('Corrections', raw);
 		return res;
 	} catch (error) {
 		console.error(error);
@@ -81,13 +89,9 @@ export const saveCorrection = async (): Promise<iResponse> => {
 
 export const calculateCorrection = async (bg: number, carbs: number): Promise<iCorrectionData> => {
 	try {
-		const response = await get<iCorrectionData>(`NewCorrection?Bg=${bg}&Carbs=${carbs}`);
-
-		//   this.CarbCorrection.innerHTML = response.CarbCorrection.toString();
-		//   this.BgCorrection.innerHTML = response.BgCorrection.toString();
-		//   this.ActiveInsulinReduction.innerHTML = response.ActiveInsulinReduction.toString();
-		//   this.Bolus.innerHTML = response.Bolus.toString();
-		return response;
+		const res = await get<iCorrectionData>(`NewCorrection?Bg=${bg}&Carbs=${carbs}`)
+			.then(data => data);
+		return res;
 	} catch (error) {
 		console.error(error);
 	}

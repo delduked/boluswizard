@@ -123,5 +123,5 @@ func CurrentRatio(uid string) (float64, error) {
 	if err != nil {
 		return carbRatio, err
 	}
-	return carbRatio, err
+	return RoundFloat(carbRatio, 2), err
 }

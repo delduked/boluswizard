@@ -5,15 +5,24 @@ export interface iRangeData {
 	Bolus: number;
 	TimeStamp: number;
 }
+
+export class RangeData implements iRangeData {
+	Key: string;
+	Bg: number;
+	Carbs: number;
+	Bolus: number;
+	TimeStamp: number;
+}
+
 export interface iCorrectionResponse {
 	Status: number;
 	Error: any;
 	Data: iCorrectionData;
 }
-export interface iResponse {
+export interface iResponse<t> {
 	Status: number;
 	Error: any;
-	Data: any;
+	Data: t;
 }
 export interface iCorrectionData {
 	BgCorrection: number;
