@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
-import type { iRangeData, iResponse, iCorrectionData, iCredentials } from './types';
+import type { iRangeData, iResponse, iCorrectionData, iCredentials, iSaveCorrection, iCorrectionResponse } from './types';
 import axios, { type AxiosRequestConfig } from 'axios';
-export const get = async <t>(info: string): Promise<t> => {
+export const get = async <t>(info: string): Promise<iResponse<t>> => {
 	try {
 		let config = {
 			method: 'get',
@@ -16,7 +16,7 @@ export const get = async <t>(info: string): Promise<t> => {
 		const res = await axios
 			.request(config)
 			.then((response) => {
-				return response.data.Data;
+				return response.data;
 			})
 			.catch((error) => {
 				throw error;
@@ -28,7 +28,7 @@ export const get = async <t>(info: string): Promise<t> => {
 		throw error;
 	}
 };
-export const post = async <t>(info: string, data: t): Promise<t> => {
+export const post = async <t>(info: string, data: t): Promise<iResponse<t>> => {
 	try {
 		//https://api.boluswizard.io/
 		let config: AxiosRequestConfig = {
@@ -45,7 +45,7 @@ export const post = async <t>(info: string, data: t): Promise<t> => {
 		const res = await axios
 			.request(config)
 			.then((response) => {
-				return response.data;
+				return response.data.Data as t;
 			})
 			.catch((error) => {
 				throw error;
@@ -70,18 +70,14 @@ export const getRange = async (): Promise<iRangeData[]> => {
 		throw error;
 	}
 };
-export const saveCorrection = async (): Promise<iResponse<any>> => {
+export const saveCorrection = async <t>(body: iSaveCorrection): Promise<iCorrectionResponse> => {
 	try {
-		var raw = await JSON.stringify([
-			{
-				//   Bg: +this.bg.value,
-				//   Bolus: +this.Bolus.textContent!,
-				//   Carbs: +this.carbs.value,
-			}
-		]);
 
-		const res = await post<iResponse<any>>('Corrections', raw);
-		return res;
+		body.Key = "";
+		body.TimeStamp = null;
+
+		const res = await post<iSaveCorrection>('Corrections', body);
+		return res.Data;
 	} catch (error) {
 		console.error(error);
 	}
@@ -90,7 +86,7 @@ export const saveCorrection = async (): Promise<iResponse<any>> => {
 export const calculateCorrection = async (bg: number, carbs: number): Promise<iCorrectionData> => {
 	try {
 		const res = await get<iCorrectionData>(`NewCorrection?Bg=${bg}&Carbs=${carbs}`)
-			.then(data => data);
+			.then(data => data.Data);
 		return res;
 	} catch (error) {
 		console.error(error);

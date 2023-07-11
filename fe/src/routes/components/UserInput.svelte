@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { calculateCorrection } from "../utils/client";
+	import type { iSaveCorrection } from './../utils/types';
+	import { calculateCorrection, saveCorrection } from "../utils/client";
 
 	let bg: number;
 	let carb: number;
@@ -8,6 +9,12 @@
 	let CarbCorrection: number;
 	let ActiveInsulinReduction: number;
 	let Bolus: number;
+
+	let save: iSaveCorrection = {
+		Bg: bg,
+		Carbs: carb,
+		Bolus: Bolus
+	}
 
 </script>
 
@@ -22,8 +29,8 @@
 				style="border-top-right-radius: 0;border-bottom-right-radius: 0;"
 			/>
 			<button
-				on:click={() =>{
-					calculateCorrection(bg,carb).then(data => {
+				on:click={async () =>{
+					await calculateCorrection(bg,carb).then(data => {
 						BgCorrection = data.BgCorrection
 						CarbCorrection = data.CarbCorrection
 						ActiveInsulinReduction = data.ActiveInsulinReduction
@@ -44,6 +51,9 @@
 				style="border-top-right-radius: 0;border-bottom-right-radius: 0;"
 			/>
 			<button
+				on:click={async () =>{
+					await saveCorrection(save)
+				}}
 				class="btn btn-sm btn-info"
 				style="border-top-left-radius: 0; border-bottom-left-radius: 0;">SAVE</button
 			>

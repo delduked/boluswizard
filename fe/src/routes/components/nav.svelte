@@ -1,7 +1,10 @@
 <script>
-	import EditTarget from "./EditTarget.svelte";
-
+	import EditDuration from './Duration/EditDuration.svelte';
+import EditIsf from './Isf/EditIsf.svelte';
+	import EditRatio from './Ratios/EditRatio.svelte';
+	import EditTarget from './Targets/EditTarget.svelte';
 </script>
+
 <div class="navbar bg-neutral">
 	<div class="flex-1 px-2 lg:flex-none">
 		<svg
@@ -19,36 +22,10 @@
 	</div>
 	<div class="flex justify-end flex-1 px-2">
 		<div class="flex items-stretch">
-			
-            <EditTarget/>
-
-			<button class="btn bg-neutral ml-2 border-0" onclick="my_modal_2.showModal()">ISF</button>
-			<dialog id="my_modal_2" class="modal">
-				<form method="dialog" class="modal-box">
-					<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-					<h3 class="font-bold text-lg">Edit Insulin Sensitivity Factor</h3>
-					<p class="py-4">Press ESC key or click on ✕ button to close</p>
-				</form>
-			</dialog>
-
-			<button class="btn bg-neutral ml-2 border-0" onclick="my_modal_3.showModal()">Duration</button
-			>
-			<dialog id="my_modal_3" class="modal">
-				<form method="dialog" class="modal-box">
-					<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-					<h3 class="font-bold text-lg">Edit Insulin Duration!</h3>
-					<p class="py-4">Press ESC key or click on ✕ button to close</p>
-				</form>
-			</dialog>
-
-			<button class="btn bg-neutral ml-2 border-0" onclick="my_modal_4.showModal()">Ratios</button>
-			<dialog id="my_modal_4" class="modal">
-				<form method="dialog" class="modal-box">
-					<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-					<h3 class="font-bold text-lg">Edit Carb Ratios</h3>
-					<p class="py-4">Press ESC key or click on ✕ button to close</p>
-				</form>
-			</dialog>
+			<EditTarget />
+			<EditIsf />
+			<EditRatio />
+			<EditDuration />
 		</div>
 	</div>
 </div>

@@ -10,10 +10,10 @@
 
 	onMount(() => {
 		try {
-			get<duration>('Duration').then((data) => (Duration = data.Duration));
-			get<iIsf>('CurrentISF').then((data) => (Isf = data));
-			get<iTarget>('CurrentTarget').then((data) => (Target = data.Low + '-' + data.High));
-			get<number>('CurrentRatio').then((data) => Ratio = data);
+			get<duration>('Duration').then((data) => (Duration = data.Data.Duration));
+			get<number>('CurrentISF').then((data) => (Isf = data.Data));
+			get<iTarget>('CurrentTarget').then((data) => (Target = data.Data.Low + '-' + data.Data.High));
+			get<number>('CurrentRatio').then((data) => Ratio = data.Data);
 		} catch (error) {
 			console.log(error);
 		}

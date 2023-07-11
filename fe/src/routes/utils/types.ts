@@ -6,6 +6,14 @@ export interface iRangeData {
 	TimeStamp: number;
 }
 
+export interface iSaveCorrection {
+	Key?: "" | string;
+	Bg: number;
+	Carbs: number;
+	Bolus: number;
+	TimeStamp?: null | number;
+}
+
 export class RangeData implements iRangeData {
 	Key: string;
 	Bg: number;
@@ -49,7 +57,19 @@ export interface iRatio {
 	Start: string;
 	Ratio: number;
 }
+export class Ratio implements iRatio{
+	Key?: string;
+	End: string;
+	Start: string;
+	Ratio: number;
+}
 export interface iIsf {
+	Key?: string;
+	End: string;
+	Start: string;
+	Sensitivity: number;
+}
+export class Isf implements iIsf {
 	Key?: string;
 	End: string;
 	Start: string;
@@ -58,13 +78,21 @@ export interface iIsf {
 export interface duration {
 	Duration: string;
 }
+
 export interface iTarget {
 	Key?: string;
 	End: string;
 	Start: string;
 	High: number;
 	Low: number;
-	Sensitivity: number;
+}
+
+export class Target implements iTarget {
+	Key?: string;
+	End: string;
+	Start: string;
+	High: number;
+	Low: number;
 }
 
 export interface iCoordinates {
