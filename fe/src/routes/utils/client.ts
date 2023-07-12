@@ -28,7 +28,7 @@ export const get = async <t>(info: string): Promise<iResponse<t>> => {
 		throw error;
 	}
 };
-export const post = async <t>(info: string, data: t): Promise<iResponse<t>> => {
+export const post = async <t,k>(info: string, data: k): Promise<t> => {
 	try {
 		//https://api.boluswizard.io/
 		let config: AxiosRequestConfig = {
@@ -39,19 +39,19 @@ export const post = async <t>(info: string, data: t): Promise<iResponse<t>> => {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			data: data
+			data: data as k
 		};
 
 		const res = await axios
 			.request(config)
 			.then((response) => {
-				return response.data.Data as t;
+				return response.data as t;
 			})
 			.catch((error) => {
 				throw error;
 			});
 
-		return res
+		return res as t
 	} catch (error) {
 		console.log(error);
 		throw error;
