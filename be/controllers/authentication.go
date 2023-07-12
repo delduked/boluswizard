@@ -61,7 +61,7 @@ func SignUp(c *fiber.Ctx) error {
 }
 
 func VerifyMiddleWare(c *fiber.Ctx) error {
-	bearer := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyNjQxMzcxMC1lMDRmLTQ0YTYtYWMwOS05OWQxYjEzZGY3MzciLCJVc2VybmFtZSI6Im5hdGUiLCJleHAiOjE2ODkxMzg5MjMsImlhdCI6MTY4OTEzMTcyM30.ks8JPqJ2YkE7vvwoX3sPaI_zdQ-lWgsQaHCUAk6laxM"
+	bearer := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIyNjQxMzcxMC1lMDRmLTQ0YTYtYWMwOS05OWQxYjEzZGY3MzciLCJVc2VybmFtZSI6Im5hdGUiLCJleHAiOjE2ODkxNDE2MjYsImlhdCI6MTY4OTEzNDQyNn0.37FJR1qDrQNid32O7L0aEO237lb-DHouOqdpCwGrMk0"
 	fmt.Println(bearer)
 	uid, err := services.VerifyCredentialsWithToken(bearer, c)
 	if err != nil {

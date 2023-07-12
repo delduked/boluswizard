@@ -1,8 +1,8 @@
 <script lang="ts">
 	import RatioRow from './RatioRow.svelte';
 	import { onMount } from 'svelte';
-	import { get } from "../../utils/client";;
-	import type { Ratio } from "../../utils/types";
+	import { get, post } from "../../utils/client";;
+	import type { Ratio, iResponse } from "../../utils/types";
 	let rows: Ratio[];
 
 	function addRatio() {
@@ -13,6 +13,16 @@
 		}
 		rows = [...rows, row]; // instead of rows.push(row)
 	}
+
+	const saveRatios = async () => {
+		try {
+			await post<iResponse<Ratio[]>, Ratio[]>('Ratios', rows).catch((err) => {
+				throw err;
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	onMount(() => {
 		try {
@@ -45,9 +55,10 @@
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
-			<button 
-			on:click|preventDefault={addRatio}
-			class="btn btn-active btn-primary">Add Ratio</button>
+			<div>
+				<button  on:click|preventDefault={addRatio} class="btn btn-active btn-secondary">Add Ratio</button>
+				<button  on:click|preventDefault={saveRatios} class="btn btn-active btn-primary">Save Ratios</button>
+			</div>
 		</div>
 	</form>
 </dialog>

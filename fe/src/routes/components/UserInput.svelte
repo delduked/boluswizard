@@ -29,7 +29,7 @@
 				style="border-top-right-radius: 0;border-bottom-right-radius: 0;"
 			/>
 			<button
-				on:click={async () =>{
+				on:click={async () => {
 					await calculateCorrection(bg,carb).then(data => {
 						BgCorrection = data.BgCorrection
 						CarbCorrection = data.CarbCorrection
@@ -51,7 +51,7 @@
 				style="border-top-right-radius: 0;border-bottom-right-radius: 0;"
 			/>
 			<button
-				on:click={async () =>{
+				on:click={async () => {
 					await saveCorrection(save)
 				}}
 				class="btn btn-sm btn-info"
@@ -63,9 +63,9 @@
 		<div class="stat">
 			<div class="stat-title">Correction</div>
 			{#if BgCorrection }
-			<div class="stat-value" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">{Bolus}</div>
+				<div class="stat-value" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">{Bolus}</div>
 			{:else}
-			<div class="stat-value" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">n/a</div>
+				<div class="stat-value" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">n/a</div>
 			{/if}
 		</div>
 	</div>
@@ -90,9 +90,9 @@
 	<div class="join m-2">
 		<div class="badge badge-neutral">Active Insulin Reduction</div>
 		{#if ActiveInsulinReduction }
-		<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{ActiveInsulinReduction}</div>
+			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{ActiveInsulinReduction}</div>
 		{:else}
-		<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">n/a</div>
+			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">n/a</div>
 		{/if}
 	</div>
 </div>

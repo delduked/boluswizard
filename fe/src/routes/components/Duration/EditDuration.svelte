@@ -1,9 +1,22 @@
 <script lang="ts">
 	import DurationRow from './DurationRow.svelte';
 	import { onMount } from 'svelte';
-	import { get } from "../../utils/client";;
-	import type { duration } from "../../utils/types";
+	import { get, post } from "../../utils/client";;
+	import type { duration, iResponse} from "../../utils/types";
 	let row: string;
+
+    const saveDuration = async () => {
+		try {
+            let saveDuration: duration;
+            saveDuration.Duration = row;
+			await post<iResponse<duration>, duration>('Ratios', saveDuration)
+                .catch((err) => {
+                    throw err;
+                });
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	onMount(() => {
 		try {
@@ -34,6 +47,7 @@
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
+			<button on:click|preventDefault={saveDuration} class="btn btn-active btn-primary">Save Duration</button>
 		</div>
 	</form>
 </dialog>

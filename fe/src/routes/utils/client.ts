@@ -34,7 +34,7 @@ export const post = async <t,k>(info: string, data: k): Promise<t> => {
 		let config: AxiosRequestConfig = {
 			method: 'post',
 			maxBodyLength: Infinity,
-			withCredentials: true,
+			withCredentials: false,
 			url: `http://localhost/wizard/${info}`,
 			headers: {
 				'Content-Type': 'application/json'

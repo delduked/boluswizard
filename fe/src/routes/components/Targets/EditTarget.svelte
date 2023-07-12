@@ -17,21 +17,19 @@
 
 	const saveTargets = async () => {
 		try {
-			await post<iResponse<Target[]>, Target[]>('Targets', rows).catch((err) => {
-				throw err;
-			});
+			await post<iResponse<Target[]>, Target[]>('Targets', rows)
+				.catch((err) => {
+					throw err;
+				});
 		} catch (error) {
 			console.log(error);
 		}
 	};
-	let promise
-	function handleClick() {
-		promise = saveTargets();
-	}
 
 	onMount(() => {
 		try {
-			get<Target[]>('Targets').then((data) => (rows = data.Data));
+			get<Target[]>('Targets')
+				.then((data) => (rows = data.Data));
 		} catch (error) {
 			console.log(error);
 		}
@@ -61,26 +59,10 @@
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
-			<button on:click|preventDefault={addTarget} class="btn btn-active btn-primary"
-				>Add Target</button
-			>
-			<button on:click|preventDefault={handleClick} class="btn btn-active btn-primary"
-				>Save Target</button
-			>
-			{#await promise}
-				<span class="loading loading-spinner loading-sm"></span>
-			{:then data}
-				<div class="alert alert-success">
-					<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span>Targets Saved!</span>
-				</div>
-			{:catch error}
-				<div class="alert alert-error">
-					<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-					<span>{error}</span>
-				</div>
-			{/await}
-
+			<div>
+				<button on:click|preventDefault={addTarget} class="btn btn-active btn-secondary mr-3">Add Target</button>
+				<button on:click|preventDefault={saveTargets} class="btn btn-active btn-primary">Save Targets</button>
+			</div>
 		</div>
 	</form>
 </dialog>

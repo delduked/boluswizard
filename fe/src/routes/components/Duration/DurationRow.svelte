@@ -1,5 +1,16 @@
 <script lang="ts">
     export let row: string;
+
+    const saveIsf = async () => {
+		try {
+			await post<iResponse<Isf[]>, Isf[]>('Ratios', rows).catch((err) => {
+				throw err;
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 </script>
 
 {#if row}

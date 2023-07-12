@@ -1,19 +1,29 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { get } from "../../utils/client";;
-    import IsfRow from "./IsfRow.svelte";
-	import type { Isf } from "../../utils/types";
+	import { get, post } from '../../utils/client';
+	import IsfRow from './IsfRow.svelte';
+	import type { Isf, iResponse } from '../../utils/types';
 
 	let rows: Isf[];
 
-	function addRatio() {
+	function addIsf() {
 		let row: Isf = {
-			Start: "00h00m",
-			End: "00h00m",
-			Sensitivity: 1.1,
-		}
+			Start: '00h00m',
+			End: '00h00m',
+			Sensitivity: 1.1
+		};
 		rows = [...rows, row]; // instead of rows.push(row)
 	}
+
+	const saveIsf = async () => {
+		try {
+			await post<iResponse<Isf[]>, Isf[]>('ISFs', rows).catch((err) => {
+				throw err;
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	onMount(() => {
 		try {
@@ -40,15 +50,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<IsfRow {rows}/>
+					<IsfRow {rows} />
 				</tbody>
 			</table>
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
-			<button 
-			on:click|preventDefault={addRatio}
-			class="btn btn-active btn-primary">Add Target</button>
+			<div>
+				<button on:click|preventDefault={addIsf} class="btn btn-active btn-secondary mr-3">Add ISF</button>
+				<button on:click|preventDefault={saveIsf} class="btn btn-active btn-primary">Save ISFs</button>
+			</div>
 		</div>
+		<div/>
 	</form>
 </dialog>
