@@ -5,6 +5,16 @@
 	import type { Target } from "../../utils/types";
 	let rows: Target[];
 
+	function addTarget() {
+		let row: Target = {
+			Start: "00h00m",
+			End: "00h00m",
+			High: 6.6,
+			Low: 6.6,
+		}
+		rows = [...rows, row]; // instead of rows.push(row)
+	}
+
 	onMount(() => {
 		try {
 			get<Target[]>('Targets').then((data) => (rows = data.Data));
@@ -37,7 +47,12 @@
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
-			<button class="btn btn-active btn-primary">Add Target</button>
+			<button 
+			on:click|preventDefault={addTarget}
+			class="btn btn-active btn-primary">Add Target</button>
+			<button 
+			on:click|preventDefault={addTarget}
+			class="btn btn-active btn-primary">Save Target</button>
 		</div>
 	</form>
 </dialog>

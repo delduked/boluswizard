@@ -6,6 +6,15 @@
 
 	let rows: Isf[];
 
+	function addRatio() {
+		let row: Isf = {
+			Start: "00h00m",
+			End: "00h00m",
+			Sensitivity: 1.1,
+		}
+		rows = [...rows, row]; // instead of rows.push(row)
+	}
+
 	onMount(() => {
 		try {
 			get<Isf[]>('ISFs').then((data) => (rows = data.Data));
@@ -37,7 +46,9 @@
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
-			<button class="btn btn-active btn-primary">Add Target</button>
+			<button 
+			on:click|preventDefault={addRatio}
+			class="btn btn-active btn-primary">Add Target</button>
 		</div>
 	</form>
 </dialog>
