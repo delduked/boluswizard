@@ -8,8 +8,8 @@
     <tr>
         <td>
             <input
+                bind:value={row.Start}
                 type="text"
-                value={row.Start}
                 pattern="^([01]?[0-9]|2[0-3])h[0-5][0-9]m$" 
                 placeholder="00h00m"
                 class="input input-bordered input-xs w-24 max-w-xs"
@@ -18,7 +18,7 @@
         <td>
             <input
                 type="text"
-                value={row.End}
+                bind:value={row.End}
                 pattern="^([01]?[0-9]|2[0-3])h[0-5][0-9]m$" 
                 placeholder="00h00m"
                 class="input input-bordered input-xs w-24 max-w-xs"
@@ -26,8 +26,8 @@
         </td>
         <td>
             <input
-                type="text"
-                value={row.High}
+                type="number"
+                bind:value={row.High}
                 pattern="^4\.[0-9]+|^[5-7](\.[0-9]*)?|^8\.0*$" 
                 placeholder="0.0"
                 class="input input-bordered input-xs w-24 max-w-xs"
@@ -35,8 +35,8 @@
         </td>
         <td>
             <input
-                type="text"
-                value={row.Low}
+                type="number"
+                bind:value={row.Low}
                 pattern="^4\.[0-9]+|^[5-7](\.[0-9]*)?|^8\.0*$" 
                 placeholder="0.0"
                 class="input input-bordered input-xs w-24 max-w-xs"

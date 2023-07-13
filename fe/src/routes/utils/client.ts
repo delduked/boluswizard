@@ -1,6 +1,9 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
+import {Navigate} from 'svelte-routing';
 import type { iRangeData, iResponse, iCorrectionData, iCredentials, iSaveCorrection, iCorrectionResponse } from './types';
 import axios, { type AxiosRequestConfig } from 'axios';
+import Cookies from 'js-cookie';
+
 export const get = async <t>(info: string): Promise<iResponse<t>> => {
 	try {
 		let config = {
@@ -151,18 +154,20 @@ export const Signin = async (creds: iCredentials): Promise<boolean> => {
 			const responseJson = await res.json();
 			console.log(responseJson.Data);
 			setTimeout(() => {
-				document.cookie = document.cookie + `authToken=${responseJson.Data.Token};path=/wizard`;
-			}, 1000);
+				// document.cookie = document.cookie + `authToken=${responseJson.Data.Token};path=/wizard`;
+				Cookies.set('wizardToken',responseJson.Data.Token, {path: "/wizard"})
+			}, 400);
 			setTimeout(() => {
-				document.cookie =
-					document.cookie +
-					`authToken=${responseJson.Data.Token};path=/u/${responseJson.Data.Username}`;
-			}, 1000);
+				// document.cookie =
+				// 	document.cookie +
+				// 	`authToken=${responseJson.Data.Token};path=/u/${responseJson.Data.Username}`;
+				Cookies.set('authToken',responseJson.Data.Token, {path: `/u/${responseJson.Data.Username}`})
+			}, 400);
 			// this.updateMessage('Login successful!');
 
 			setTimeout(() => {
-				document.location.href = `/user/${responseJson.Data.Username}`;
-			}, 1000);
+				document.location.href = `/u/${responseJson.Data.Username}`;
+			}, 400);
 			return true;
 		}
 	} catch (error) {

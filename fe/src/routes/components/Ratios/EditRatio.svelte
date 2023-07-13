@@ -49,16 +49,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<RatioRow {rows}/>
+					<RatioRow bind:rows />
 				</tbody>
 			</table>
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
-			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
-			<div>
-				<button  on:click|preventDefault={addRatio} class="btn btn-active btn-secondary">Add Ratio</button>
-				<button  on:click|preventDefault={saveRatios} class="btn btn-active btn-primary">Save Ratios</button>
+			<div class="join m-3">
+				<button  on:click|preventDefault={addRatio} class="btn btn-active btn-secondary btn-sm md:btn-md" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add Ratio</button>
+				<button  on:click|preventDefault={saveRatios} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save Ratios</button>
 			</div>
+			<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>
 		</div>
 	</form>
 </dialog>

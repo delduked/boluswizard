@@ -1,3 +1,9 @@
+<script>
+
+	
+
+</script>
+
 <div
 	class="hero min-h-screen bg-base-200"
 	style="background-image: url(https://boluswizard.io/assets/loginpage/bg.gif);"
@@ -24,7 +30,7 @@
 					</label>
 					<input type="text" placeholder="password" class="input input-bordered" />
 					<label class="label">
-						<a href="#" class="label-text-alt link link-hover">Signup?</a>
+						<a href="signup" class="label-text-alt link link-hover">Signup?</a>
 					</label>
 				</div>
 				<div class="form-control mt-6">

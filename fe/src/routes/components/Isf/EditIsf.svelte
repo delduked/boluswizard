@@ -38,7 +38,7 @@
 <dialog id="my_modal_isf" class="modal">
 	<form method="dialog" class="modal-box w-11/12 max-w-5xl">
 		<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-		<h3 class="font-bold text-lg ml-3">Edit Targets!</h3>
+		<h3 class="font-bold text-lg ml-3">Edit Insulin Sensitivity Factor!</h3>
 		<div class=" overflow-x-auto">
 			<table class="table table-zebra table-sm mt-4">
 				<!-- head -->
@@ -50,17 +50,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<IsfRow {rows} />
+					<IsfRow bind:rows />
 				</tbody>
 			</table>
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
-			<p class="py-4 ml-3">Press ESC key or click on ✕ button to close</p>
-			<div>
-				<button on:click|preventDefault={addIsf} class="btn btn-active btn-secondary mr-3">Add ISF</button>
-				<button on:click|preventDefault={saveIsf} class="btn btn-active btn-primary">Save ISFs</button>
+			<div class="join m-3">
+				<button on:click|preventDefault={addIsf} class="btn btn-active btn-secondary btn-sm md:btn-md" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add ISF</button>
+				<button on:click|preventDefault={saveIsf} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save ISFs</button>
 			</div>
 		</div>
+		<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>
 		<div/>
 	</form>
 </dialog>

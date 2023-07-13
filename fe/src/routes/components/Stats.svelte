@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { post, get } from '../utils/client';
-	import type { duration, iTarget, iRatio, iIsf } from '../utils/types';
+	import { get } from '../utils/client';
+	import type { duration, iTarget } from '../utils/types';
 
 	let Isf;
 	let Duration;
@@ -28,7 +28,6 @@
 		{:else}
 			<div class="stat-value">n/a</div>
 		{/if}
-
 		<div class="stat-desc">mmols</div>
 	</div>
 
