@@ -140,10 +140,10 @@ export const Signup = async (creds: iCredentials): Promise<boolean> => {
 };
 
 // Signin
-export const Signin = async (creds: iCredentials): Promise<boolean> => {
+export const Signin = async (creds: iCredentials): Promise<string> => {
 	try {
 		// setup post request for login
-		const res = await fetch(`${process.env.ApiServiceUrl}SignIn`, {
+		const res = await fetch(`http://localhost/SignIn`, {
 			method: 'POST',
 			body: JSON.stringify(creds),
 			headers: { 'content-type': 'application/json' }
@@ -153,26 +153,17 @@ export const Signin = async (creds: iCredentials): Promise<boolean> => {
 			// assign token to local storage
 			const responseJson = await res.json();
 			console.log(responseJson.Data);
-			setTimeout(() => {
-				// document.cookie = document.cookie + `authToken=${responseJson.Data.Token};path=/wizard`;
-				Cookies.set('wizardToken',responseJson.Data.Token, {path: "/wizard"})
-			}, 400);
-			setTimeout(() => {
-				// document.cookie =
-				// 	document.cookie +
-				// 	`authToken=${responseJson.Data.Token};path=/u/${responseJson.Data.Username}`;
-				Cookies.set('authToken',responseJson.Data.Token, {path: `/u/${responseJson.Data.Username}`})
-			}, 400);
-			// this.updateMessage('Login successful!');
+			
+			Cookies.set('wizardToken',responseJson.Data.Token, {path: "/wizard"})
+		
 
-			setTimeout(() => {
-				document.location.href = `/u/${responseJson.Data.Username}`;
-			}, 400);
-			return true;
+			Cookies.set('authToken',responseJson.Data.Token, {path: `/u/${responseJson.Data.Username}`})
+			
+			return responseJson.Data.Username;
 		}
 	} catch (error) {
 		console.error(error);
-		return false;
+		return error;
 		// update message
 		// this.updateMessage('Oops! Something went wrong.', error);
 	}

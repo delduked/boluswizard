@@ -1,7 +1,18 @@
 <script>
+	import { Navigate } from 'svelte-routing';
+	import jwt_decode from 'jwt-decode';
+	import Cookies from 'js-cookie';
+	import { onMount } from 'svelte';
+	import { Signin } from '../utils/client';
 
-	
+	let Username;
+	let Password;
 
+	const signin = Signin({ Username, Password }).then((data) => {
+		if (data == Username) {
+			Navigate(`/user/${Username}`);
+		}
+	});
 </script>
 
 <div
@@ -22,19 +33,38 @@
 					<label class="label">
 						<span class="label-text">Email</span>
 					</label>
-					<input type="text" placeholder="email" class="input input-bordered" />
+					<input
+						bind:value={Username}
+						type="text"
+						placeholder="email"
+						class="input input-bordered"
+					/>
 				</div>
 				<div class="form-control">
 					<label class="label">
 						<span class="label-text">Password</span>
 					</label>
-					<input type="text" placeholder="password" class="input input-bordered" />
+					<input
+						bind:value={Password}
+						type="text"
+						placeholder="password"
+						class="input input-bordered"
+					/>
 					<label class="label">
 						<a href="signup" class="label-text-alt link link-hover">Signup?</a>
 					</label>
 				</div>
 				<div class="form-control mt-6">
-					<button class="btn btn-primary">Signin</button>
+					<button
+						on:click={() => {
+							Signin({ Username, Password }).then((data) => {
+								if (data == Username) {
+									Navigate(`/user/${Username}`);
+								}
+							});
+						}}
+						class="btn btn-primary">Signin</button
+					>
 				</div>
 			</div>
 		</div>
