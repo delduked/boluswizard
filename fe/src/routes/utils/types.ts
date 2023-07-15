@@ -100,6 +100,16 @@ export interface iCoordinates {
 	y: number;
 }
 export interface iCredentials {
+	Uid?: string;
     Username: string;
     Password: string;
+}
+
+interface iSignUp {
+	Token: string;
+	Username: string;
+}
+export class Signup implements iSignUp {
+	Token: string;
+	Username: string;
 }

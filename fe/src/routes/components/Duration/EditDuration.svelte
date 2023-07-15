@@ -1,26 +1,16 @@
 <script lang="ts">
 	import DurationRow from './DurationRow.svelte';
 	import { onMount } from 'svelte';
-	import { get, post } from '../../utils/client';
-	import type { duration, iResponse } from '../../utils/types';
+	import { getDuration, saveDuration } from '../../utils/client';
+	import type { duration } from '../../utils/types';
 	let row: duration;
 
-	const saveDuration = async () => {
-		try {
-			await post<iResponse<duration>, duration>('Duration', row).catch((err) => {
-				throw err;
-			});
-		} catch (error) {
-			console.log(error);
-		}
+	const handleClick = async () => {
+		saveDuration(row)
 	};
 
 	onMount(() => {
-		try {
-			get<duration>('Duration').then((data) => (row = data.Data));
-		} catch (error) {
-			console.log(error);
-		}
+		getDuration().then(data => row = data.Data)
 	});
 </script>
 
@@ -43,7 +33,7 @@
 			</table>
 		</div>
 		<div class="flex justify-between items-baseline mt-2">
-			<button on:click={saveDuration} class="btn btn-active btn-primary m-2 btn-sm md:btn-md"
+			<button on:click={handleClick} class="btn btn-active btn-primary m-2 btn-sm md:btn-md"
 				>Save Duration</button
 			>
 		</div>

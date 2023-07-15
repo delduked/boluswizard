@@ -117,13 +117,14 @@ func deleteISFs(value []types.InsulinSensitivity, uid string) error {
 }
 
 // Get the current Insulin sensitivity factor for the current user
-func CurrentIsf(uid string) (float64, error) {
-	var isf float64
+func CurrentIsf(uid string) (types.InsulinSensitivity, error) {
+	var res types.InsulinSensitivity
 	now := time.Now()
 	t := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local)
 	isf, err := GetInsulinSensitivityFactor(t, now, uid)
 	if err != nil {
-		return isf, err
+		return res, err
 	}
-	return RoundFloat(isf,2), err
+	res.Sensitivity = RoundFloat(isf,2)
+	return res, err
 }

@@ -116,12 +116,14 @@ func deleteRatios(value []types.CarbRatio, uid string) error {
 	return nil
 }
 
-func CurrentRatio(uid string) (float64, error) {
+func CurrentRatio(uid string) (types.CarbRatio, error) {
 	now := time.Now()
+	var res types.CarbRatio
 	t := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local)
 	carbRatio, err := GetCarbRatio(t, now, uid)
 	if err != nil {
-		return carbRatio, err
+		return res, err
 	}
-	return RoundFloat(carbRatio, 2), err
+	res.Ratio = RoundFloat(carbRatio, 2)
+	return res, err
 }

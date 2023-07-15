@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { get, post } from '../../utils/client';
+	import { get, getISFs, post, saveISFs } from '../../utils/client';
 	import IsfRow from './IsfRow.svelte';
 	import type { Isf, iResponse } from '../../utils/types';
 
@@ -15,22 +15,12 @@
 		rows = [...rows, row]; // instead of rows.push(row)
 	}
 
-	const saveIsf = async () => {
-		try {
-			await post<iResponse<Isf[]>, Isf[]>('ISFs', rows).catch((err) => {
-				throw err;
-			});
-		} catch (error) {
-			console.log(error);
-		}
+	const handleClick = async () => {
+		saveISFs(rows)
 	};
 
 	onMount(() => {
-		try {
-			get<Isf[]>('ISFs').then((data) => (rows = data.Data));
-		} catch (error) {
-			console.log(error);
-		}
+		getISFs().then(data => rows = data.Data)
 	});
 </script>
 
@@ -57,7 +47,7 @@
 		<div class="flex justify-between items-baseline mt-4">
 			<div class="join m-3">
 				<button on:click|preventDefault={addIsf} class="btn btn-active btn-secondary btn-sm md:btn-md" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add ISF</button>
-				<button on:click|preventDefault={saveIsf} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save ISFs</button>
+				<button on:click|preventDefault={handleClick} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save ISFs</button>
 			</div>
 		</div>
 		<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>

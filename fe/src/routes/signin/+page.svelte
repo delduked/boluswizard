@@ -1,6 +1,6 @@
 <script>
 	import { redirect } from '@sveltejs/kit';
-	import { Signin } from '../utils/client';
+	import { userSignin } from '../utils/client';
 	import { goto } from '$app/navigation';
 	import Cookies from 'js-cookie';
 
@@ -53,25 +53,7 @@
 				<div class="form-control mt-6">
 					<button
 						on:click={() => {
-							Signin({ Username, Password })
-								.then((data) => {
-									console.log(data);
-
-									Cookies.set('authToken', data.Token, {
-										//httpOnly: true,
-										secure: false,
-										//sameSite: 'strict',
-										path: `/`,
-										expires: 60 * 60 * 24
-									});
-
-									setTimeout(() =>{
-										goto(`/user/${Username}`);
-									},500);
-								})
-								.catch((err) => {
-									console.log(err);
-								});
+							userSignin({ Username, Password })
 						}}
 						class="btn btn-primary">Signin</button
 					>

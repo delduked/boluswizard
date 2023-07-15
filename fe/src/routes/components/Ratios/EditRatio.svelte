@@ -1,7 +1,7 @@
 <script lang="ts">
 	import RatioRow from './RatioRow.svelte';
 	import { onMount } from 'svelte';
-	import { get, post } from "../../utils/client";;
+	import { get, getRatios, post, saveRatios } from "../../utils/client";;
 	import type { Ratio, iResponse } from "../../utils/types";
 	let rows: Ratio[];
 
@@ -14,22 +14,14 @@
 		rows = [...rows, row]; // instead of rows.push(row)
 	}
 
-	const saveRatios = async () => {
-		try {
-			await post<iResponse<Ratio[]>, Ratio[]>('Ratios', rows).catch((err) => {
-				throw err;
-			});
-		} catch (error) {
-			console.log(error);
-		}
+	const handleClick = () => {
+		saveRatios(rows)
 	};
 
 	onMount(() => {
-		try {
-			get<Ratio[]>('Ratios').then((data) => (rows = data.Data));
-		} catch (error) {
-			console.log(error);
-		}
+
+		getRatios().then(data => rows = data.Data)
+
 	});
 </script>
 
@@ -56,7 +48,7 @@
 		<div class="flex justify-between items-baseline mt-4">
 			<div class="join m-3">
 				<button  on:click|preventDefault={addRatio} class="btn btn-active btn-secondary btn-sm md:btn-md" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add Ratio</button>
-				<button  on:click|preventDefault={saveRatios} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save Ratios</button>
+				<button  on:click|preventDefault={handleClick} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save Ratios</button>
 			</div>
 			<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>
 		</div>

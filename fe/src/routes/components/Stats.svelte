@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { get } from '../utils/client';
+	import { get, getDuration,getCurrentISF,getCurrentTarget, getCurrentRatio } from '../utils/client';
 	import type { duration, iTarget } from '../utils/types';
 
 	let Isf;
@@ -9,10 +9,10 @@
 	let Ratio;
 	onMount(() => {
 		try {
-			get<duration>('Duration').then((data) => (Duration = data.Data.Duration));
-			get<number>('CurrentISF').then((data) => (Isf = data.Data));
-			get<iTarget>('CurrentTarget').then((data) => (Target = data.Data.Low + '-' + data.Data.High));
-			get<number>('CurrentRatio').then((data) => Ratio = data.Data);
+			getDuration().then((data) => (Duration = data.Data.Duration));
+			getCurrentISF().then((data) => (Isf = data.Data.Sensitivity));
+			getCurrentTarget().then((data) => (Target = data.Data.Low + '-' + data.Data.High));
+			getCurrentRatio().then((data) => Ratio = data.Data.Ratio);
 		} catch (error) {
 			console.log(error);
 		}
