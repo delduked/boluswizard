@@ -12,8 +12,8 @@ func main() {
 	app := fiber.New()
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
-		AllowOrigins:     "*",
-		AllowHeaders:     "*",
+		AllowOrigins:     "http://127.0.0.1:5173", // your client app's origin
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization, Cookie",
 	}))
 
 	app.Use(controllers.Logger)

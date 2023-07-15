@@ -1,18 +1,12 @@
 <script>
-	import { Navigate } from 'svelte-routing';
-	import jwt_decode from 'jwt-decode';
-	import Cookies from 'js-cookie';
-	import { onMount } from 'svelte';
+	import { redirect } from '@sveltejs/kit';
 	import { Signin } from '../utils/client';
+	import { goto } from '$app/navigation';
+	import Cookies from 'js-cookie';
 
 	let Username;
 	let Password;
 
-	const signin = Signin({ Username, Password }).then((data) => {
-		if (data == Username) {
-			Navigate(`/user/${Username}`);
-		}
-	});
 </script>
 
 <div
@@ -30,10 +24,11 @@
 		<div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 ml-4">
 			<div class="card-body">
 				<div class="form-control">
-					<label class="label">
+					<label for="email" class="label">
 						<span class="label-text">Email</span>
 					</label>
 					<input
+						id="email"
 						bind:value={Username}
 						type="text"
 						placeholder="email"
@@ -41,27 +36,42 @@
 					/>
 				</div>
 				<div class="form-control">
-					<label class="label">
+					<label for="password" class="label">
 						<span class="label-text">Password</span>
 					</label>
 					<input
+						id="password"
 						bind:value={Password}
 						type="text"
 						placeholder="password"
 						class="input input-bordered"
 					/>
-					<label class="label">
-						<a href="signup" class="label-text-alt link link-hover">Signup?</a>
+					<label for="signup" class="label">
+						<a id="signup" href="signup" class="label-text-alt link link-hover">Signup?</a>
 					</label>
 				</div>
 				<div class="form-control mt-6">
 					<button
 						on:click={() => {
-							Signin({ Username, Password }).then((data) => {
-								if (data == Username) {
-									Navigate(`/user/${Username}`);
-								}
-							});
+							Signin({ Username, Password })
+								.then((data) => {
+									console.log(data);
+
+									Cookies.set('authToken', data.Token, {
+										//httpOnly: true,
+										secure: false,
+										//sameSite: 'strict',
+										path: `/`,
+										expires: 60 * 60 * 24
+									});
+
+									setTimeout(() =>{
+										goto(`/user/${Username}`);
+									},500);
+								})
+								.catch((err) => {
+									console.log(err);
+								});
 						}}
 						class="btn btn-primary">Signin</button
 					>

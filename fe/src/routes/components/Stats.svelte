@@ -7,7 +7,6 @@
 	let Duration;
 	let Target;
 	let Ratio;
-
 	onMount(() => {
 		try {
 			get<duration>('Duration').then((data) => (Duration = data.Data.Duration));

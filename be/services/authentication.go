@@ -86,6 +86,8 @@ func VerifyCredentialsWithToken(bearer string, c *fiber.Ctx) (string, error) {
 	})
 	if err != nil {
 		ErrorLogger <- err
+		fmt.Println("89")
+		fmt.Println(c.Cookies("authToken"))
 		c.ClearCookie("authToken")
 		return "nil", err
 	}
@@ -93,6 +95,8 @@ func VerifyCredentialsWithToken(bearer string, c *fiber.Ctx) (string, error) {
 	// Decode the second portion of the JWT token for the username
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
+		fmt.Println("98")
+		fmt.Println(c.Cookies("authToken"))
 		c.ClearCookie("authToken")
 		return "nil", fmt.Errorf("could not parse claims")
 	}
@@ -102,6 +106,8 @@ func VerifyCredentialsWithToken(bearer string, c *fiber.Ctx) (string, error) {
 
 	jwtUid, ok := claims["Uid"].(string)
 	if !ok {
+		fmt.Println("109")
+		fmt.Println(c.Cookies("authToken"))
 		c.ClearCookie("authToken")
 		return "nil", fmt.Errorf("no Uid field in JWT")
 	}
@@ -118,6 +124,8 @@ func VerifyCredentialsWithToken(bearer string, c *fiber.Ctx) (string, error) {
 	}
 
 	if user.Username != jwtUsername {
+		fmt.Println("127")
+		fmt.Println(c.Cookies("authToken"))
 		c.ClearCookie("authToken")
 		return "nil", err
 	}

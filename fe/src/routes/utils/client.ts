@@ -1,25 +1,20 @@
 import { error, redirect } from '@sveltejs/kit';
-import {Navigate} from 'svelte-routing';
 import type { iRangeData, iResponse, iCorrectionData, iCredentials, iSaveCorrection, iCorrectionResponse } from './types';
 import axios, { type AxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
 
 export const get = async <t>(info: string): Promise<iResponse<t>> => {
 	try {
-		let config = {
-			method: 'get',
-			maxBodyLength: Infinity,
-			withCredentials: true,
-			url: `http://localhost/wizard/${info}`,
-			headers: {
-				'Content-Type': 'application/json'
-			},
-		};
 
-		const res = await axios
-			.request(config)
+		const res = await fetch(`http://127.0.0.1/wizard/${info}`,{
+				method:'GET',
+				credentials: 'include',
+				headers: {
+					'Content-Type':'application/json',
+				}
+			})
 			.then((response) => {
-				return response.data;
+				return response.json();
 			})
 			.catch((error) => {
 				throw error;
@@ -37,7 +32,7 @@ export const post = async <t,k>(info: string, data: k): Promise<t> => {
 		let config: AxiosRequestConfig = {
 			method: 'post',
 			maxBodyLength: Infinity,
-			withCredentials: false,
+			withCredentials: true,
 			url: `http://localhost/wizard/${info}`,
 			headers: {
 				'Content-Type': 'application/json'
@@ -140,10 +135,10 @@ export const Signup = async (creds: iCredentials): Promise<boolean> => {
 };
 
 // Signin
-export const Signin = async (creds: iCredentials): Promise<string> => {
+export const Signin = async (creds: iCredentials): Promise<{Username: string, Token: string}> => {
 	try {
 		// setup post request for login
-		const res = await fetch(`http://localhost/SignIn`, {
+		const res = await fetch(`http://127.0.0.1/SignIn`, {
 			method: 'POST',
 			body: JSON.stringify(creds),
 			headers: { 'content-type': 'application/json' }
@@ -151,15 +146,8 @@ export const Signin = async (creds: iCredentials): Promise<string> => {
 
 		if (res.ok) {
 			// assign token to local storage
-			const responseJson = await res.json();
-			console.log(responseJson.Data);
-			
-			Cookies.set('wizardToken',responseJson.Data.Token, {path: "/wizard"})
-		
-
-			Cookies.set('authToken',responseJson.Data.Token, {path: `/u/${responseJson.Data.Username}`})
-			
-			return responseJson.Data.Username;
+			const responseJson = await res.json();			
+			return responseJson.Data;
 		}
 	} catch (error) {
 		console.error(error);
