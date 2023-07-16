@@ -1,16 +1,44 @@
 <script lang="ts">
+	import Alert from './../Alert.svelte';
+
 	import DurationRow from './DurationRow.svelte';
 	import { onMount } from 'svelte';
 	import { getDuration, saveDuration } from '../../utils/client';
 	import type { duration } from '../../utils/types';
 	let row: duration;
+	let promise = null;
+
+	async function save() {
+		try {
+			if (row) {
+				const res = await saveDuration(row)
+					.then((data) => data)
+					.catch((err) => {
+						throw err;
+					});
+				if (res.Status == 200) {
+					return true;
+				} else {
+					throw Error('Error saving Durection rows');
+				}
+			} else {
+				throw Error('No rows found');
+			}
+		} catch (error) {
+			return error;
+		}
+	}
 
 	const handleClick = async () => {
-		saveDuration(row)
+		promise = save();
+
+		setTimeout(() => {
+			promise = null;
+		}, 2000);
 	};
 
 	onMount(() => {
-		getDuration().then(data => row = data.Data)
+		getDuration().then((data) => (row = data.Data));
 	});
 </script>
 
@@ -33,11 +61,11 @@
 			</table>
 		</div>
 		<div class="flex justify-between items-baseline mt-2">
-			<button on:click={handleClick} class="btn btn-active btn-primary m-2 btn-sm md:btn-md"
+			<button on:click|preventDefault={handleClick} class="btn btn-active btn-primary m-2 btn-sm md:btn-md"
 				>Save Duration</button
 			>
 		</div>
+		<Alert message={'Saving Duration'} {promise} />
 		<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>
-
 	</form>
 </dialog>

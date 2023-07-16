@@ -1,27 +1,55 @@
 <script lang="ts">
 	import RatioRow from './RatioRow.svelte';
 	import { onMount } from 'svelte';
-	import { get, getRatios, post, saveRatios } from "../../utils/client";;
-	import type { Ratio, iResponse } from "../../utils/types";
+	import { getRatios, saveRatios } from '../../utils/client';
+	import type { Ratio } from '../../utils/types';
+	import Alert from '../Alert.svelte';
+
 	let rows: Ratio[];
+	let promise = null;
 
 	function addRatio() {
 		let row: Ratio = {
-			Start: "00h00m",
-			End: "00h00m",
-			Ratio: 0.0,
-		}
+			Start: '00h00m',
+			End: '00h00m',
+			Ratio: 0.0
+		};
 		rows = [...rows, row]; // instead of rows.push(row)
 	}
 
+	async function save() {
+		try {
+			if (rows) {
+				const res = await saveRatios(rows)
+					.then((data) => data)
+					.catch((err) => {
+						throw err;
+					});
+				if (res.Status == 200) {
+					return true;
+				} else {
+					throw Error('Error saving Carb Ratio rows');
+				}
+			} else {
+				throw Error('No rows found');
+			}
+		} catch (error) {
+			return error;
+		}
+	}
+
 	const handleClick = () => {
-		saveRatios(rows)
+		promise = save();
+
+		setTimeout(() => {
+			promise = null;
+		}, 2000);
+
+		saveRatios(rows);
 	};
 
 	onMount(() => {
-
-		getRatios().then(data => rows = data.Data)
-
+		getRatios().then((data) => (rows = data.Data));
 	});
 </script>
 
@@ -47,10 +75,19 @@
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<div class="join m-3">
-				<button  on:click|preventDefault={addRatio} class="btn btn-active btn-secondary btn-sm md:btn-md" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add Ratio</button>
-				<button  on:click|preventDefault={handleClick} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save Ratios</button>
-			</div>
-			<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>
+				<button
+					on:click|preventDefault={addRatio}
+					class="btn btn-active btn-secondary btn-sm md:btn-md"
+					style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add Ratio</button
+				>
+				<button
+					on:click|preventDefault={handleClick}
+					class="btn btn-active btn-primary btn-sm md:btn-md"
+					style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save Ratios</button
+				>
+		</div>
+		<Alert message={'Saving Carb Ratios'} {promise} />
+		<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>
 		</div>
 	</form>
 </dialog>

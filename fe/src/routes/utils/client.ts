@@ -51,12 +51,13 @@ export const post = async <t>(info: string, data: t): Promise<iResponse<t>> => {
 	}
 };
 
-export const saveTargets = async (rows: Target[]) => {
+export const saveTargets = async (rows: Target[]): Promise<iResponse<any>> => {
 	try {
-		await post<Target[]>('wizard/Targets', rows)
+		const res = await post<Target[]>('wizard/Targets', rows)
 			.catch((err) => {
 				throw err;
 			});
+		return res
 	} catch (error) {
 		throw error
 	}

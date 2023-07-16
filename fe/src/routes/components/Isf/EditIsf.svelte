@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { get, getISFs, post, saveISFs } from '../../utils/client';
+	import Alert from './../Alert.svelte';
+
+	import { getISFs, saveISFs } from '../../utils/client';
 	import IsfRow from './IsfRow.svelte';
-	import type { Isf, iResponse } from '../../utils/types';
+	import type { Isf } from '../../utils/types';
 
 	let rows: Isf[];
+	let promise = null;
 
 	function addIsf() {
 		let row: Isf = {
@@ -15,12 +18,36 @@
 		rows = [...rows, row]; // instead of rows.push(row)
 	}
 
+	async function save() {
+		try {
+			if (rows) {
+				const res = await saveISFs(rows)
+					.then((data) => data)
+					.catch((err) => {
+						throw err;
+					});
+				if (res.Status == 200) {
+					return true;
+				} else {
+					throw Error('Error saving ISF rows');
+				}
+			} else {
+				throw Error('No rows found');
+			}
+		} catch (error) {
+			return error;
+		}
+	}
+
 	const handleClick = async () => {
-		saveISFs(rows)
+		promise = save();
+		setTimeout(() => {
+			promise = null;
+		}, 2000);
 	};
 
 	onMount(() => {
-		getISFs().then(data => rows = data.Data)
+		getISFs().then((data) => (rows = data.Data));
 	});
 </script>
 
@@ -46,11 +73,20 @@
 		</div>
 		<div class="flex justify-between items-baseline mt-4">
 			<div class="join m-3">
-				<button on:click|preventDefault={addIsf} class="btn btn-active btn-secondary btn-sm md:btn-md" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add ISF</button>
-				<button on:click|preventDefault={handleClick} class="btn btn-active btn-primary btn-sm md:btn-md" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save ISFs</button>
+				<button
+					on:click|preventDefault={addIsf}
+					class="btn btn-active btn-secondary btn-sm md:btn-md"
+					style="border-top-right-radius: 0;border-bottom-right-radius: 0;">Add ISF</button
+				>
+				<button
+					on:click|preventDefault={handleClick}
+					class="btn btn-active btn-primary btn-sm md:btn-md"
+					style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Save ISFs</button
+				>
 			</div>
 		</div>
+		<Alert message={'Saving ISFs'} {promise} />
 		<p class="ml-3 mt-1">Press ESC key or click on ✕ button to close</p>
-		<div/>
+		<div />
 	</form>
 </dialog>
