@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly ,fade} from 'svelte/transition';
 	import { userSignup } from '../utils/client';
 
 	let Username: string;
@@ -6,10 +7,12 @@
 </script>
 
 <div
+
 	class="hero min-h-screen bg-base-200"
 	style="background-image: url(https://boluswizard.io/assets/loginpage/bg.gif);"
 >
-	<div class="hero-content flex-col lg:flex-row-reverse">
+	<div 
+	class="hero-content flex-col lg:flex-row-reverse">
 		<div class="text-center lg:text-left lg:ml-4 text-white sm:max-w-lg">
 			<h1 class="text-5xl font-bold">Sign Up Now!</h1>
 			<p class="py-6">

@@ -2,7 +2,7 @@
 	"/": [],
 	"/signin": [],
 	"/signup": [],
-	"/user/[id]": [
-		"src/routes/user/[id]/+page.server.ts"
+	"/u/[id]": [
+		"src/routes/u/[id]/+page.server.ts"
 	]
 }

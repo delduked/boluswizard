@@ -1,4 +1,5 @@
 <script>
+	import { fly,fade } from 'svelte/transition';
 	import { redirect } from '@sveltejs/kit';
 	import { userSignin } from '../utils/client';
 	import { goto } from '$app/navigation';
@@ -10,6 +11,7 @@
 </script>
 
 <div
+
 	class="hero min-h-screen bg-base-200"
 	style="background-image: url(https://boluswizard.io/assets/loginpage/bg.gif);"
 >

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import type { iSaveCorrection } from './../utils/types';
 	import { calculateCorrection, saveCorrection } from "../utils/client";
 
@@ -10,10 +11,14 @@
 	let ActiveInsulinReduction: number;
 	let Bolus: number;
 
-	let save: iSaveCorrection = {
+	let save: iSaveCorrection[] = [{
 		Bg: bg,
 		Carbs: carb,
 		Bolus: Bolus
+	}]
+
+	function handleClick() {
+		saveCorrection(save)
 	}
 
 </script>
@@ -51,9 +56,7 @@
 				style="border-top-right-radius: 0;border-bottom-right-radius: 0;"
 			/>
 			<button
-				on:click={async () => {
-					await saveCorrection(save)
-				}}
+				on:click={handleClick}
 				class="btn btn-sm btn-info"
 				style="border-top-left-radius: 0; border-bottom-left-radius: 0;">SAVE</button
 			>
@@ -62,8 +65,8 @@
 	<div class="stats bg-primary text-primary-content m-3" style="width: 240px;">
 		<div class="stat">
 			<div class="stat-title">Correction</div>
-			{#if BgCorrection }
-				<div class="stat-value" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">{Bolus}</div>
+			{#if Bolus }
+				<div transition:fly={{y: -5, duration: 300, delay:300}} class="stat-value" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">{Bolus}</div>
 			{:else}
 				<div class="stat-value" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">n/a</div>
 			{/if}
@@ -74,7 +77,7 @@
 	<div class="join m-2">
 		<div class="badge badge-neutral">Bg Correction</div>
 		{#if BgCorrection }
-			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{BgCorrection}</div>
+			<div transition:fly={{y: -5, duration: 300, delay:300}} class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{BgCorrection}</div>
 		{:else}
 			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">n/a</div>
 		{/if}
@@ -82,7 +85,7 @@
 	<div class="join m-2">
 		<div class="badge badge-neutral">Carb Correction</div>
 		{#if CarbCorrection }
-			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{CarbCorrection}</div>
+			<div transition:fly={{y: -5, duration: 300, delay:300}} class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{CarbCorrection}</div>
 		{:else}
 			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">n/a</div>
 		{/if}
@@ -90,7 +93,7 @@
 	<div class="join m-2">
 		<div class="badge badge-neutral">Active Insulin Reduction</div>
 		{#if ActiveInsulinReduction }
-			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{ActiveInsulinReduction}</div>
+			<div transition:fly={{y: -5, duration: 300, delay:300}} class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">{ActiveInsulinReduction}</div>
 		{:else}
 			<div class="badge badge-accent" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">n/a</div>
 		{/if}

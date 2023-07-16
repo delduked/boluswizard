@@ -177,14 +177,11 @@ export const getRange = async (): Promise<iRangeData[]> => {
 		throw error;
 	}
 };
-export const saveCorrection = async <t>(body: iSaveCorrection): Promise<iCorrectionResponse> => {
+export const saveCorrection = async (body: iSaveCorrection[]) => {
 	try {
+		
+		await post<iSaveCorrection[]>('wizard/Corrections', body);
 
-		body.Key = "";
-		body.TimeStamp = null;
-
-		const res = await post<iSaveCorrection>('Corrections', body);
-		return res.Data;
 	} catch (error) {
 		console.error(error);
 	}
@@ -192,7 +189,7 @@ export const saveCorrection = async <t>(body: iSaveCorrection): Promise<iCorrect
 
 export const calculateCorrection = async (bg: number, carbs: number): Promise<iCorrectionData> => {
 	try {
-		const res = await get<iCorrectionData>(`NewCorrection?Bg=${bg}&Carbs=${carbs}`)
+		const res = await get<iCorrectionData>(`wizard/NewCorrection?Bg=${bg}&Carbs=${carbs}`)
 			.then(data => data.Data);
 		return res;
 	} catch (error) {
@@ -221,7 +218,7 @@ export const userSignup = async (creds: iCredentials): Promise<boolean> => {
 				expires: 60 * 60 * 24
 			});		
 			setTimeout(() =>{
-				goto(`/user/${response.Data.Username}`);
+				goto(`/u/${response.Data.Username}`);
 			},500);
 			
 			return true;
@@ -256,7 +253,7 @@ export const userSignin = async (creds: iCredentials): Promise<boolean> => {
 			});
 
 			setTimeout(() =>{
-				goto(`/user/${response.Data.Username}`);
+				goto(`/u/${response.Data.Username}`);
 			},500);
 			
 			return true;
