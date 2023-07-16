@@ -26,7 +26,6 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const ApiServiceUrl: string;
 	export const NVM_INC: string;
 	export const MANPATH: string;
 	export const TERM_PROGRAM: string;
@@ -111,7 +110,7 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	
+	export const PUBLIC_ApiServiceUrl: string;
 }
 
 /**
@@ -128,7 +127,6 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
-		ApiServiceUrl: string;
 		NVM_INC: string;
 		MANPATH: string;
 		TERM_PROGRAM: string;
@@ -218,6 +216,7 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
+		PUBLIC_ApiServiceUrl: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }

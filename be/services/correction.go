@@ -3,6 +3,7 @@ package services
 import (
 	"api/config"
 	"api/types"
+	"fmt"
 	"time"
 
 	"strings"
@@ -89,7 +90,8 @@ func Correction(uid string, key string) (types.Correction, error) {
 
 // Save a single or multiple corrections
 func SaveCorrections(value []types.Correction, uid string) error {
-
+	fmt.Println("value")
+	fmt.Println(value)
 	var err error
 	var key string
 

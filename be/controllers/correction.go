@@ -3,6 +3,7 @@ package controllers
 import (
 	"api/services"
 	"api/types"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -104,7 +105,8 @@ func SaveCorrections(c *fiber.Ctx) error {
 		}
 		return services.Response(res, c)
 	}
-
+	fmt.Println("*body")
+	fmt.Println(*body)
 	// save the corrections in redis
 	err := services.SaveCorrections(*body, uid)
 	if err != nil {

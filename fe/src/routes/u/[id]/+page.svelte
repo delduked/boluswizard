@@ -2,14 +2,13 @@
 	import Nav from '../../components/nav.svelte';
 	import Stats from '../../components/Stats.svelte';
 	import UserInput from '../../components/UserInput.svelte';
-	import { fly, fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	export let data;
-	console.log(data);
 </script>
 
 {#if data.auth}
-	<div>
+	<div in:fly={{y: -5, duration: 500, delay: 500}} out:fly={{y: 5, duration: 500}} >
 		<Nav />
 		<div class="w-full flex justify-center items-center flex-wrap lg:m-4 sm:m-2">
 			<UserInput />
@@ -23,7 +22,7 @@
 		style="background-image: url(https://boluswizard.io/assets/loginpage/bg.gif);"
 	>
 		<div class="hero-overlay" />
-		<div class="hero-content text-center text-neutral-content">
+		<div in:fly={{y: -5, duration: 500, delay: 500}} out:fly={{y: 5, duration: 500}} class="hero-content text-center text-neutral-content">
 			<div class="max-w-md text-white">
 				<h1 class="mb-5 text-5xl font-bold">Account not accessible</h1>
 				<h3 class="m-4">Please either create an account or signin with an existing account.</h3>

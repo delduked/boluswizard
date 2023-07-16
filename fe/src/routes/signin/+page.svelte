@@ -1,21 +1,48 @@
 <script>
-	import { fly,fade } from 'svelte/transition';
+	import Alert from './../components/Alert.svelte';
+	import { fly, fade } from 'svelte/transition';
 	import { redirect } from '@sveltejs/kit';
 	import { userSignin } from '../utils/client';
 	import { goto } from '$app/navigation';
 	import Cookies from 'js-cookie';
-
 	let Username;
 	let Password;
+
+	let promise = null;
+	async function signin() {
+		try {
+			if (!Username || !Password) {
+				throw Error("Can not sign in null account")
+			} else {
+				const res = await userSignin({ Username, Password })
+					.then(data => data)
+					.catch(err => {throw err});
+				return res
+			}
+		} catch (error) {
+			throw error
+		}
+	}
+
+	function handleSignin() {
+		promise = signin()
+
+		setTimeout(() => {
+			promise = null;
+		}, 2000);
+	}
 
 </script>
 
 <div
-
 	class="hero min-h-screen bg-base-200"
 	style="background-image: url(https://boluswizard.io/assets/loginpage/bg.gif);"
 >
-	<div class="hero-content flex-col lg:flex-row-reverse">
+	<div
+		in:fly={{ y: -5, duration: 500, delay: 500 }}
+		out:fly={{ y: 5, duration: 500 }}
+		class="hero-content flex-col lg:flex-row-reverse"
+	>
 		<div class="text-center lg:text-left text-white sm:max-w-lg">
 			<h1 class="text-5xl font-bold">Sign In!</h1>
 			<p class="py-6">
@@ -54,12 +81,11 @@
 				</div>
 				<div class="form-control mt-6">
 					<button
-						on:click={() => {
-							userSignin({ Username, Password })
-						}}
+						on:click|preventDefault={handleSignin}
 						class="btn btn-primary">Signin</button
 					>
 				</div>
+				<Alert message={"Signin"} {promise} />
 			</div>
 		</div>
 	</div>

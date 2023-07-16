@@ -2,11 +2,11 @@ import type { iRangeData, iResponse, iCorrectionData, iCredentials, iSaveCorrect
 import axios, { type AxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
 import { goto } from '$app/navigation';
-
+import { PUBLIC_ApiServiceUrl } from '$env/static/public';
 export const get = async <t>(info: string): Promise<iResponse<t>> => {
 	try {
 
-		const res = await fetch(`http://127.0.0.1/${info}`,{
+		const res = await fetch(`${PUBLIC_ApiServiceUrl}${info}`,{
 				method:'GET',
 				credentials: 'include',
 				headers: {
@@ -28,7 +28,7 @@ export const get = async <t>(info: string): Promise<iResponse<t>> => {
 };
 export const post = async <t>(info: string, data: t): Promise<iResponse<t>> => {
 	try {
-		const res = await fetch(`http://127.0.0.1/${info}`,{
+		const res = await fetch(`${PUBLIC_ApiServiceUrl}${info}`,{
 			method:'POST',
 			credentials: 'include',
 			headers: {
@@ -200,7 +200,7 @@ export const calculateCorrection = async (bg: number, carbs: number): Promise<iC
 // Signup
 export const userSignup = async (creds: iCredentials): Promise<boolean> => {
 	try {
-		const res = await fetch(`http://127.0.0.1/SignUp`, {
+		const res = await fetch(`${PUBLIC_ApiServiceUrl}SignUp`, {
 			method: 'POST',
 			body: JSON.stringify(creds),
 			headers: { 'content-type': 'application/json' }
@@ -234,7 +234,7 @@ export const userSignup = async (creds: iCredentials): Promise<boolean> => {
 export const userSignin = async (creds: iCredentials): Promise<boolean> => {
 	try {
 		// setup post request for login
-		const res = await fetch(`http://127.0.0.1/SignIn`, {
+		const res = await fetch(`${PUBLIC_ApiServiceUrl}SignIn`, {
 			method: 'POST',
 			body: JSON.stringify(creds),
 			headers: { 'content-type': 'application/json' }
@@ -254,7 +254,7 @@ export const userSignin = async (creds: iCredentials): Promise<boolean> => {
 
 			setTimeout(() =>{
 				goto(`/u/${response.Data.Username}`);
-			},500);
+			},2000);
 			
 			return true;
 		}

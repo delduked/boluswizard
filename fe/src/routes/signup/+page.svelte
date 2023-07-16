@@ -1,9 +1,34 @@
 <script lang="ts">
+	import Alert from './../components/Alert.svelte';
 	import { fly ,fade} from 'svelte/transition';
 	import { userSignup } from '../utils/client';
 
-	let Username: string;
-	let Password: string;
+	let Username;
+	let Password;
+
+	let promise = null;
+	async function signup() {
+		try {
+			if (!Username || !Password) {
+				throw Error("Can not sign up null account")
+			} else {
+				const res = await userSignup({ Username, Password })
+					.then(data => data)
+					.catch(err => {throw err});
+				return res
+			}
+		} catch (error) {
+			throw error
+		}
+	}
+
+	function handleSignup() {
+		promise = signup()
+
+		setTimeout(() => {
+			promise = null;
+		}, 2000);
+	}
 </script>
 
 <div
@@ -11,8 +36,7 @@
 	class="hero min-h-screen bg-base-200"
 	style="background-image: url(https://boluswizard.io/assets/loginpage/bg.gif);"
 >
-	<div 
-	class="hero-content flex-col lg:flex-row-reverse">
+	<div in:fly={{y: -5, duration: 500, delay: 500}} out:fly={{y: 5, duration: 500}}  class="hero-content flex-col lg:flex-row-reverse">
 		<div class="text-center lg:text-left lg:ml-4 text-white sm:max-w-lg">
 			<h1 class="text-5xl font-bold">Sign Up Now!</h1>
 			<p class="py-6">
@@ -51,12 +75,11 @@
 				</div>
 				<div class="form-control mt-6">
 					<button
-						on:click={() => {
-							userSignup({ Username, Password });
-						}}
+						on:click|preventDefault={handleSignup}
 						class="btn btn-primary">Sign up</button
 					>
 				</div>
+				<Alert message={"Signup"} {promise} />
 			</div>
 		</div>
 	</div>

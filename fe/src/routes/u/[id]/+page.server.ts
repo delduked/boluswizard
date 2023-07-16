@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import Cookies from 'js-cookie';
-export const load = ({ request }) => {
+export const load = ({ request, params }) => {
 	function authentication(): {success: boolean,token: string} {
 		let futureDate = new Date();
 		futureDate.setDate(futureDate.getDate() + 1);
@@ -20,7 +20,7 @@ export const load = ({ request }) => {
 						'n4th4n43ln4th4n43ln4th4n43l',
 						{ algorithm: 'HS256' },
 						function (err, decoded) {
-							if (decoded) {
+							if (params.id == decoded.Username) {
 								Cookies.set("authToken", authToken, {
 									httpOnly: false,
 									secure: false,
@@ -32,6 +32,7 @@ export const load = ({ request }) => {
 								token = authToken
 								success = true;
 							} else {
+								Cookies.remove("authToken")
 								success = false;
 							}
 						}
@@ -45,6 +46,6 @@ export const load = ({ request }) => {
 
 	return {
 		auth: res.success,
-		token: res.token
+		token: res.token,
 	};
 };
