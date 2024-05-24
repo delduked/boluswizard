@@ -1,1 +1,3 @@
-/ui/assets              export-ignore
+/ui/assets export-ignore
+/ui/assets/portal/moment.js linguist-vendored
+/ui/assets/portal/chartist.js linguist-vendored
